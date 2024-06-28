@@ -15,7 +15,7 @@ function Registrationpage() {
         e.preventDefault()
         try {
             if (password === confirmpassword) {
-                 
+               
             } else {
                 toast.error("Password not match");
             }

@@ -44,7 +44,7 @@ function Loginpage() {
                             Login
                         </button>
                     </form>
-                    <div className=" items-center justify-between mt-4">
+                    <div className="items-center justify-between mt-4">
                         <a href="#" style={{ fontFamily: 'inria-serif' }} className="text-md text-black-600">Not a Member?</a>
                         <a href="#" style={{ fontFamily: 'inria-serif' }} className="text-md text-blue-600 hover:underline font-bold" onClick={() => navigate("/registration")}>Sign Up</a>
                     </div>
