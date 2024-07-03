@@ -69,7 +69,7 @@ function Blooddonate() {
                     <div className="mb-4">
                     <label className="form-control w-full max-w-xs">
                         <div className="label">
-                            <span className="label-text font-bold">Select product Category</span>
+                            <span className="label-text font-bold">Select Blood group</span>
                         </div>
                         <select className="h-[40px] w-full" onChange={e => setcategory(e.target.value)}>
                             <option>Select category</option>
