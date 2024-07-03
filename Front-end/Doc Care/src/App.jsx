@@ -3,6 +3,7 @@ import './App.css'
 import Loginpage from './user/Pages/Loginpage'
 import Registrationpage from './user/Pages/Registrationpage'
 import Homepage from './user/Pages/Homepage'
+import Blooddonate from './user/Components/Blooddonate'
 
 function App() {
 
@@ -12,6 +13,7 @@ function App() {
         <Route path='/' element={<Loginpage />}></Route>
         <Route path='/registration' element={<Registrationpage />}></Route>
         <Route path='/home' element={<Homepage />}></Route>
+        <Route path='/blooddonate' element={<Blooddonate />}></Route>
       </Routes>
     </div>
   )
