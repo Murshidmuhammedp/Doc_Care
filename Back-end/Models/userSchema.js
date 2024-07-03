@@ -23,7 +23,12 @@ const userSchema = new mongoose.Schema({
     accountCreatedDate: {
         type: Date,
         required: true,
-        default: Date.now
+        default: () => {
+            const now = new Date();
+            now.setHours(now.getHours() + 5);
+            now.setMinutes(now.getMinutes() + 30);
+            return now;
+        }
     },
     isDeleted: {
         type: Boolean,

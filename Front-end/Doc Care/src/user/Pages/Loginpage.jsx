@@ -1,10 +1,17 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 
 
 function Loginpage() {
+    const [email, setemail] = useState("");
+    const [password, setpassword] = useState("");
 
     const navigate = useNavigate();
+
+    const loginValidation = (e) => {
+        e.preventDefault();
+
+    }
     return (
         <>
             <div
@@ -15,7 +22,7 @@ function Loginpage() {
             >
                 <div className="bg-white bg-opacity-40 p-8 rounded-lg shadow-lg w-full max-w-sm mx-4">
                     <h2 style={{ fontFamily: 'inria-serif' }} className="text-3xl font-bold mb-6 text-center">Login</h2>
-                    <form>
+                    <form onChange={loginValidation}>
                         <div className="mb-4">
                             <input
                                 type="email"
@@ -23,6 +30,8 @@ function Loginpage() {
                                 className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
                                 placeholder="Enter email or mobile number"
                                 required
+                                value={email}
+                                onChange={e => setemail(e.target.value)}
                             />
                         </div>
                         <div className="mb-6">
@@ -32,6 +41,8 @@ function Loginpage() {
                                 className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
                                 placeholder="Enter password"
                                 required
+                                value={password}
+                                onChange={e => setpassword(e.target.value)}
                             />
                         </div>
                         <div className="flex items-center justify-between mb-4">

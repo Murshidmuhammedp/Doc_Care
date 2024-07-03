@@ -15,7 +15,7 @@ function Registrationpage() {
         e.preventDefault()
         try {
             if (password === confirmpassword) {
-               
+
             } else {
                 toast.error("Password not match");
             }
@@ -99,7 +99,7 @@ function Registrationpage() {
                     </form>
                     <div className="items-center justify-between mt-4">
                         <a href="#" style={{ fontFamily: 'inria-serif' }} className="text-md text-black-600">Have an Account?</a>
-                        <a href="#" style={{ fontFamily: 'inria-serif' }} className="text-md text-blue-600 hover:underline font-bold" onClick={() => navigate('/login')}>Login Here</a>
+                        <a href="#" style={{ fontFamily: 'inria-serif' }} className="text-md text-blue-600 hover:underline font-bold" onClick={() => navigate('/')}>Login Here</a>
                     </div>
                 </div>
             </div>

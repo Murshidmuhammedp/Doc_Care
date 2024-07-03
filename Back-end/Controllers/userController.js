@@ -30,4 +30,24 @@ export const signup = async (req, res, next) => {
     await newUser.save();
 
     return res.status(200).json({ message: "Registered successfully", data: newUser });
-} 
+}
+
+export const signin = async (req, res, next) => {
+    const { email, password } = req.body();
+
+    const validUser = await Users.findOne({ email });
+
+    if (!validUser) {
+        res.status(202).json({ message: "User not found" });
+    }
+
+    if (validUser.isDeleted === true) {
+        res.status(200).json({ message: "Your account is suspended" });
+    }
+
+    const validpassword = bcrypt.compareSync(password, validUser.password);
+
+    if (!validpassword) {
+        res.status(202).json({ message: "Password incorrect" });
+    }
+}
