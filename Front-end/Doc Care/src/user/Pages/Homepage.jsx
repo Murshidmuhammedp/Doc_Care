@@ -1,12 +1,14 @@
 import React from 'react'
 import Footer from '../Components/Footer'
 import { useNavigate } from 'react-router-dom'
+import Navbar from '../Components/Navbar';
 
 function Homepage() {
 
     const navigate = useNavigate();
     return (
         <>
+        <Navbar/>
             <div className="ml-4 md:ml-[180px]">
                 <div className="flex flex-col md:flex-row">
                     <div
