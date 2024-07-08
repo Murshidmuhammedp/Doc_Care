@@ -1,6 +1,7 @@
-import bloodjoi from "../joiValidation/bloodRegValidation"
+import Blood from "../Models/bloodRegisterSchema.js";
+import bloodjoi from "../joiValidation/bloodRegValidation.js"
 
-export const bloodRegister = (req, res, next) => {
+export const bloodRegister = async (req, res, next) => {
 
     const { value, error } = bloodjoi.validate(req.body);
 
@@ -8,7 +9,18 @@ export const bloodRegister = (req, res, next) => {
         return res.status(400).json({ Details: error });
     }
 
-    const { Donor_name, Blood_group, email, Phone_number } = value;
+    const { Donor_name, Blood_group, email, Phone_number, State, City } = value;
 
-    
+    const newDonor = new Blood({
+        Donor_name,
+        Blood_group,
+        email,
+        Phone_number,
+        State,
+        City
+    });
+
+    await newDonor.save();
+
+    return res.status(202).json({ message: "Registered successfully", data: newDonor });
 }

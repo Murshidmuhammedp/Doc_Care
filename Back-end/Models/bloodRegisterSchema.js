@@ -17,6 +17,14 @@ const bloodSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
+    State: {
+        type: String,
+        required: true
+    },
+    City: {
+        type: String,
+        required: true
+    },
     created_at: {
         type: Date,
         required: true,

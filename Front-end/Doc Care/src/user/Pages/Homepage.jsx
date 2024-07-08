@@ -28,7 +28,7 @@ function Homepage() {
                         <button
                             type="submit"
                             className="mt-4 md:mt-[40px] w-[300px] bg-black text-white p-2 rounded-full hover:bg-gray-800 focus:outline-none focus:ring focus:ring-blue-200 text-lg md:text-xl"
-                        >
+                        onClick={()=>navigate('/category')} >
                             Book Appointment
                         </button>
                     </div>

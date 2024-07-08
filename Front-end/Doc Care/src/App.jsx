@@ -4,6 +4,7 @@ import Loginpage from './user/Pages/Loginpage'
 import Registrationpage from './user/Pages/Registrationpage'
 import Homepage from './user/Pages/Homepage'
 import Blooddonate from './user/Components/Blooddonate'
+import Categorypage from './user/Components/Categorypage'
 
 function App() {
 
@@ -14,6 +15,7 @@ function App() {
         <Route path='/registration' element={<Registrationpage />}></Route>
         <Route path='/home' element={<Homepage />}></Route>
         <Route path='/blooddonate' element={<Blooddonate />}></Route>
+        <Route path='/category' element={<Categorypage/>}></Route>
       </Routes>
     </div>
   )
