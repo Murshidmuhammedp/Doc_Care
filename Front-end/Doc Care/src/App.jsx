@@ -5,6 +5,8 @@ import Registrationpage from './user/Pages/Registrationpage'
 import Homepage from './user/Pages/Homepage'
 import Blooddonate from './user/Components/Blooddonate'
 import Categorypage from './user/Components/Categorypage'
+import Businessreg from './user/Components/Businesscategory'
+import Doc_hosregister from './user/Components/Doc_hosregister'
 
 function App() {
 
@@ -15,7 +17,9 @@ function App() {
         <Route path='/login' element={<Loginpage />}></Route>
         <Route path='/registration' element={<Registrationpage />}></Route>
         <Route path='/blooddonate' element={<Blooddonate />}></Route>
-        <Route path='/category' element={<Categorypage/>}></Route>
+        <Route path='/category' element={<Categorypage />}></Route>
+        <Route path='/forbusiness' element={<Businessreg />}></Route>
+        <Route path='/businessregister' element={<Doc_hosregister />}></Route>
       </Routes>
     </div>
   )

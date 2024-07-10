@@ -28,7 +28,7 @@ function Categorypage() {
         <>
             <Navbar />
 
-            <div className=" bg-blue-50">
+            <div className=" bg-blue-100">
                 <div className="flex flex-col md:flex-row">
 
                     <div className="flex flex-col items-start justify-center mt-8 md:mt-0 md:ml-[200px]">
@@ -57,27 +57,24 @@ function Categorypage() {
             </div>
 
             <div>
-                <h1 className='text-4xl font-bold ml-[-950px] mt-[30px]'>10+ Specialities</h1>
-                <h6 className="text-gray-500 ml-[-910px] mt-[10px]">Consult with top doctors across specialities</h6>
+                <h1 className="text-2xl md:text-4xl font-bold ml-4 md:ml-[-950px] mt-4 md:mt-[30px]">10+ Specialities</h1>
+                <h6 className="text-gray-500 ml-4 md:ml-[-910px] mt-2 md:mt-[10px]">Consult with top doctors across specialities</h6>
             </div>
             {/* Category card */}
-
-            <div className="mb-10 flex flex-wrap items-center justify-center gap-[40px] mt-[50px] w-[1200px] ml-[150px]">
-                {department.map((value, index) => {
-                    return (
-                        <div key={index} className="flex flex-col items-center justify-center">
-                            <div className='h-[250px] w-[180px] border 2px black pt-[30px] rounded-md shadow-md hover:shadow-xl'>
-                                <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg ml-[25px] hover:shadow-xl">
-                                    <img src={value.imageUrl} alt={value.title} className="w-full h-full object-cover cursor-pointer" onClick={() => { setcate(value.title); navigate('/category'); }} />
-                                </div>
-                                <p className="mt-4 text-md font-semibold text-gray-800">{value.title}</p>
-                                <p className="mt-2 text-md font-semibold text-blue-400">Book now</p>
+            <div className="mb-10 flex flex-wrap items-center justify-center gap-4 md:gap-[40px] mt-4 md:mt-[50px] w-full md:w-[1200px] ml-4 md:ml-[150px]">
+                {department.map((value, index) => (
+                    <div key={index} className="flex flex-col items-center justify-center w-40 md:w-auto">
+                        <div className="h-[250px] w-[180px] border-2 pt-[30px] rounded-md shadow-md hover:shadow-xl">
+                            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg mx-auto hover:shadow-xl">
+                                <img src={value.imageUrl} alt={value.title} className="w-full h-full object-cover cursor-pointer" onClick={() => { {/*setcate(value.title);*/ } navigate('/category'); }} />
                             </div>
+                            <p className="mt-4 text-md font-semibold text-gray-800 text-center">{value.title}</p>
+                            <p className="mt-2 text-md font-semibold text-blue-400 text-center hover:cursor-pointer">Book now</p>
                         </div>
-                    )
-                })
-                }
+                    </div>
+                ))}
             </div>
+
             <Footer />
         </>
     )

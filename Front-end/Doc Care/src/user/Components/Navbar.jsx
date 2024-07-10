@@ -5,9 +5,10 @@ import { useNavigate } from 'react-router-dom'
 
 const navigation = [
     { name: 'Dashboard', href: '#', current: false },
-    { name: 'Team', href: '#', current: false },
-    { name: 'Projects', href: '#', current: false },
-    { name: 'Calendar', href: '#', current: false },
+    // { name: 'Team', href: '#', current: false },
+    // { name: 'Projects', href: '#', current: false },
+    { name: 'Medicines', href: '#', current: false },
+    { name: 'For business', href: '/forbusiness', current: false },
 ]
 
 
@@ -123,7 +124,7 @@ function Navbar() {
                                     as="a"
                                     href={item.href}
                                     className={classNames(
-                                        item.current ? 'bg-gray-900 text-white' : 'text-gray-300 hover:bg-gray-700 hover:text-white',
+                                        item.current ? 'bg-gray-900 text-white' : 'text-gray-600 hover:bg-gray-700 hover:text-white',
                                         'block rounded-md px-3 py-2 text-base font-medium',
                                     )}
                                     aria-current={item.current ? 'page' : undefined}
