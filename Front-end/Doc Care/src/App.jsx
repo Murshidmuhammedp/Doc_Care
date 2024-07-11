@@ -6,7 +6,8 @@ import Homepage from './user/Pages/Homepage'
 import Blooddonate from './user/Components/Blooddonate'
 import Categorypage from './user/Components/Categorypage'
 import Businessreg from './user/Components/Businesscategory'
-import Doc_hosregister from './user/Components/Doc_hosregister'
+import Doctorregistration from './user/Pages/Doctorregistration'
+import Hospitalregister from './user/Pages/Hospitalregister'
 
 function App() {
 
@@ -19,7 +20,8 @@ function App() {
         <Route path='/blooddonate' element={<Blooddonate />}></Route>
         <Route path='/category' element={<Categorypage />}></Route>
         <Route path='/forbusiness' element={<Businessreg />}></Route>
-        <Route path='/businessregister' element={<Doc_hosregister />}></Route>
+        <Route path='/doctorregister' element={<Doctorregistration />}></Route>
+        <Route path='/hospitalregister' element={<Hospitalregister />}></Route>
       </Routes>
     </div>
   )
