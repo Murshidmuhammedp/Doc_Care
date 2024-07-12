@@ -21,8 +21,8 @@ function Registrationpage() {
                     toast.success(response.data.message)
                     navigate('/login');
                 }
-                if (response.status === 400) {
-                    alert(response.data.message)
+                if (response.status === 200) {
+                    toast.error(response.data.message)
                 }
             } else {
                 toast.error("Password not match");
