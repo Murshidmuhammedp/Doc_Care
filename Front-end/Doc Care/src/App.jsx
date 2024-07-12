@@ -10,7 +10,6 @@ import Doctorregistration from './user/Pages/Doctorregistration'
 import Hospitalregister from './user/Pages/Hospitalregister'
 
 function App() {
-
   return (
     <div>
       <Routes>
