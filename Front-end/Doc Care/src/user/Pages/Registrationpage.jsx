@@ -1,22 +1,29 @@
 import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom'
-import Navbar from '../Components/Navbar';
+import axios from 'axios'
 
 function Registrationpage() {
 
     const [username, setusername] = useState("");
     const [email, setemail] = useState("");
-    const [number, setnumber] = useState();
+    const [phone_number, setnumber] = useState();
     const [password, setpassword] = useState("");
     const [confirmpassword, setconfirmpassword] = useState("");
     const navigate = useNavigate();
 
-    const handleRegistration = (e) => {
+    const handleRegistration = async (e) => {
         e.preventDefault()
         try {
             if (password === confirmpassword) {
-
+                const response = await axios.post('http://localhost:9876/user/api/register', { username, email, phone_number, password });
+                if (response.status === 201) {
+                    toast.success(response.data.message)
+                    navigate('/login');
+                }
+                if (response.status === 400) {
+                    alert(response.data.message)
+                }
             } else {
                 toast.error("Password not match");
             }
@@ -60,12 +67,12 @@ function Registrationpage() {
                         </div>
                         <div className="mb-4">
                             <input
-                                type="tel"
+                                type="text"
                                 id="phone"
                                 className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
                                 placeholder="Phone number"
                                 required
-                                value={number}
+                                value={phone_number}
                                 onChange={e => setnumber(e.target.value)}
                             />
                         </div>

@@ -16,7 +16,7 @@ export const signup = async (req, res, next) => {
     const existingUser = await Users.findOne({ email });
 
     if (existingUser) {
-        return res.status(200).json({ message: "E-mail already registered" });
+        return res.status(400).json({ message: "E-mail already registered" });
     }
 
     const hashedPassword = await bcrypt.hash(password, 10);
@@ -29,7 +29,7 @@ export const signup = async (req, res, next) => {
     });
     await newUser.save();
 
-    return res.status(200).json({ message: "Registered successfully", data: newUser });
+    return res.status(201).json({ message: "Registered successfully", data: newUser });
 }
 
 export const signin = async (req, res, next) => {
