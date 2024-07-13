@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import Navbar from '../Components/Navbar';
+import axios from 'axios';
+import toast from 'react-hot-toast';
+
 
 
 function Loginpage() {
@@ -9,10 +11,27 @@ function Loginpage() {
 
     const navigate = useNavigate();
 
-    const loginValidation = (e) => {
+    const loginValidation = async (e) => {
         e.preventDefault();
 
-    }
+        const response = await axios.post('http://localhost:9876/user/api/login', { email, password });
+        if (response.status === 200) {
+            const token = response.data.token;
+            localStorage.setItem('userToken', token);
+            toast.success(response.data.message);
+            navigate('/');
+        }
+        if (response.status === 400) {
+            toast.error(response.data.message);
+        };
+        if (response.status === 401) {
+            toast.error(response.data.message);
+        }
+        if (response.status === 404) {
+            toast.success(response.data.message);
+        }
+    };
+
     return (
         <>
             <div
@@ -23,7 +42,7 @@ function Loginpage() {
             >
                 <div className="bg-white bg-opacity-40 p-8 rounded-lg shadow-lg w-full max-w-sm mx-4">
                     <h2 style={{ fontFamily: 'inria-serif' }} className="text-3xl font-bold mb-6 text-center">Login</h2>
-                    <form onChange={loginValidation}>
+                    <form onSubmit={loginValidation}>
                         <div className="mb-4">
                             <input
                                 type="email"
@@ -31,7 +50,6 @@ function Loginpage() {
                                 className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
                                 placeholder="Enter email or mobile number"
                                 required
-                                value={email}
                                 onChange={e => setemail(e.target.value)}
                             />
                         </div>
@@ -42,7 +60,6 @@ function Loginpage() {
                                 className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
                                 placeholder="Enter password"
                                 required
-                                value={password}
                                 onChange={e => setpassword(e.target.value)}
                             />
                         </div>

@@ -106,7 +106,7 @@ function Navbar() {
                                     </MenuItems>
                                 </Menu> */}
 
-                                <button className='w-[110px] h-[30px] text-gray-800 border border-gray-400 hover:text-blue-400 hover:border-blue-400 text-[12px] font-sans'>{localStorage.getItem("user.name") ? (<span onClick={() => { navigate('/login'); localStorage.clear(); }}><a>Logout</a></span>) : (<span onClick={() => navigate("/login")}>
+                                <button className='w-[110px] h-[30px] text-gray-800 border border-gray-400 hover:text-blue-400 hover:border-blue-400 text-[12px] font-sans'>{localStorage.getItem("userToken") ? (<span onClick={() => { navigate('/login'); localStorage.clear(); }}><a>Logout</a></span>) : (<span onClick={() => navigate("/login")}>
                                     <a>Login/Signup</a>
                                 </span>)}</button>
 

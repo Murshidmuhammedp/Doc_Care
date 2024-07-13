@@ -1,6 +1,7 @@
 import Users from "../Models/userSchema.js";
 import bcrypt from 'bcrypt'
 import userjoi from "../joiValidation/userValidation.js";
+import Jwt from "jsonwebtoken";
 
 export const signup = async (req, res, next) => {
 
@@ -33,21 +34,30 @@ export const signup = async (req, res, next) => {
 }
 
 export const signin = async (req, res, next) => {
-    const { email, password } = req.body();
+
+    const { email, password } = req.body;
 
     const validUser = await Users.findOne({ email });
 
     if (!validUser) {
-        res.status(404).json({ message: "User not found" });
-    }
+        return res.status(404).json({ message: "User not found" });
+    };
 
-    if (validUser.isDeleted === true) {
-        res.status(400).json({ message: "Your account is suspended" });
-    }
+    if (validUser.isDeleted == true) {
+        return res.status(400).json({ message: "Your account is suspended" });
+    };
 
     const validpassword = bcrypt.compareSync(password, validUser.password);
 
     if (!validpassword) {
         res.status(401).json({ message: "Password incorrect" });
     }
-}
+
+    const token = Jwt.sign({ id: validUser._id }, process.env.USER_JWT_SECRET_KEY);
+    const { password: hashedPassword, ...rest } = validUser._doc;
+    const expiryDate = new Date(Date.now() + 60 * 1000);
+    // cookie setting 
+    res.cookie('access_token', token, { httpOnly: true, expires: expiryDate });
+    res.status(200).json({ message: "successfully login", token, data: rest });
+};
+
