@@ -5,11 +5,32 @@ import { districts, states } from '../Components/State_district'
 
 function Hospitalregister() {
 
-    const [state, setState] = useState("");
-    const specialization = ["Cardiology", "Dermatology", "Neurology", "Pediatrics", "Orthopedic", "General medicine", "Opthalmology", "Psychiatry", "ENT", "Gynaecology", "Sexology", "General physician", "Urology", "Dental", "General surgery", "Stomach & digestion"];
+    const [formData, setFormData] = useState({
+        License_number: "",
+        Hospital_name: "",
+        Email: "",
+        State: "",
+        Phone_Number: "",
+        Phone_Number_2: "",
+        Address: "",
+        City: "",
+        District: "",
+        State: "",
+        Password: "",
+    });
+    const [CPassword, setCPassword] = useState("");
+
+    const handleInputChange = (e) => {
+        const { id, value } = e.target;
+        setFormData((state) => ({
+            ...state,
+            [id]: value
+        }));
+    }
 
 
-    const hospitalregistration = () => {
+    const hospitalregistration = (e) => {
+        e.preventDefault()
 
     };
 
@@ -22,63 +43,73 @@ function Hospitalregister() {
                     <form onSubmit={hospitalregistration}>
                         <div className="md:flex md:flex-wrap -mx-3 mb-6">
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left" htmlFor="licenseNumber">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left" htmlFor="License_number">
                                     Hospital License No :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="licenseNumber"
+                                    id="License_number"
                                     type="text"
                                     placeholder="License number"
                                     required
+                                    value={formData.License_number}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left" htmlFor="hospitalName">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left" htmlFor="Hospital_name">
                                     Hospital Name :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="hospitalName"
+                                    id="Hospital_name"
                                     type="text"
                                     placeholder="Hospital name"
                                     required
+                                    value={formData.Hospital_name}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="email">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Email">
                                     Email :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="email"
+                                    id="Email"
                                     type="email"
                                     placeholder="E-mail"
                                     required
+                                    value={formData.Email}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="phone">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Phone_Number">
                                     Phone Number :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="phone"
+                                    id="Phone_Number"
                                     type="text"
                                     placeholder="Phone number"
                                     required
+                                    value={formData.Phone_Number}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="phone1">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Phone_Number_2">
                                     Phone Number 2 :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="phone1"
+                                    id="Phone_Number_2"
                                     type="text"
                                     placeholder="Phone number"
                                     required
+                                    value={formData.Phone_Number_2}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             {/* <div className="md:w-1/2 px-3 mb-4 md:mb-0">
@@ -97,55 +128,60 @@ function Hospitalregister() {
                                 </select>
                             </div> */}
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="address">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Address">
                                     Address :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="address"
+                                    id="Address"
                                     type="text"
                                     placeholder="Address"
                                     required
+                                    value={formData.Address}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="city">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="City">
                                     City
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="city"
+                                    id="City"
                                     type="text"
                                     placeholder="City"
                                     required
+                                    value={formData.City}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="district">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="District">
                                     District :
                                 </label>
                                 <select
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="district"
+                                    id="District"
                                     required
-
+                                    value={formData.District}
+                                    onChange={handleInputChange}
                                 >
                                     <option value="">Select District</option>
-                                    {state && districts[state].map((district) => (
-                                        <option value={district}>{district}</option>
+                                    {formData.State && districts[formData.State].map((district, index) => (
+                                        <option key={index} value={district}>{district}</option>
                                     ))}
                                 </select>
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="state">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="State">
                                     State :
                                 </label>
                                 <select
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="state"
+                                    id="State"
                                     required
-                                    value={state}
-                                    onChange={(e) => setState(e.target.value)}
+                                    value={formData.State}
+                                    onChange={handleInputChange}
                                 >
                                     <option value="">Select state</option>
                                     {states.map((state, index) => (
@@ -154,15 +190,17 @@ function Hospitalregister() {
                                 </select>
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="password">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Password">
                                     Password :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="password"
+                                    id="Password"
                                     type="password"
                                     placeholder="Password"
                                     required
+                                    value={formData.Password}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
@@ -175,6 +213,8 @@ function Hospitalregister() {
                                     type="password"
                                     placeholder="Confirm Password"
                                     required
+                                    value={CPassword}
+                                    onChange={e => setCPassword(e.target.value)}
                                 />
                             </div>
 

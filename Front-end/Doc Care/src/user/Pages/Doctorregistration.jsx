@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
 import Navbar from '../Components/Navbar';
-import { districts, states } from '../Components/State_district'
+import { districts, specializations, states } from '../Components/State_district'
 import toast from 'react-hot-toast';
 import { customAxios } from '../../confiq/axios';
 
-
 function Registrationform() {
+
     const [formData, setFormData] = useState({
         Doctor_ID: "",
         Full_Name: "",
@@ -23,8 +23,6 @@ function Registrationform() {
     });
     const [confirmPassword, setconfirmPassword] = useState("");
 
-    const specialization = ["Cardiology", "Dermatology", "Neurology", "Pediatrics", "Orthopedic", "General medicine", "Opthalmology", "Psychiatry", "ENT", "Gynaecology", "Sexology", "General physician", "Urology", "Dental", "General surgery", "Stomach & digestion"];
-
     const handleInputChange = (e) => {
         const { id, value } = e.target;
         setFormData((prevState) => ({
@@ -41,8 +39,7 @@ function Registrationform() {
                 .then((result) => {
                     toast.success(result.data.message);
                 }).catch((error) => {
-                    toast.error(error)
-                    console.log(error);
+                    toast.error(error.response.data.message);
                 });
         } else {
             toast.error("Password not match")
@@ -154,7 +151,7 @@ function Registrationform() {
                                     onChange={handleInputChange}
                                 >
                                     <option value="">Select specialization</option>
-                                    {specialization.map((value, index) => (
+                                    {specializations.map((value, index) => (
                                         <option key={index} value={value}>{value}</option>
                                     ))}
                                 </select>

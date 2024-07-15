@@ -1,7 +1,7 @@
 import mongoose from "mongoose";
 
 const bloodSchema = new mongoose.Schema({
-    Donor_name: {
+    Name: {
         type: String,
         required: true
     },
@@ -9,7 +9,7 @@ const bloodSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    email: {
+    Email: {
         type: String,
         required: true
     },
@@ -17,11 +17,11 @@ const bloodSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    State: {
+    District: {
         type: String,
         required: true
     },
-    City: {
+    State: {
         type: String,
         required: true
     },

@@ -1,115 +1,144 @@
-import React from 'react'
-import Navbar from './Navbar'
+import React, { useState } from 'react';
+import Navbar from './Navbar';
+import { bloodGroups, districts, states } from './State_district';
+import toast from 'react-hot-toast';
+import { customAxios } from '../../confiq/axios';
 
 function Blooddonate() {
+
+    const [formData, setformData] = useState({
+        Name: "",
+        Blood_group: "",
+        Email: "",
+        Phone_number: "",
+        District: "",
+        State: ""
+    });
+
+    const handleInputChange = (e) => {
+        const { id, value } = e.target;
+        setformData((state) => ({
+            ...state,
+            [id]: value
+        }));
+    }
+
+    const bloodRegistration = async (e) => {
+        e.preventDefault()
+        await customAxios.post('/user/api/bloodregister', formData)
+            .then((result) => {
+                toast.success(result.data.message)
+            }).catch((error) => {
+                toast.error(error.response.data.message)
+            })
+    };
     return (
         <>
             <Navbar />
 
             <div className="bg-white bg-opacity-40 p-8 rounded-lg shadow-lg w-full max-w-sm mx-4 ">
                 <h2 style={{ fontFamily: 'inria-serif' }} className="text-3xl font-bold mb-6 text-center">Register</h2>
-                <form>
+                <form onSubmit={bloodRegistration}>
                     <div className="mb-4">
                         <label>
                             <div className="label">
-                                <span className=" font-bold">Enter Donor name</span>
+                                <span className=" font-bold">Donor name</span>
                             </div>
                             <input
                                 type="text"
-                                id="username"
+                                id="Name"
                                 className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
                                 placeholder="User name"
                                 required
-                                onChange={e => setusername(e.target.value)}
+                                value={formData.Name}
+                                onChange={handleInputChange}
                             />
                         </label>
                     </div>
                     <div className="mb-4">
                         <label className="form-control w-full max-w-xs">
                             <div className="label">
-                                <span className="font-bold">Select Blood group</span>
+                                <span className="font-bold">Blood group</span>
                             </div>
-                            <select className="h-[40px] w-full border 2px gray" onChange={e => setcategory(e.target.value)}>
-                                <option>Select category</option>
-                                <option value="A+">A+</option>
-                                <option value="A-">A-</option>
-                                <option value="B+">B+</option>
-                                <option value="B-">B-</option>
-                                <option value="AB+">AB+</option>
-                                <option value="AB-">AB-</option>
-                                <option value="O+">O+</option>
-                                <option value="O-">O-</option>
+                            <select className="h-[40px] w-full border 2px gray"
+                                id='Blood_group'
+                                required
+                                value={formData.Blood_group}
+                                onChange={handleInputChange}
+                            >
+                                <option>Select blood group</option>
+                                {bloodGroups.map((blood, index) => (
+                                    <option key={index} value={blood}>{blood}</option>
+                                ))}
                             </select>
                         </label>
                     </div>
                     <div className="mb-4">
                         <label>
                             <div className="label">
-                                <span className="font-bold">Enter Donor e-mail</span>
+                                <span className="font-bold">Donor e-mail</span>
                             </div>
                             <input
                                 type="email"
-                                id="email"
+                                id="Email"
                                 className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
                                 placeholder="E-mail"
                                 required
-                                onChange={e => setemail(e.target.value)}
+                                value={formData.Email}
+                                onChange={handleInputChange}
                             />
                         </label>
                     </div>
                     <div className="mb-4">
                         <label>
                             <div className="label">
-                                <span className=" font-bold">Enter Contact number</span>
+                                <span className=" font-bold">Contact number</span>
                             </div>
                             <input
                                 type="tel"
-                                id="phone"
+                                id="Phone_number"
                                 className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
                                 placeholder="Phone number"
                                 required
-                                onChange={e => setnumber(e.target.value)}
+                                value={formData.Phone_number}
+                                onChange={handleInputChange}
                             />
                         </label>
                     </div>
-
                     <div className="mb-4">
-                        <label className="form-control w-full max-w-xs">
+                        <label className="form-control w-full max-w-xs" htmlFor='District'>
                             <div className="label">
-                                <span className="font-bold">Select State</span>
+                                <span className="font-bold">District</span>
                             </div>
-                            <select className="h-[40px] w-full border 2px gray" onChange={e => setdistrict(e.target.value)}>
-                                <option>Select State</option>
-                                <option value="Kerala">Kerala</option>
-                                <option value="Tamilnadu">Tamilnadu</option>
-                                <option value="Karnataka">Karnataka</option>
-                                <option value="Thelugana">Thelugana</option>
-                                <option value="Rajasthan">Rajasthan</option>
-                                <option value="Gujarath">Gujarath</option>
-                                <option value="Uttar pradesh">Uttar pradesh</option>
-                                <option value="Maharashtra">Maharashtra</option>
-                                <option value="Madhya pradesh">Madhya pradesh</option>
-                                <option value="Himachal pradesh">Himachal pradesh</option>
-                                <option value="Jammu & Kashmir">Jammu & Kashmir</option>
-                                <option value="West Bangal">West Bangal</option>
-                                <option value="Assam">Assam</option>
+                            <select className="h-[40px] w-full border 2px gray"
+                                id='District'
+                                required
+                                value={formData.District}
+                                onChange={handleInputChange}
+                            >
+                                <option>Select district</option>
+                                {formData.State && districts[formData.State].map((district, index) => (
+                                    <option key={index} value={district}>{district}</option>
+                                ))}
                             </select>
                         </label>
                     </div>
-
                     <div className="mb-4">
-                        <label>
+                        <label className="form-control w-full max-w-xs" htmlFor='State'>
                             <div className="label">
-                                <span className="font-bold">Enter City</span>
+                                <span className="font-bold">State</span>
                             </div>
-                            <input
-                                type="text"
-                                id="city"
-                                className="w-full p-2 border border-gray-300 rounded focus:outline-none focus:ring focus:ring-blue-200"
-                                placeholder="City"
+                            <select className="h-[40px] w-full border 2px gray"
+                                id='State'
                                 required
-                                onChange={e => setcity(e.target.value)}
-                            />
+                                value={formData.State}
+                                onChange={handleInputChange}
+                            >
+                                <option>Select State</option>
+                                {states.map((state, index) => (
+                                    <option key={index} value={state}>{state}</option>
+                                ))}
+                            </select>
                         </label>
                     </div>
 

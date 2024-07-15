@@ -9,15 +9,15 @@ export const bloodRegister = async (req, res, next) => {
         return res.status(400).json({ Details: error });
     }
 
-    const { Donor_name, Blood_group, email, Phone_number, State, City } = value;
+    const { Name, Blood_group, Email, Phone_number, District, State } = value;
 
     const newDonor = new Blood({
-        Donor_name,
+        Name,
         Blood_group,
-        email,
+        Email,
         Phone_number,
-        State,
-        City
+        District,
+        State
     });
 
     await newDonor.save();
