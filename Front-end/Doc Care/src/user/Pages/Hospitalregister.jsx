@@ -6,6 +6,7 @@ import { districts, states } from '../Components/State_district'
 function Hospitalregister() {
 
     const [state, setState] = useState("");
+    const specialization = ["Cardiology", "Dermatology", "Neurology", "Pediatrics", "Orthopedic", "General medicine", "Opthalmology", "Psychiatry", "ENT", "Gynaecology", "Sexology", "General physician", "Urology", "Dental", "General surgery", "Stomach & digestion"];
 
 
     const hospitalregistration = () => {
@@ -80,7 +81,7 @@ function Hospitalregister() {
                                     required
                                 />
                             </div>
-                            <div className="md:w-1/2 px-3 mb-4 md:mb-0">
+                            {/* <div className="md:w-1/2 px-3 mb-4 md:mb-0">
                                 <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="specialization">
                                     Specialization :
                                 </label>
@@ -90,11 +91,11 @@ function Hospitalregister() {
                                     required
                                 >
                                     <option value="">Select specialization</option>
-                                    {/* {specialization.map((value, index) => ( */}
-                                    <option value="mmp">mmp</option>
-                                    {/* ))} */}
+                                    {specialization.map((value, index) => (
+                                    <option value={value}>{value}</option>
+                                     ))} 
                                 </select>
-                            </div>
+                            </div> */}
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
                                 <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="address">
                                     Address :
@@ -103,7 +104,7 @@ function Hospitalregister() {
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     id="address"
                                     type="text"
-                                    placeholder="Enter address"
+                                    placeholder="Address"
                                     required
                                 />
                             </div>
@@ -160,7 +161,7 @@ function Hospitalregister() {
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     id="password"
                                     type="password"
-                                    placeholder="Enter password"
+                                    placeholder="Password"
                                     required
                                 />
                             </div>
@@ -172,7 +173,7 @@ function Hospitalregister() {
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     id="confirmPassword"
                                     type="password"
-                                    placeholder="Enter password"
+                                    placeholder="Confirm Password"
                                     required
                                 />
                             </div>

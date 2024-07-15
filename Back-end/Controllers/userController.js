@@ -2,6 +2,7 @@ import Users from "../Models/userSchema.js";
 import bcrypt from 'bcrypt'
 import userjoi from "../joiValidation/userValidation.js";
 import Jwt from "jsonwebtoken";
+import createError from "http-errors"
 
 export const signup = async (req, res, next) => {
 
@@ -44,13 +45,14 @@ export const signin = async (req, res, next) => {
     };
 
     if (validUser.isDeleted == true) {
+        // throw new createError[400]("Your account is suspended")
         return res.status(400).json({ message: "Your account is suspended" });
     };
 
     const validpassword = bcrypt.compareSync(password, validUser.password);
-
     if (!validpassword) {
-        res.status(401).json({ message: "Password incorrect" });
+        // throw new createError.BadRequest("Password incorrect");
+       return res.status(401).json({ message: "Password incorrect" });
     }
 
     const token = Jwt.sign({ id: validUser._id }, process.env.USER_JWT_SECRET_KEY);

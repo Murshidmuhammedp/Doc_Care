@@ -1,18 +1,52 @@
 import React, { useState } from 'react';
 import Navbar from '../Components/Navbar';
 import { districts, states } from '../Components/State_district'
+import toast from 'react-hot-toast';
+import { customAxios } from '../../confiq/axios';
 
 
 function Registrationform() {
+    const [formData, setFormData] = useState({
+        Doctor_ID: "",
+        Full_Name: "",
+        Email: "",
+        Phone_Number: "",
+        Gender: "",
+        DOB: "",
+        Specialization: "",
+        Experience: "",
+        Address: "",
+        Consultation_Address: "",
+        District: "",
+        State: "",
+        Password: "",
+    });
+    const [confirmPassword, setconfirmPassword] = useState("");
 
-    const [state, setState] = useState("")
-
-    // const state = ["Andaman & Nicobar", "Pondicherry", "Kerala", "Chhattisgarh", "Bihar", "Maharashtra", "Andhra Pradesh", "Mizoram", "Punjab", "Karnataka", "West Bengal", "Haryana", "Manipur", "Himachal Pradesh", "Goa", "Arunachal Pradesh", "Assam", "Gujarat", "Telangana", "Rajasthan", "Madhya Pradesh", "Tamil Nadu", "Nagaland", "Odisha", "Jharkhand", "Meghalaya", "Delhi", "Tripura", "Uttar Pradesh", "Jammu & Kashmir", "Sikkim", "Uttarakhand"];
     const specialization = ["Cardiology", "Dermatology", "Neurology", "Pediatrics", "Orthopedic", "General medicine", "Opthalmology", "Psychiatry", "ENT", "Gynaecology", "Sexology", "General physician", "Urology", "Dental", "General surgery", "Stomach & digestion"];
 
-    const doctorregistration = () => {
+    const handleInputChange = (e) => {
+        const { id, value } = e.target;
+        setFormData((prevState) => ({
+            ...prevState,
+            [id]: value
+        }));
+    };
 
 
+    const doctorregistration = async (e) => {
+        e.preventDefault();
+        if (formData.Password === confirmPassword) {
+            await customAxios.post('/user/api/doctor/register', formData)
+                .then((result) => {
+                    toast.success(result.data.message);
+                }).catch((error) => {
+                    toast.error(error)
+                    console.log(error);
+                });
+        } else {
+            toast.error("Password not match")
+        }
     };
     return (
         <>
@@ -23,61 +57,71 @@ function Registrationform() {
                     <form onSubmit={doctorregistration}>
                         <div className="md:flex md:flex-wrap -mx-3 mb-6">
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left" htmlFor="doctorId">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left" htmlFor="Doctor_ID">
                                     Doctor ID :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="doctorId"
+                                    id="Doctor_ID"
                                     type="text"
                                     placeholder="Enter doctor ID"
                                     required
+                                    value={formData.Doctor_ID}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left" htmlFor="name">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left" htmlFor="Full_Name">
                                     Full Name :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="name"
+                                    id="Full_Name"
                                     type="text"
                                     placeholder="Enter full name"
                                     required
+                                    value={formData.Full_Name}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="email">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Email">
                                     Email :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="email"
+                                    id="Email"
                                     type="email"
                                     placeholder="Enter email"
                                     required
+                                    value={formData.Email}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="phone">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Phone_Number">
                                     Phone Number :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="phone"
+                                    id="Phone_Number"
                                     type="text"
                                     placeholder="Enter phone number"
                                     required
+                                    value={formData.Phone_Number}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="gender">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Gender">
                                     Gender :
                                 </label>
                                 <select
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="gender"
+                                    id="Gender"
                                     required
+                                    value={formData.Gender}
+                                    onChange={handleInputChange}
                                 >
                                     <option value="">Select Gender</option>
                                     <option value="Male">Male</option>
@@ -85,25 +129,29 @@ function Registrationform() {
                                 </select>
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="dob">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="DOB">
                                     DOB :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="dob"
+                                    id="DOB"
                                     type="date"
                                     placeholder="Enter Date of birth"
                                     required
+                                    value={formData.DOB}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="specialization">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Specialization">
                                     Specialization :
                                 </label>
                                 <select
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="specialization"
+                                    id="Specialization"
                                     required
+                                    value={formData.Specialization}
+                                    onChange={handleInputChange}
                                 >
                                     <option value="">Select specialization</option>
                                     {specialization.map((value, index) => (
@@ -112,66 +160,74 @@ function Registrationform() {
                                 </select>
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="experience">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Experience">
                                     Experience :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="experience"
+                                    id="Experience"
                                     type="number"
                                     placeholder="Enter years of experience"
                                     required
+                                    value={formData.Experience}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="address">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Address">
                                     Address :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="address"
+                                    id="Address"
                                     type="text"
                                     placeholder="Enter address"
                                     required
+                                    value={formData.Address}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="consultationPlace">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Consultation_Address">
                                     Consultation Address :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="consultationAddress"
+                                    id="Consultation_Address"
                                     type="text"
                                     placeholder="Enter consultation Address"
                                     required
+                                    value={formData.Consultation_Address}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="city">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="District">
                                     District :
                                 </label>
                                 <select
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="city"
+                                    id="District"
                                     required
+                                    value={formData.District}
+                                    onChange={handleInputChange}
                                 >
-                                    <option value="">Select city</option>
-                                    {state && districts[state].map((district, index) => (
+                                    <option value="">Select district</option>
+                                    {formData.State && districts[formData.State].map((district, index) => (
                                         <option key={index} value={district}>{district}</option>
                                     ))}
                                 </select>
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="state">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="State">
                                     State :
                                 </label>
                                 <select
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="state"
+                                    id="State"
                                     required
-                                    value={state}
-                                    onChange={(e) => setState(e.target.value)}
+                                    value={formData.State}
+                                    onChange={handleInputChange}
                                 >
                                     <option value="">Select state</option>
                                     {states.map((state, index) => (
@@ -180,15 +236,17 @@ function Registrationform() {
                                 </select>
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="password">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Password">
                                     Password :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="password"
+                                    id="Password"
                                     type="password"
                                     placeholder="Enter password"
                                     required
+                                    value={formData.Password}
+                                    onChange={handleInputChange}
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
@@ -201,6 +259,8 @@ function Registrationform() {
                                     type="password"
                                     placeholder="Enter password"
                                     required
+                                    value={confirmPassword}
+                                    onChange={e => setconfirmPassword(e.target.value)}
                                 />
                             </div>
 

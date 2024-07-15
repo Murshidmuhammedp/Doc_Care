@@ -22,7 +22,7 @@ const doctorSchema = new mongoose.Schema({
         required: true
     },
     DOB: {
-        type: Number,
+        type: String,
         required: true
     },
     Specialization: {

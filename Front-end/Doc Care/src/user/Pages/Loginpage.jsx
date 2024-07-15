@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
+import { customAxios } from '../../confiq/axios';
 
 
 
@@ -14,22 +15,15 @@ function Loginpage() {
     const loginValidation = async (e) => {
         e.preventDefault();
 
-        const response = await axios.post('http://localhost:9876/user/api/login', { email, password });
-        if (response.status === 200) {
-            const token = response.data.token;
-            localStorage.setItem('userToken', token);
-            toast.success(response.data.message);
-            navigate('/');
-        }
-        if (response.status === 400) {
-            toast.error(response.data.message);
-        };
-        if (response.status === 401) {
-            toast.error(response.data.message);
-        }
-        if (response.status === 404) {
-            toast.success(response.data.message);
-        }
+        await customAxios.post('/user/api/login', { email, password })
+            .then((result) => {
+                const token = result.data.token;
+                localStorage.setItem('userToken', token);
+                toast.success(result.data.message);
+                navigate('/');
+            }).catch((error) => {
+                toast.error(error.response.data.message)
+            });
     };
 
     return (

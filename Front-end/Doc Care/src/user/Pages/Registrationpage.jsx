@@ -2,6 +2,7 @@ import React, { useState } from 'react'
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom'
 import axios from 'axios'
+import { customAxios } from '../../confiq/axios';
 
 function Registrationpage() {
 
@@ -16,7 +17,7 @@ function Registrationpage() {
         e.preventDefault()
         try {
             if (password === confirmpassword) {
-                const response = await axios.post('http://localhost:9876/user/api/register', { username, email, phone_number, password });
+                const response = await customAxios.post('/user/api/register', { username, email, phone_number, password });
                 if (response.status === 201) {
                     toast.success(response.data.message)
                     navigate('/login');
