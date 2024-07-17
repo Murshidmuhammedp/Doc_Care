@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import toast from 'react-hot-toast';
 import { customAxios } from '../../confiq/axios';
+import Navbar2 from '../Components/Navbar2';
 
 
 
@@ -28,6 +29,7 @@ function Loginpage() {
 
     return (
         <>
+            <Navbar2 />
             <div
                 className="bg-cover bg-center h-screen w-full flex items-center justify-center"
                 style={{

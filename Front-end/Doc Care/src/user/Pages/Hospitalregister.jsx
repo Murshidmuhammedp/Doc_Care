@@ -39,7 +39,7 @@ function Hospitalregister() {
             <Navbar />
             <div className="flex items-center justify-center min-h-screen bg-gray-200">
                 <div className="max-w-4xl bg-white p-8 rounded-lg shadow-md hover:shadow-xl w-full mt-6">
-                    <h2 className="text-2xl font-bold mb-12 text-center">Hospital Registration</h2>
+                    <h2 className="text-2xl font-bold mb-12 text-center">HOSPITAL REGISTRATION</h2>
                     <form onSubmit={hospitalregistration}>
                         <div className="md:flex md:flex-wrap -mx-3 mb-6">
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">

@@ -3,9 +3,10 @@ import Navbar from '../Components/Navbar';
 import { districts, specializations, states } from '../Components/State_district'
 import toast from 'react-hot-toast';
 import { customAxios } from '../../confiq/axios';
+import { useNavigate } from 'react-router-dom';
 
 function Registrationform() {
-
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         Doctor_ID: "",
         Full_Name: "",
@@ -38,6 +39,7 @@ function Registrationform() {
             await customAxios.post('/user/api/doctor/register', formData)
                 .then((result) => {
                     toast.success(result.data.message);
+                    navigate('/forbusiness')
                 }).catch((error) => {
                     toast.error(error.response.data.message);
                 });
@@ -50,7 +52,7 @@ function Registrationform() {
             <Navbar />
             <div className="flex items-center justify-center min-h-screen bg-gray-200">
                 <div className="max-w-4xl bg-white p-8 rounded-lg shadow-md hover:shadow-xl w-full mt-6">
-                    <h2 className="text-2xl font-bold mb-12 text-center">Doctor Registration</h2>
+                    <h2 className="text-2xl font-bold mb-12 text-center">DOCTOR REGISTRATION</h2>
                     <form onSubmit={doctorregistration}>
                         <div className="md:flex md:flex-wrap -mx-3 mb-6">
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">

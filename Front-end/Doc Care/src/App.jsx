@@ -8,6 +8,7 @@ import Categorypage from './user/Components/Categorypage'
 import Businessreg from './user/Components/Businesscategory'
 import Doctorregistration from './user/Pages/Doctorregistration'
 import Hospitalregister from './user/Pages/Hospitalregister'
+import Doclogin from './user/Pages/businesslogin'
 
 function App() {
   return (
@@ -21,6 +22,7 @@ function App() {
         <Route path='/forbusiness' element={<Businessreg />}></Route>
         <Route path='/doctorregister' element={<Doctorregistration />}></Route>
         <Route path='/hospitalregister' element={<Hospitalregister />}></Route>
+        <Route path='/forbusiness/doclogin' element={<Doclogin />}></Route>
       </Routes>
     </div>
   )
