@@ -9,6 +9,8 @@ import Businessreg from './user/Components/Businesscategory'
 import Doctorregistration from './user/Pages/Doctorregistration'
 import Hospitalregister from './user/Pages/Hospitalregister'
 import Doclogin from './user/Pages/businesslogin'
+import AdminLogin from './admin/Login'
+import AdminHomepage from './admin/Homepage'
 
 function App() {
   return (
@@ -23,6 +25,8 @@ function App() {
         <Route path='/doctorregister' element={<Doctorregistration />}></Route>
         <Route path='/hospitalregister' element={<Hospitalregister />}></Route>
         <Route path='/forbusiness/doclogin' element={<Doclogin />}></Route>
+        <Route path='/admin/login' element={<AdminLogin />}></Route>
+        <Route path='/admin/homepage' element={<AdminHomepage/>}></Route>
       </Routes>
     </div>
   )

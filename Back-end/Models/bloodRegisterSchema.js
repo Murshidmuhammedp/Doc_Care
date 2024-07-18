@@ -9,6 +9,14 @@ const bloodSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    Gender: {
+        type: String,
+        required: true
+    },
+    Age: {
+        type: Number,
+        required: true
+    },
     Email: {
         type: String,
         required: true
