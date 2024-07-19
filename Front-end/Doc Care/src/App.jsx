@@ -11,6 +11,8 @@ import Hospitalregister from './user/Pages/Hospitalregister'
 import Doclogin from './user/Pages/businesslogin'
 import AdminLogin from './admin/Login'
 import AdminHomepage from './admin/Homepage'
+import Userlist from './admin/User\'slist'
+import Workerlist from './admin/Worker\'slist'
 
 function App() {
   return (
@@ -26,7 +28,9 @@ function App() {
         <Route path='/hospitalregister' element={<Hospitalregister />}></Route>
         <Route path='/forbusiness/doclogin' element={<Doclogin />}></Route>
         <Route path='/admin/login' element={<AdminLogin />}></Route>
-        <Route path='/admin/homepage' element={<AdminHomepage/>}></Route>
+        <Route path='/admin/home/dashboard' element={<AdminHomepage />}></Route>
+        <Route path='/admin/home/userlist' element={<Userlist />}></Route>
+        <Route path='/admin/home/workerlist' element={<Workerlist />}></Route>
       </Routes>
     </div>
   )

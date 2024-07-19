@@ -16,7 +16,7 @@ const AdminLogin = () => {
       .then((result) => {
         localStorage.setItem("adminToken", result.data.token);
         toast.success(result.data.message);
-        navigate('/admin/homepage')
+        navigate('/admin/home/dashboard')
       }).catch((error) => {
         toast.error(error.response.data.message);
       })
@@ -24,8 +24,8 @@ const AdminLogin = () => {
 
   return (
     <>
-      <Navbaradmin />
-      <div className="h-[89vh] flex items-center justify-center bg-blue-200">
+      {/* <Navbaradmin /> */}
+      <div className="h-[100vh] flex items-center justify-center bg-blue-200">
         <div className="flex flex-col lg:flex-row w-full max-w-5xl  bg-white shadow-lg rounded-xl overflow-hidden">
           {/* Left Side - Quote */}
           <div className="hidden lg:flex w-full lg:w-1/2 bg-blue-500 text-white justify-center items-center p-10">
