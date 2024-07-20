@@ -1,6 +1,8 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Sidebar from './Sidebar'
 import Nav from './Navbaradmin'
+import { customAxios } from '../confiq/axios';
+import toast from 'react-hot-toast';
 
 function Pendingrequest() {
 
@@ -14,6 +16,38 @@ function Pendingrequest() {
 
     const [selectedCategory, setSelectedCategory] = useState('Hospital');
     const [data, setData] = useState([]);
+
+    useEffect(() => {
+        const fetchdata = async () => {
+            await customAxios.get('/admin/api/workers/pendingrequest')
+                .then((result) => {
+                    console.log(result.data.data);
+                    setData(result.data.data)
+                }).catch((error) => {
+                    console.log(error);
+                })
+        }
+        fetchdata();
+    }, []);
+
+    const rejectDoctor = async (id) => {
+        await customAxios.delete(`/admin/api/workers/rejected/${id}`)
+            .then((result) => {
+                toast.success(result.data.message)
+            }).catch((error) => {
+                console.log(error);
+            })
+    };
+
+    const approvelDoctor = async (id) => {
+        await customAxios.patch(`/admin/api/workers/approved/${id}`)
+            .then((result) => {
+                console.log(result);
+                toast.success(result.data.message)
+            }).catch((error) => {
+                console.log(error);
+            })
+    };
 
     return (
         <>
@@ -30,10 +64,10 @@ function Pendingrequest() {
                                     <button
                                         key={category}
                                         onClick={() => handleCategoryChange(category)}
-                                        className={`py-2 px-4 rounded-lg font-semibold transition-colors duration-300 ${selectedCategory === category
-                                                ? 'bg-blue-500 text-white'
-                                                : 'bg-white text-blue-500 border border-blue-500'
-                                            } hover:bg-blue-600 hover:text-white`}
+                                        className={`py - 2 px - 4 rounded - lg font - semibold transition - colors duration - 300 ${selectedCategory === category
+                                            ? 'bg-blue-500 text-white'
+                                            : 'bg-white text-blue-500 border border-blue-500'
+                                            } hover: bg-blue - 600 hover: text - white`}
                                     >
                                         {category}
                                     </button>
@@ -44,34 +78,30 @@ function Pendingrequest() {
                                 <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
                                     <thead className="bg-blue-500 text-white">
                                         <tr>
-                                            <th className="py-3 px-4 text-left">Sl. No</th>
-                                            <th className="py-3 px-4 text-left">Name</th>
-                                            <th className="py-3 px-4 text-left">Image</th>
-                                            <th className="py-3 px-4 text-left">Phone Number</th>
+                                            <th className="py-3 px-4 text-center">Sl. No</th>
+                                            <th className="py-3 px-4 text-center">Name</th>
+                                            <th className="py-3 px-4 text-center">Doctor Id</th>
+                                            <th className="py-3 px-4 text-center">Specialization</th>
+                                            <th className="py-3 px-4 text-center">Phone Number</th>
                                             <th className="py-3 px-4 text-left">Actions</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        {data.map((item, index) => (
-                                            <tr key={item.id} className="border-b hover:bg-gray-100">
-                                                <td className="py-2 px-4">{index + 1}</td>
-                                                <td className="py-2 px-4">{item.name}</td>
-                                                <td className="py-2 px-4">
-                                                    <img
-                                                        src={item.image}
-                                                        alt={item.name}
-                                                        className="w-16 h-16 object-cover rounded"
-                                                    />
-                                                </td>
-                                                <td className="py-2 px-4">{item.phone}</td>
-                                                <td className="py-2 px-4 flex space-x-2">
-                                                    <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600">
+                                        {data && data.map((item, index) => (
+                                            <tr key={item._id} className="border-b hover:bg-gray-100">
+                                                <td className="py-3 px-4">{index + 1}</td>
+                                                <td className="py-3 px-4">{item.Full_Name}</td>
+                                                <td className="py-3 px-4">{item.Doctor_ID}</td>
+                                                <td className="py-3 px-4">{item.Specialization}</td>
+                                                <td className="py-3 px-4">{item.Phone_Number}</td>
+                                                <td className="py-3 px-4 flex space-x-2">
+                                                    <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600" onClick={() => rejectDoctor(item._id)}>
                                                         Reject
                                                     </button>
-                                                    <button className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600">
-                                                        Accept
+                                                    <button className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600" onClick={() => approvelDoctor(item._id)}>
+                                                        Approve
                                                     </button>
-                                                    <button className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600">
+                                                    <button className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600" onClick={() => detailspage(item._id)}>
                                                         Details
                                                     </button>
                                                 </td>
