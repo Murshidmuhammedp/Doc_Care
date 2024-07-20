@@ -20,6 +20,8 @@ function Registrationform() {
         Consultation_Address: "",
         District: "",
         State: "",
+        Pincode: "",
+        image: "",
         Password: "",
     });
     const [confirmPassword, setconfirmPassword] = useState("");
@@ -32,15 +34,30 @@ function Registrationform() {
         }));
     };
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setFormData({
+                ...formData,
+                image: file
+            });
+        }
+    };
 
     const doctorregistration = async (e) => {
         e.preventDefault();
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        }
         if (formData.Password === confirmPassword) {
-            await customAxios.post('/user/api/doctor/register', formData)
-                .then((result) => {
-                    toast.success(result.data.message);
-                    navigate('/forbusiness')
-                }).catch((error) => {
+            await customAxios.post('/user/api/doctor/register', formData, config)
+            .then((result) => {
+                toast.success(result.data.message);
+                navigate('/forbusiness')
+            }).catch((error) => {
+                console.log(error);
                     toast.error(error.response.data.message);
                 });
         } else {
@@ -234,6 +251,35 @@ function Registrationform() {
                                     ))}
                                 </select>
                             </div>
+
+                            <div className="md:w-1/2 px-3 mb-4 md:mb-0">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Pincode">
+                                    Pincode :
+                                </label>
+                                <input
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="Pincode"
+                                    type="tel"
+                                    placeholder="Enter Pincode"
+                                    required
+                                    value={formData.Pincode}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="md:w-1/2 px-3 mb-4 md:mb-0">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Image">
+                                    Upload Photo :
+                                </label>
+                                <input
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="Image"
+                                    type="file"
+                                    placeholder="Upload Photo"
+                                    required
+                                    onChange={handleImageChange}
+                                />
+                            </div>
+
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
                                 <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Password">
                                     Password :

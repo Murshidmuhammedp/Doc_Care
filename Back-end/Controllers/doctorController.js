@@ -10,7 +10,7 @@ export const doctorRegistration = async (req, res) => {
         return res.status(404).json({ Details: error });
     }
 
-    const { Doctor_ID, Full_Name, Email, Phone_Number, Gender, DOB, Specialization, Experience, Address, Consultation_Address, District, State, Password } = value
+    const { Doctor_ID, Full_Name, Email, Phone_Number, Gender, DOB, Specialization, Experience, Address, Consultation_Address, District, State, Pincode, Password } = value
 
     const existingdoctor = await doctors.findOne({ Doctor_ID })
 
@@ -33,11 +33,13 @@ export const doctorRegistration = async (req, res) => {
         Consultation_Address,
         District,
         State,
+        Pincode,
+        Image: req.cloudinaryImageUrl,
         Password: hashedPassword
     });
 
     await newDoctor.save();
 
-    return res.status(201).json({ messsage: "Registered successfully", data: newDoctor });
+    return res.status(201).json({ message: "Registered successfully", data: newDoctor });
 
 };

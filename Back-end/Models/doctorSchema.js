@@ -49,6 +49,14 @@ const doctorSchema = new mongoose.Schema({
         type: String,
         required: true
     },
+    Pincode: {
+        type: Number,
+        required: true
+    },
+    Image: {
+        type: String,
+        required: true
+    },
     Password: {
         type: String,
         required: true
@@ -65,6 +73,10 @@ const doctorSchema = new mongoose.Schema({
             now.setMinutes(now.getMinutes() + 30);
             return now;
         }
+    },
+    approve: {
+        type: Boolean,
+        default: false
     },
     isDeleted: {
         type: Boolean,

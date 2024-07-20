@@ -13,6 +13,7 @@ const doctorjoi = Joi.object({
     Consultation_Address: Joi.string().required(),
     District: Joi.string().required(),
     State: Joi.string().required(),
+    Pincode: Joi.number().required(),
     Password: Joi.string().required(),
 });
 

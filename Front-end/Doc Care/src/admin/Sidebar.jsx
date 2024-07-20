@@ -27,16 +27,22 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
                         {sidebarOpen && <span className="w-full">Dashboard</span>}
                     </li>
                 </Link>
-                <Link to={'/admin/home/userlist'}>
+                <Link to={'/admin/userlist'}>
                     <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
                         <FaUsers className="mr-4 text-gray-800" />
                         {sidebarOpen && <span className="w-full">User's List</span>}
                     </li>
                 </Link>
-                <Link to={'/admin/home/workerlist'}>
+                <Link to={'/admin/workerlist'}>
                     <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
                         <FaUserTie className="mr-4 text-gray-800" />
                         {sidebarOpen && <span className="w-full">Workers List</span>}
+                    </li>
+                </Link>
+                <Link to={'/admin/pendingrequest'}>
+                    <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
+                        <FaUserTie className="mr-4 text-gray-800" />
+                        {sidebarOpen && <span className="w-full">Pending Request</span>}
                     </li>
                 </Link>
                 <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">

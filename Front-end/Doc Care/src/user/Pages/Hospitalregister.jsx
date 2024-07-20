@@ -16,6 +16,7 @@ function Hospitalregister() {
         City: "",
         District: "",
         State: "",
+        Pincode: "",
         Password: "",
     });
     const [CPassword, setCPassword] = useState("");
@@ -188,6 +189,20 @@ function Hospitalregister() {
                                         <option key={index} value={state}>{state}</option>
                                     ))}
                                 </select>
+                            </div>
+                            <div className="md:w-1/2 px-3 mb-4 md:mb-0">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Pincode">
+                                    Pincode :
+                                </label>
+                                <input
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="Pincode"
+                                    type="tel"
+                                    placeholder="Pincode"
+                                    required
+                                    value={formData.Pincode}
+                                    onChange={handleInputChange}
+                                />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
                                 <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Password">

@@ -13,6 +13,7 @@ import AdminLogin from './admin/Login'
 import AdminHomepage from './admin/Homepage'
 import Userlist from './admin/User\'slist'
 import Workerlist from './admin/Worker\'slist'
+import Pendingrequest from './admin/Pendingrequest'
 
 function App() {
   return (
@@ -29,8 +30,9 @@ function App() {
         <Route path='/forbusiness/doclogin' element={<Doclogin />}></Route>
         <Route path='/admin/login' element={<AdminLogin />}></Route>
         <Route path='/admin/home/dashboard' element={<AdminHomepage />}></Route>
-        <Route path='/admin/home/userlist' element={<Userlist />}></Route>
-        <Route path='/admin/home/workerlist' element={<Workerlist />}></Route>
+        <Route path='/admin/userlist' element={<Userlist />}></Route>
+        <Route path='/admin/workerlist' element={<Workerlist />}></Route>
+        <Route path='/admin/pendingrequest' element={<Pendingrequest />}></Route>
       </Routes>
     </div>
   )
