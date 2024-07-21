@@ -1,10 +1,13 @@
 import React, { useState } from 'react'
 import Navbar from '../Components/Navbar'
-import { districts, specializations, states } from '../Components/State_district'
+import { districts, states } from '../Components/State_district'
+import toast from 'react-hot-toast';
+import { customAxios } from '../../confiq/axios';
+import { useNavigate } from 'react-router-dom';
 
 
 function Hospitalregister() {
-
+    const navigate = useNavigate();
     const [formData, setFormData] = useState({
         License_number: "",
         Hospital_name: "",
@@ -38,9 +41,25 @@ function Hospitalregister() {
         }
     };
 
-    const hospitalregistration = (e) => {
+    const hospitalregistration = async (e) => {
         e.preventDefault()
-
+        const config = {
+            headers: {
+                'Content-Type': 'multipart/form-data',
+            }
+        }
+        if (formData.Password === CPassword) {
+            await customAxios.post('', formData, config)
+                .then((result) => {
+                    toast.success(result.data.message);
+                    navigate('/forbusiness')
+                }).catch((error) => {
+                    console.log(error);
+                    toast.error(error.response.data.message);
+                });
+        } else {
+            toast.error("Password not match")
+        }
     };
 
     return (
@@ -224,7 +243,6 @@ function Hospitalregister() {
                                     onChange={e => setCPassword(e.target.value)}
                                 />
                             </div>
-
                         </div>
                         <div className="flex items-center justify-center">
                             <button
@@ -237,7 +255,6 @@ function Hospitalregister() {
                     </form>
                 </div>
             </div>
-
         </>
     )
 }
