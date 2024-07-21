@@ -1,5 +1,5 @@
 import React from 'react';
-import { FaTachometerAlt, FaUsers, FaUserTie, FaRegStar, FaClipboardList, FaBell, FaSignOutAlt, FaBars } from 'react-icons/fa';
+import { FaTachometerAlt, FaUsers, FaUserTie, FaRegStar, FaClipboardList, FaBell, FaSignOutAlt, FaBars, FaHandHoldingHeart } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 
 const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
@@ -45,10 +45,12 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
                         {sidebarOpen && <span className="w-full">Pending Request</span>}
                     </li>
                 </Link>
-                <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
-                    <FaRegStar className="mr-4 text-gray-800" />
-                    {sidebarOpen && <span className="w-full">Reviews</span>}
-                </li>
+                <Link to={'/admin/blooddonors'}>
+                    <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
+                        <FaHandHoldingHeart className="mr-4 text-gray-800" />
+                        {sidebarOpen && <span className="w-full">Blood Donor's List</span>}
+                    </li>
+                </Link>
                 <Link to={'/admin/home/orderslist'}>
                     <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
                         <FaClipboardList className="mr-4 text-gray-800" />

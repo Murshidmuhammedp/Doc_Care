@@ -14,6 +14,7 @@ import AdminHomepage from './admin/Homepage'
 import Userlist from './admin/User\'slist'
 import Workerlist from './admin/Worker\'slist'
 import Pendingrequest from './admin/Pendingrequest'
+import Blooddonor from './admin/Blooddonor\'s'
 
 function App() {
   return (
@@ -33,6 +34,7 @@ function App() {
         <Route path='/admin/userlist' element={<Userlist />}></Route>
         <Route path='/admin/workerlist' element={<Workerlist />}></Route>
         <Route path='/admin/pendingrequest' element={<Pendingrequest />}></Route>
+        <Route path='/admin/blooddonors' element={<Blooddonor />}></Route>
       </Routes>
     </div>
   )
