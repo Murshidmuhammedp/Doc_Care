@@ -49,13 +49,13 @@ function Hospitalregister() {
             }
         }
         if (formData.Password === CPassword) {
-            await customAxios.post('', formData, config)
+            await customAxios.post('/user/api/hospital/register', formData, config)
                 .then((result) => {
                     toast.success(result.data.message);
                     navigate('/forbusiness')
                 }).catch((error) => {
                     console.log(error);
-                    toast.error(error.response.data.message);
+                    // toast.error(error.response.data);
                 });
         } else {
             toast.error("Password not match")

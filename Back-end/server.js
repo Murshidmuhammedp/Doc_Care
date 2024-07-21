@@ -3,7 +3,8 @@ import mongoose from 'mongoose';
 import dotenv from 'dotenv';
 import userRouter from '../Back-end/routes/userRouter.js';
 import doctorRouter from '../Back-end/routes/doctorRouter.js';
-import adminRouter from '../Back-end/routes/adminRouter.js'
+import adminRouter from '../Back-end/routes/adminRouter.js';
+import hospitalRouter from '../Back-end/routes/hospitalRouter.js'
 import cors from 'cors';
 
 const app = express();
@@ -18,6 +19,7 @@ app.use(cors({
 
 app.use("/user/api", userRouter);
 app.use("/user/api", doctorRouter);
+app.use("/user/api", hospitalRouter);
 app.use('/admin/api', adminRouter);
 
 // DB connecting

@@ -1,5 +1,5 @@
-import hospitaljoi from "../../joiValidation/hospitalValidation"
-import hospitals from "../../Models/hospitalSchema";
+import hospitaljoi from "../../joiValidation/hospitalValidation.js"
+import hospitals from "../../Models/hospitalSchema.js";
 import bcrypt from 'bcrypt';
 
 export const hospitalRegistration = async (req, res, next) => {
