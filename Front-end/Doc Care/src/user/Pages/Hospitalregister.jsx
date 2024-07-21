@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 import Navbar from '../Components/Navbar'
-import { districts, states } from '../Components/State_district'
+import { districts, specializations, states } from '../Components/State_district'
 
 
 function Hospitalregister() {
@@ -9,14 +9,13 @@ function Hospitalregister() {
         License_number: "",
         Hospital_name: "",
         Email: "",
-        State: "",
         Phone_Number: "",
-        Phone_Number_2: "",
         Address: "",
         City: "",
         District: "",
         State: "",
         Pincode: "",
+        image: "",
         Password: "",
     });
     const [CPassword, setCPassword] = useState("");
@@ -27,8 +26,17 @@ function Hospitalregister() {
             ...state,
             [id]: value
         }));
-    }
+    };
 
+    const handleImageChange = (e) => {
+        const file = e.target.files[0];
+        if (file) {
+            setFormData({
+                ...formData,
+                image: file
+            });
+        }
+    };
 
     const hospitalregistration = (e) => {
         e.preventDefault()
@@ -99,35 +107,6 @@ function Hospitalregister() {
                                     onChange={handleInputChange}
                                 />
                             </div>
-                            <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Phone_Number_2">
-                                    Phone Number 2 :
-                                </label>
-                                <input
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="Phone_Number_2"
-                                    type="text"
-                                    placeholder="Phone number"
-                                    required
-                                    value={formData.Phone_Number_2}
-                                    onChange={handleInputChange}
-                                />
-                            </div>
-                            {/* <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="specialization">
-                                    Specialization :
-                                </label>
-                                <select
-                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="specialization"
-                                    required
-                                >
-                                    <option value="">Select specialization</option>
-                                    {specialization.map((value, index) => (
-                                    <option value={value}>{value}</option>
-                                     ))} 
-                                </select>
-                            </div> */}
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
                                 <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Address">
                                     Address :
@@ -202,6 +181,19 @@ function Hospitalregister() {
                                     required
                                     value={formData.Pincode}
                                     onChange={handleInputChange}
+                                />
+                            </div>
+                            <div className="md:w-1/2 px-3 mb-4 md:mb-0">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Image">
+                                    Upload Hospital Photo :
+                                </label>
+                                <input
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="Image"
+                                    type="file"
+                                    placeholder="Upload Photo"
+                                    required
+                                    onChange={handleImageChange}
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">

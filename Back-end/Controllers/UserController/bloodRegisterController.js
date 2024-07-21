@@ -1,5 +1,5 @@
-import Blood from "../Models/bloodRegisterSchema.js";
-import bloodjoi from "../joiValidation/bloodRegValidation.js"
+import Blood from "../../Models/bloodRegisterSchema.js";
+import bloodjoi from "../../joiValidation/bloodRegValidation.js"
 
 export const bloodRegister = async (req, res, next) => {
 

@@ -1,4 +1,4 @@
-import doctors from "../Models/doctorSchema.js"
+import doctors from "../../Models/doctorSchema.js"
 
 export const pendingrequest = async (req, res, next) => {
 

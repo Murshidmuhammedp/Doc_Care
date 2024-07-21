@@ -1,7 +1,7 @@
 import express from 'express';
-import { adminLogin } from '../Controllers/adminController.js';
-import { BlockandUnblock, ViewallUser } from '../Controllers/adminUserController.js';
-import { approvedoctor, pendingrequest, rejectDoctor } from '../Controllers/adminDoctorController.js';
+import { adminLogin } from '../Controllers/AdminController/adminController.js';
+import { BlockandUnblock, ViewallUser } from '../Controllers/AdminController/adminUserController.js';
+import { approvedoctor, pendingrequest, rejectDoctor } from '../Controllers/AdminController/adminDoctorController.js';
 const router = express.Router();
 
 // Admin Login

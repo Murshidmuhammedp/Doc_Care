@@ -1,5 +1,5 @@
 import express from 'express';
-import { doctorRegistration } from '../Controllers/doctorController.js';
+import { doctorRegistration } from '../Controllers/DoctorController/doctorController.js';
 import uploadImage from '../Middlewares/uploadImage.js';
 
 const router = express.Router();

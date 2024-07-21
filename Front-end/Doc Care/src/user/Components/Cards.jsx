@@ -1,10 +1,10 @@
 import React from 'react'
-import Footer from '../Components/Footer'
-import { useNavigate } from 'react-router-dom'
-import Navbar from '../Components/Navbar';
-import CardSlider from '../Components/CardSlider';
+import { useNavigate } from 'react-router-dom';
 
-function Homepage() {
+function Cards() {
+
+    const navigate = useNavigate();
+
 
     const department = [
         { imageUrl: "https://img.freepik.com/free-vector/doctor-clinic-illustration_1270-69.jpg?size=626&ext=jpg&ga=GA1.1.2019962754.1719289157&semt=ais_hybrid", title: "General medicine" },
@@ -24,81 +24,23 @@ function Homepage() {
         { imageUrl: "data:image/jpeg;base64,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", title: "Cardiology" },
     ]
 
-    const navigate = useNavigate();
-
     return (
         <>
-            <Navbar />
-            <div className="ml-4 md:ml-[180px]">
-                <div className="flex flex-col md:flex-row">
-                    <div
-                        className="h-[500px] w-full md:w-[500px] bg-cover bg-center rounded-[15px] mt-[40px] md:mt-[80px] flex items-start justify-start"
-                        style={{
-                            backgroundImage: "url('https://img.freepik.com/free-photo/doctor-with-thumb-up-white-background_1368-5891.jpg?w=740&t=st=1719299983~exp=1719300583~hmac=e6948433c862f771dd7df76f4e7d14e6df8fb478c79fcbcd20b56ecd3dda8da4')",
-                        }}
-                    >
+            <div className="mb-10 flex flex-wrap items-center justify-center gap-4 md:gap-[40px] mt-4 md:mt-[50px] w-full md:w-[1200px] ml-4 md:ml-[150px]">
+                {department.map((value, index) => (
+                    <div key={index} className="flex flex-col items-center justify-center w-40 md:w-auto">
+                        <div className="h-[250px] w-[180px] border-2 pt-[30px] rounded-md shadow-md hover:shadow-xl">
+                            <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg mx-auto hover:shadow-xl">
+                                <img src={value.imageUrl} alt={value.title} className="w-full h-full object-cover cursor-pointer" onClick={() => { {/*setcate(value.title);*/ } navigate('/category'); }} />
+                            </div>
+                            <p className="mt-4 text-md font-semibold text-gray-800 text-center">{value.title}</p>
+                            <p className="mt-2 text-md font-semibold text-blue-400 text-center hover:cursor-pointer">Book now</p>
+                        </div>
                     </div>
-                    <div className="flex flex-col items-start justify-center mt-8 md:mt-0 md:ml-28">
-                        <h1 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: 'inria-serif' }}>
-                            <span className="md:ml-[-70px]">Now from the good</span> <br />
-                            doctor Take care of your <br />
-                            <span className="md:ml-[-285px]">body.</span>
-                        </h1>
-                        <h6 className="mt-4 md:mt-[40px] text-base md:text-lg">Book your doctor appointment online and take the <br /><span className='ml-[-155px]'>first step towards better health.</span></h6>
-                        <button
-                            type="submit"
-                            className="mt-4 md:mt-[40px] w-[300px] bg-black text-white p-2 rounded-full hover:bg-gray-800 focus:outline-none focus:ring focus:ring-blue-200 text-lg md:text-xl"
-                            onClick={() => navigate('/category')} >
-                            Book Appointment
-                        </button>
-                    </div>
-                </div>
+                ))}
             </div>
-
-            {/* Category card */}
-
-            <div className="p-20">
-                <div>
-                    <h1 className="text-2xl md:text-1xl font-bold ml-4 md:ml-[-780px] mt-4 md:mt-[30px]">Book an appointment for an in-clinic consultation</h1>
-                    <h6 className="text-gray-500 ml-4 md:ml-[-1018px] mt-2 md:mt-[10px]">Find experienced doctors across all specialties</h6>
-                </div>
-                <CardSlider department={department} />
-            </div>
-
-
-            <div className="ml-4 md:ml-[180px]">
-                <div className="flex flex-col md:flex-row">
-                    <div
-                        className="h-[500px] w-full md:w-[500px] bg-cover bg-center rounded-[15px] mt-[40px] md:mt-[80px] flex items-start justify-start"
-                        style={{
-                            backgroundImage: "url('https://img.freepik.com/free-vector/blood-donor-day-poster-with-heart-blood-drop_1017-25357.jpg')",
-                        }}
-                    >
-                    </div>
-                    <div className="flex flex-col items-start justify-center mt-8 md:mt-0 md:ml-28">
-                        <h1 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: 'inria-serif' }}>
-                            <span className="md:ml-[-330px]">Donate blood, </span> <br />
-                            <span className="md:ml-[-385px]">save lives. </span> <br />
-                            <span className="md:ml-[-1px]"> Be a hero in someone's story today.</span>
-                        </h1>
-                        <h6 className="mt-4 md:mt-[40px] text-base md:text-lg">Donating blood is a simple act that can save multiple lives,<br /><span className='ml-[-122px]'> making a profound difference in the world.</span></h6>
-                        <button
-                            type="submit"
-                            className="mt-4 md:mt-[40px] w-[300px] bg-black text-white p-2 rounded-full hover:bg-gray-800 focus:outline-none focus:ring focus:ring-blue-200 text-lg md:text-xl"
-                            onClick={() => navigate('/blooddonate')} >
-                            Donote Blood
-                        </button>
-                    </div>
-                </div>
-            </div>
-
-
-            <Footer />
         </>
-
-
-
     )
 }
 
-export default Homepage
+export default Cards

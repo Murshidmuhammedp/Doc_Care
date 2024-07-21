@@ -53,11 +53,11 @@ function Registrationform() {
         }
         if (formData.Password === confirmPassword) {
             await customAxios.post('/user/api/doctor/register', formData, config)
-            .then((result) => {
-                toast.success(result.data.message);
-                navigate('/forbusiness')
-            }).catch((error) => {
-                console.log(error);
+                .then((result) => {
+                    toast.success(result.data.message);
+                    navigate('/forbusiness')
+                }).catch((error) => {
+                    console.log(error);
                     toast.error(error.response.data.message);
                 });
         } else {
@@ -251,7 +251,6 @@ function Registrationform() {
                                     ))}
                                 </select>
                             </div>
-
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
                                 <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Pincode">
                                     Pincode :
@@ -279,7 +278,6 @@ function Registrationform() {
                                     onChange={handleImageChange}
                                 />
                             </div>
-
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
                                 <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Password">
                                     Password :
@@ -308,7 +306,6 @@ function Registrationform() {
                                     onChange={e => setconfirmPassword(e.target.value)}
                                 />
                             </div>
-
                         </div>
                         <div className="flex items-center justify-center">
                             <button
@@ -321,7 +318,6 @@ function Registrationform() {
                     </form>
                 </div>
             </div>
-
         </>
     );
 }

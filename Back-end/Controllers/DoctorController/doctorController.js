@@ -1,5 +1,5 @@
-import doctors from "../Models/doctorSchema.js";
-import doctorjoi from "../joiValidation/doctorValidation.js";
+import doctors from "../../Models/doctorSchema.js";
+import doctorjoi from "../../joiValidation/doctorValidation.js";
 import bcrypt from 'bcrypt';
 
 export const doctorRegistration = async (req, res) => {

@@ -1,6 +1,6 @@
-import Users from "../Models/userSchema.js";
+import Users from "../../Models/userSchema.js";
 import bcrypt from 'bcrypt'
-import userjoi from "../joiValidation/userValidation.js";
+import userjoi from "../../joiValidation/userValidation.js";
 import Jwt from "jsonwebtoken";
 import createError from "http-errors"
 

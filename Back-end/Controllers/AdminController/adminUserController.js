@@ -1,4 +1,4 @@
-import Users from "../Models/userSchema.js";
+import Users from "../../Models/userSchema.js";
 
 export const ViewallUser = async (req, res, next) => {
 

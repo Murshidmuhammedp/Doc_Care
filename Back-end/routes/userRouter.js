@@ -1,6 +1,6 @@
 import express from 'express';
-import { signin, signup } from '../Controllers/userController.js';
-import { bloodRegister } from '../Controllers/bloodRegisterController.js';
+import { signin, signup } from '../Controllers/UserController/userController.js'
+import { bloodRegister } from '../Controllers/UserController/bloodRegisterController.js'
 
 const router = express.Router();
 
