@@ -7,19 +7,18 @@ import toast from 'react-hot-toast';
 function Pendingrequest() {
 
     const categories = ["Doctor", "Hospital", "Pharmacy"]
-
     const [sidebarOpen, setSidebarOpen] = useState(false);
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
     };
 
-    const [selectedCategory, setSelectedCategory] = useState('Hospital');
+    const [selectedCategory, setSelectedCategory] = useState('Doctor');
     const [data, setData] = useState([]);
 
     useEffect(() => {
         const fetchdata = async () => {
-            await customAxios.get('/admin/api/workers/pendingrequest')
+            await customAxios.get(`/admin/api/workers/${selectedCategory}/pendingrequest`)
                 .then((result) => {
                     console.log(result.data.data);
                     setData(result.data.data)
@@ -31,7 +30,7 @@ function Pendingrequest() {
     }, []);
 
     const rejectDoctor = async (id) => {
-        await customAxios.delete(`/admin/api/workers/rejected/${id}`)
+        await customAxios.delete(`/admin/api/workers/${selectedCategory}/rejected/${id}`)
             .then((result) => {
                 toast.success(result.data.message)
             }).catch((error) => {
@@ -40,13 +39,17 @@ function Pendingrequest() {
     };
 
     const approvelDoctor = async (id) => {
-        await customAxios.patch(`/admin/api/workers/approved/${id}`)
+        await customAxios.patch(`/admin/api/workers/${selectedCategory}/approved/${id}`)
             .then((result) => {
                 console.log(result);
                 toast.success(result.data.message)
             }).catch((error) => {
                 console.log(error);
             })
+    };
+
+    const handleCategoryChange = (category) => {
+        setSelectedCategory(category)
     };
 
     return (
