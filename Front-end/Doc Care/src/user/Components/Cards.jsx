@@ -31,10 +31,10 @@ function Cards() {
                     <div key={index} className="flex flex-col items-center justify-center w-40 md:w-auto">
                         <div className="h-[250px] w-[180px] border-2 pt-[30px] rounded-md shadow-md hover:shadow-xl">
                             <div className="w-32 h-32 rounded-full overflow-hidden border-4 border-gray-200 shadow-lg mx-auto hover:shadow-xl">
-                                <img src={value.imageUrl} alt={value.title} className="w-full h-full object-cover cursor-pointer" onClick={() => { {/*setcate(value.title);*/ } navigate('/category'); }} />
+                                <img src={value.imageUrl} alt={value.title} className="w-full h-full object-cover cursor-pointer" />
                             </div>
                             <p className="mt-4 text-md font-semibold text-gray-800 text-center">{value.title}</p>
-                            <p className="mt-2 text-md font-semibold text-blue-400 text-center hover:cursor-pointer">Book now</p>
+                            <p className="mt-2 text-md font-semibold text-blue-400 text-center hover:cursor-pointer" onClick={() => navigate(`/user/viewdoctors?value=${value.title}`)}>Book now</p>
                         </div>
                     </div>
                 ))}

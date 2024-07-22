@@ -8,7 +8,7 @@ const bloodjoi = Joi.object({
     Email: Joi.string().email().required(),
     Phone_number: Joi.number().min(10).required(),
     District: Joi.string().required(),
-    State: Joi.string().required(),
+    State: Joi.string().required()
 });
 
 export default bloodjoi;

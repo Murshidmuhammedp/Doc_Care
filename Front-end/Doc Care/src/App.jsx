@@ -15,6 +15,7 @@ import Userlist from './admin/User\'slist'
 import Workerlist from './admin/Worker\'slist'
 import Pendingrequest from './admin/Pendingrequest'
 import Blooddonor from './admin/Blooddonor\'s'
+import Viewdoctors from './user/Components/Viewdoctors'
 
 function App() {
   return (
@@ -35,6 +36,7 @@ function App() {
         <Route path='/admin/workerlist' element={<Workerlist />}></Route>
         <Route path='/admin/pendingrequest' element={<Pendingrequest />}></Route>
         <Route path='/admin/blooddonors' element={<Blooddonor />}></Route>
+        <Route path='/user/viewdoctors' element={<Viewdoctors />}></Route>
       </Routes>
     </div>
   )
