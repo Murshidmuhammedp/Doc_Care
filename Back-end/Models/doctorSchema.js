@@ -33,8 +33,8 @@ const doctorSchema = new mongoose.Schema({
         type: Number,
         required: true
     },
-    Address: {
-        type: String,
+    Consultation_Fee: {
+        type: Number,
         required: true
     },
     Consultation_Address: {

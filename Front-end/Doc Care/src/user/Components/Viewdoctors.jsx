@@ -1,13 +1,15 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { useSearchParams } from 'react-router-dom'
 import { districts } from './State_district';
+import { customAxios } from '../../confiq/axios';
 
 function Viewdoctors() {
     const [searchParams] = useSearchParams();
     const value = searchParams.get('value');
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredDistricts, setFilteredDistricts] = useState(districts["Kerala"]);
+    const [filter, setfilter] = useState([])
 
     const handleSearchChange = (event) => {
         const query = event.target.value;
@@ -27,6 +29,19 @@ function Viewdoctors() {
         setSearchQuery(district);
         setFilteredDistricts([]);
     };
+
+    useEffect(() => {
+        const filterdata = async () => {
+            await customAxios.get(`/user/api/finddoctors?District=${searchQuery}&Specialization=${value}`)
+                .then((response) => {
+                    console.log(response.data.data);
+                    setfilter(response.data.data);
+                }).catch((error) => {
+                    console.log(error);
+                })
+        }
+        filterdata();
+    }, [searchQuery, value]);
 
     return (
         <>
@@ -67,32 +82,31 @@ function Viewdoctors() {
             </div>
             {/* Doctor's Cards */}
             <div className=' bg-gray-100 pt-5'>
-                {/* {items && items?.map(value => { */}
-                    {/* price += (value?.productId.price * value?.quantity) */}
-                    {/* return ( */}
-                        <div key={""} className="bg-white shadow-xl flex flex-col md:flex-row mb-5 text-start md:h-[250px] w-full md:w-[1000px] mx-auto md:m-5">
+                {filter && filter?.map(item => {
+                    return (
+                        <div key={item._id} className="bg-white shadow-xl flex flex-col md:flex-row mb-5 text-start md:h-[250px] w-full md:w-[1000px] mx-auto md:m-5">
                             <figure className="w-full md:w-1/3">
-                            <div className="mt-7 ml-[50px] w-48 h-48 rounded-full overflow-hidden border-4 border-gray-50 shadow-lg mx-auto hover:shadow-md">
-                                <img src={""} alt="" className="w-full h-full object-cover cursor-pointer" />
-                            </div>
+                                <div className="mt-7 ml-[50px] w-48 h-48 rounded-full overflow-hidden border-4 border-gray-50 shadow-lg mx-auto hover:shadow-md">
+                                    <img src={item.Image} alt="" className="w-full h-full object-cover cursor-pointer" />
+                                </div>
                             </figure>
                             <div className="w-full md:w-2/3 p-4 md:pt-[50px]">
-                                <h2 className="text-2xl  text-blue-500">Dr.Murshid</h2>
-                                <p className="text-md text-black">ENT</p>
-                           
-                                <p className="text-xl font-bold text-black my-5">₹500 Consultation Fees</p>
+                                <h2 className="text-2xl  text-blue-500">Dr.{item.Full_Name}</h2>
+                                <p className="text-md text-black">{item.Specialization}</p>
+
+                                <p className="text-md  text-black my-5">₹{item.Consultation_Fee} Consultation Fee</p>
                                 <div className="mt-4 flex justify-start">
                                     <button
-                                className="ml-[450px] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                // onClick={() => remove(value.productId._id)}
+                                        className="ml-[450px] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                    // onClick={() => booking(value.productId._id)}
                                     >
-                                      Book Clinic Vist
+                                        Book Clinic Vist
                                     </button>
                                 </div>
                             </div>
                         </div>
-                    {/* )
-                })} */}
+                    )
+                })}
             </div>
 
         </>

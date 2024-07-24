@@ -16,7 +16,7 @@ function Registrationform() {
         DOB: "",
         Specialization: "",
         Experience: "",
-        Address: "",
+        Consultation_Fee: "",
         Consultation_Address: "",
         District: "",
         State: "",
@@ -190,16 +190,16 @@ function Registrationform() {
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Address">
-                                    Address :
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Consultation_Fee">
+                                Consultation Fee :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="Address"
+                                    id="Consultation_Fee"
                                     type="text"
-                                    placeholder="Enter address"
+                                    placeholder="Enter Fee"
                                     required
-                                    value={formData.Address}
+                                    value={formData.Consultation_Fee}
                                     onChange={handleInputChange}
                                 />
                             </div>

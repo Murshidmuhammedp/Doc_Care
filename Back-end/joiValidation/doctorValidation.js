@@ -9,12 +9,12 @@ const doctorjoi = Joi.object({
     DOB: Joi.string().required(),
     Specialization: Joi.string().required(),
     Experience: Joi.number().required(),
-    Address: Joi.string().required(),
+    Consultation_Fee: Joi.number().required(),
     Consultation_Address: Joi.string().required(),
     District: Joi.string().required(),
     State: Joi.string().required(),
     Pincode: Joi.number().required(),
-    Password: Joi.string().required(),
+    Password: Joi.string().required()
 });
 
 export default doctorjoi;

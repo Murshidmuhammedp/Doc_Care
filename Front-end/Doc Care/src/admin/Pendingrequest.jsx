@@ -27,7 +27,7 @@ function Pendingrequest() {
                 })
         }
         fetchdata();
-    },[selectedCategory]);
+    }, [selectedCategory]);
 
     const rejectDoctor = async (id) => {
         await customAxios.delete(`/admin/api/workers/${selectedCategory}/rejected/${id}`)
@@ -41,7 +41,6 @@ function Pendingrequest() {
     const approvelDoctor = async (id) => {
         await customAxios.patch(`/admin/api/workers/${selectedCategory}/approved/${id}`)
             .then((result) => {
-                console.log(result);
                 toast.success(result.data.message)
             }).catch((error) => {
                 console.log(error);
