@@ -1,23 +1,32 @@
 import React, { useState } from 'react'
 import Navbar2 from '../Components/Navbar2';
 import { useNavigate } from 'react-router-dom';
+import { customAxios } from '../../confiq/axios';
+import toast from 'react-hot-toast';
 
 function businesslogin() {
 
-    const navigate =useNavigate();
+    const navigate = useNavigate();
 
     const [role, setRole] = useState('doctor');
-    const [email, setEmail] = useState('');
-    const [password, setPassword] = useState('');
+    const [Email, setEmail] = useState('');
+    const [Password, setPassword] = useState('');
 
-    const businessValidation = (e) => {
+    const businessValidation = async (e) => {
         e.preventDefault();
-        if (role === "doctor") {
-
-
-        } else if (role === 'hospital') {
-
-
+        if (role == "doctor") {
+            await customAxios.post("/user/api/doctor/login", { Email, Password })
+                .then((response) => {
+                    console.log(response);
+                    toast.success(response.data.message)
+                    navigate('/doctor/homepage')
+                }).catch((error) => {
+                    console.log(error, "error");
+                });
+        } else if (role == 'hospital') {
+            toast.error("Hospital not complited");
+        } else {
+            toast.error("Pharmacy not complited");
         }
     };
 

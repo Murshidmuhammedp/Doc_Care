@@ -48,26 +48,31 @@ export const doctorRegistration = async (req, res) => {
 export const doctorlogin = async (req, res, next) => {
     try {
 
-        const { email, Password } = req.body;
-
-        const doctor = await doctors.find({ email });
-
-        if (!doctor) {
+        const { Email, Password } = req.body;
+        console.log(Email);
+        console.log(Password);
+        const Validuser = await doctors.findOne({ Email });
+        console.log('Validuser:', Validuser);
+        if (!Validuser) {
             return res.status(404).json({ message: "User not found" })
         }
-        if (doctor.approve == false) {
+        if (Validuser.approve == false) {
             return res.status(202).json({ message: "Your account is not approved" })
         };
-        if (doctor.isDeleted == true) {
+        if (Validuser.isDeleted == true) {
             return res.status(202).json({ message: "Account is temporarily suspended" })
         };
-        const validpassword = bcrypt.compareSync(Password, doctor.Password)
+        console.log('Password:', Password);
+        console.log('Doctor Password:', Validuser.Password);
+
+        const validpassword = bcrypt.compareSync(Password, Validuser.Password);
+
         if (!validpassword) {
             return res.status(401).json({ message: "Invalid username or password" })
         }
 
-        const token = Jwt.sign({ id: doctor._id }, process.env.DOCTOR_JWT_SECRET_KEY);
-        const { Password: hashedPassword, ...rest } = doctor._doc;
+        const token = Jwt.sign({ id: Validuser._id }, process.env.DOCTOR_JWT_SECRET_KEY);
+        const { Password: hashedPassword, ...rest } = Validuser._doc;
         const expiryDate = new Date(Date.now() + 60 * 1000);
 
         res.cookie('access_token', token, { httpOnly: true, expires: expiryDate });
