@@ -6,4 +6,9 @@ const bookingSchema = new mongoose.Schema({
         ref: "Users",
         required: true
     },
+    doctorId:{
+        type:mongoose.Schema.Types.ObjectId,
+        ref:"doctors",
+        required:true
+    },
 })
