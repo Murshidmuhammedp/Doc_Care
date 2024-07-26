@@ -39,7 +39,6 @@ function Categorypage() {
             </div>
 
 
-
             <div>
                 <h1 className="text-2xl md:text-4xl font-bold ml-4 md:ml-[-950px] mt-4 md:mt-[30px]">10+ Specialities</h1>
                 <h6 className="text-gray-500 ml-4 md:ml-[-910px] mt-2 md:mt-[10px]">Consult with top doctors across specialities</h6>

@@ -22,7 +22,6 @@ function Businessreg() {
         <>
             <Navbar />
     
-
             <div className="mb-10 flex flex-wrap items-center justify-center gap-4 md:gap-[40px] mt-4 md:mt-[50px] w-full md:w-[1200px] ml-4 md:ml-[150px]">
                 {business.map((value, index) => (
                     <div key={index} className="flex flex-col items-center justify-center w-40 md:w-auto" onClick={() => { {/*setcate(value.title);*/ } chooseroute(value.title) }}>
