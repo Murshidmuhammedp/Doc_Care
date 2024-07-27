@@ -11,32 +11,34 @@ export const doctorRegistration = async (req, res) => {
         return res.status(404).json({ Details: error });
     }
 
-    const { Doctor_ID, Full_Name, Email, Phone_Number, Gender, DOB, Specialization, Experience, Consultation_Fee, Consultation_Address, District, State, Pincode, Password } = value
+    const { doctor_ID, full_Name, email, phone_Number, gender, DOB, specialization, experience, consultation_Fee, consultation_Address, district, state, pincode, startTime, endTime, password } = value
 
-    const existingdoctor = await doctors.findOne({ Doctor_ID })
+    const existingdoctor = await doctors.findOne({ doctor_ID })
 
     if (existingdoctor) {
         return res.status(200).json({ message: "Already registered" });
     }
 
-    const hashedPassword = await bcrypt.hash(Password, 10);
+    const hashedPassword = await bcrypt.hash(password, 10);
 
     const newDoctor = new doctors({
-        Doctor_ID,
-        Full_Name,
-        Email,
-        Phone_Number,
-        Gender,
+        doctor_ID,
+        full_Name,
+        email,
+        phone_Number,
+        gender,
         DOB,
-        Specialization,
-        Experience,
-        Consultation_Fee,
-        Consultation_Address,
-        District,
-        State,
-        Pincode,
+        specialization,
+        experience,
+        consultation_Fee,
+        consultation_Address,
+        district,
+        state,
+        pincode,
         Image: req.cloudinaryImageUrl,
-        Password: hashedPassword
+        startTime,
+        endTime,
+        password: hashedPassword
     });
 
     await newDoctor.save();
@@ -48,11 +50,9 @@ export const doctorRegistration = async (req, res) => {
 export const doctorlogin = async (req, res, next) => {
     try {
 
-        const { Email, Password } = req.body;
-        console.log(Email);
-        console.log(Password);
-        const Validuser = await doctors.findOne({ Email });
-        console.log('Validuser:', Validuser);
+        const { email, password } = req.body;
+
+        const Validuser = await doctors.findOne({ email });
         if (!Validuser) {
             return res.status(404).json({ message: "User not found" })
         }
@@ -62,17 +62,15 @@ export const doctorlogin = async (req, res, next) => {
         if (Validuser.isDeleted == true) {
             return res.status(202).json({ message: "Account is temporarily suspended" })
         };
-        console.log('Password:', Password);
-        console.log('Doctor Password:', Validuser.Password);
 
-        const validpassword = bcrypt.compareSync(Password, Validuser.Password);
+        const validpassword = bcrypt.compareSync(password, Validuser.password);
 
         if (!validpassword) {
             return res.status(401).json({ message: "Invalid username or password" })
         }
 
         const token = Jwt.sign({ id: Validuser._id }, process.env.DOCTOR_JWT_SECRET_KEY);
-        const { Password: hashedPassword, ...rest } = Validuser._doc;
+        const { password: hashedPassword, ...rest } = Validuser._doc;
         const expiryDate = new Date(Date.now() + 60 * 1000);
 
         res.cookie('access_token', token, { httpOnly: true, expires: expiryDate });

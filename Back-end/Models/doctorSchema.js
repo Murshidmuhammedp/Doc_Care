@@ -1,23 +1,23 @@
 import mongoose from "mongoose";
 
 const doctorSchema = new mongoose.Schema({
-    Doctor_ID: {
+    doctor_ID: {
         type: String,
         required: true
     },
-    Full_Name: {
+    full_Name: {
         type: String,
         required: true
     },
-    Email: {
+    email: {
         type: String,
         required: true
     },
-    Phone_Number: {
+    phone_Number: {
         type: Number,
         required: true
     },
-    Gender: {
+    gender: {
         type: String,
         required: true
     },
@@ -25,31 +25,31 @@ const doctorSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    Specialization: {
+    specialization: {
         type: String,
         required: true
     },
-    Experience: {
+    experience: {
         type: Number,
         required: true
     },
-    Consultation_Fee: {
+    consultation_Fee: {
         type: Number,
         required: true
     },
-    Consultation_Address: {
+    consultation_Address: {
         type: String,
         required: true
     },
-    District: {
+    district: {
         type: String,
         required: true
     },
-    State: {
+    state: {
         type: String,
         required: true
     },
-    Pincode: {
+    pincode: {
         type: Number,
         required: true
     },
@@ -57,7 +57,15 @@ const doctorSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    Password: {
+    startTime: {
+        type: String,
+        required: true
+    },
+    endTime: {
+        type: String,
+        required: true
+    },
+    password: {
         type: String,
         required: true
     },

@@ -8,23 +8,23 @@ import { useNavigate } from 'react-router-dom';
 function Registrationform() {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
-        Doctor_ID: "",
-        Full_Name: "",
-        Email: "",
-        Phone_Number: "",
-        Gender: "",
+        doctor_ID: "",
+        full_Name: "",
+        email: "",
+        phone_Number: "",
+        gender: "",
         DOB: "",
-        Specialization: "",
-        Experience: "",
-        Consultation_Fee: "",
-        Consultation_Address: "",
-        District: "",
-        State: "",
-        Pincode: "",
+        specialization: "",
+        experience: "",
+        consultation_Fee: "",
+        consultation_Address: "",
+        district: "",
+        state: "",
+        pincode: "",
         image: "",
         startTime: "",
         endTime: "",
-        Password: "",
+        password: "",
     });
     const [confirmPassword, setconfirmPassword] = useState("");
 
@@ -55,7 +55,7 @@ function Registrationform() {
         }
         const startTime = new Date(`1970-01-01T${formData.startTime}:00`);
         const endTime = new Date(`1970-01-01T${formData.endTime}:00`);
-        if (formData.Password === confirmPassword) {
+        if (formData.password === confirmPassword) {
             if (endTime >= startTime) {
                 await customAxios.post('/user/api/doctor/register', formData, config)
                     .then((result) => {
@@ -90,7 +90,7 @@ function Registrationform() {
                                     type="text"
                                     placeholder="Enter doctor ID"
                                     required
-                                    value={formData.Doctor_ID}
+                                    value={formData.doctor_ID}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -104,7 +104,7 @@ function Registrationform() {
                                     type="text"
                                     placeholder="Enter full name"
                                     required
-                                    value={formData.Full_Name}
+                                    value={formData.full_Name}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -118,7 +118,7 @@ function Registrationform() {
                                     type="email"
                                     placeholder="Enter email"
                                     required
-                                    value={formData.Email}
+                                    value={formData.email}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -132,7 +132,7 @@ function Registrationform() {
                                     type="text"
                                     placeholder="Enter phone number"
                                     required
-                                    value={formData.Phone_Number}
+                                    value={formData.phone_Number}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -144,7 +144,7 @@ function Registrationform() {
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     id="Gender"
                                     required
-                                    value={formData.Gender}
+                                    value={formData.gender}
                                     onChange={handleInputChange}
                                 >
                                     <option value="">Select Gender</option>
@@ -174,7 +174,7 @@ function Registrationform() {
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     id="Specialization"
                                     required
-                                    value={formData.Specialization}
+                                    value={formData.specialization}
                                     onChange={handleInputChange}
                                 >
                                     <option value="">Select specialization</option>
@@ -193,7 +193,7 @@ function Registrationform() {
                                     type="number"
                                     placeholder="Enter years of experience"
                                     required
-                                    value={formData.Experience}
+                                    value={formData.experience}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -207,7 +207,7 @@ function Registrationform() {
                                     type="text"
                                     placeholder="Enter Fee"
                                     required
-                                    value={formData.Consultation_Fee}
+                                    value={formData.consultation_Fee}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -221,7 +221,7 @@ function Registrationform() {
                                     type="text"
                                     placeholder="Enter consultation Address"
                                     required
-                                    value={formData.Consultation_Address}
+                                    value={formData.consultation_Address}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -233,11 +233,11 @@ function Registrationform() {
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     id="District"
                                     required
-                                    value={formData.District}
+                                    value={formData.district}
                                     onChange={handleInputChange}
                                 >
                                     <option value="">Select district</option>
-                                    {formData.State && districts[formData.State].map((district, index) => (
+                                    {formData.state && districts[formData.state].map((district, index) => (
                                         <option key={index} value={district}>{district}</option>
                                     ))}
                                 </select>
@@ -250,7 +250,7 @@ function Registrationform() {
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
                                     id="State"
                                     required
-                                    value={formData.State}
+                                    value={formData.state}
                                     onChange={handleInputChange}
                                 >
                                     <option value="">Select state</option>
@@ -269,7 +269,7 @@ function Registrationform() {
                                     type="tel"
                                     placeholder="Enter Pincode"
                                     required
-                                    value={formData.Pincode}
+                                    value={formData.pincode}
                                     onChange={handleInputChange}
                                 />
                             </div>
@@ -328,7 +328,7 @@ function Registrationform() {
                                     type="password"
                                     placeholder="Enter password"
                                     required
-                                    value={formData.Password}
+                                    value={formData.password}
                                     onChange={handleInputChange}
                                 />
                             </div>
