@@ -92,10 +92,10 @@ function Pendingrequest() {
                                         {data && data.map((item, index) => (
                                             <tr key={item._id} className="border-b hover:bg-gray-100">
                                                 <td className="py-3 px-4">{index + 1}</td>
-                                                <td className="py-3 px-4">{item.Full_Name}{item.Hospital_name}</td>
-                                                <td className="py-3 px-4">{item.Doctor_ID}</td>
-                                                <td className="py-3 px-4">{item.Specialization}</td>
-                                                <td className="py-3 px-4">{item.Phone_Number}</td>
+                                                <td className="py-3 px-4">{item.full_Name}{item.Hospital_name}</td>
+                                                <td className="py-3 px-4">{item.doctor_ID}</td>
+                                                <td className="py-3 px-4">{item.specialization}</td>
+                                                <td className="py-3 px-4">{item.phone_Number}</td>
                                                 <td className="py-3 px-4 flex space-x-2">
                                                     <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600" onClick={() => rejectDoctor(item._id)}>
                                                         Reject

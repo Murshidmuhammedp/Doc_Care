@@ -3,14 +3,14 @@ import doctors from "../../Models/doctorSchema.js"
 export const filterData = async (req, res, next) => {
     try {
 
-        const { Specialization, District } = req.query;
+        const { specialization, district } = req.query;
 
         const filterCriteria = {};
-        if (Specialization) {
-            filterCriteria.Specialization = { $regex: new RegExp(Specialization, 'i') };
+        if (specialization) {
+            filterCriteria.specialization = { $regex: new RegExp(specialization, 'i') };
         }
-        if (District) {
-            filterCriteria.District = { $regex: new RegExp(District, 'i') };
+        if (district) {
+            filterCriteria.district = { $regex: new RegExp(district, 'i') };
         }
         const doctorsList = await doctors.find(filterCriteria);
 

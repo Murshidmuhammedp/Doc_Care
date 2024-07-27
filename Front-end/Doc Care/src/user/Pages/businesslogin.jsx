@@ -9,13 +9,13 @@ function businesslogin() {
     const navigate = useNavigate();
 
     const [role, setRole] = useState('doctor');
-    const [Email, setEmail] = useState('');
-    const [Password, setPassword] = useState('');
+    const [email, setEmail] = useState('');
+    const [password, setPassword] = useState('');
 
     const businessValidation = async (e) => {
         e.preventDefault();
         if (role == "doctor") {
-            await customAxios.post("/user/api/doctor/login", { Email, Password })
+            await customAxios.post("/user/api/doctor/login", { email, password })
                 .then((response) => {
                     console.log(response);
                     toast.success(response.data.message)

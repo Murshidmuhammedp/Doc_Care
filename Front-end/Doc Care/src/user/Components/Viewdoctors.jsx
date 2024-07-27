@@ -32,9 +32,9 @@ function Viewdoctors() {
 
     useEffect(() => {
         const filterdata = async () => {
-            await customAxios.get(`/user/api/finddoctors?District=${searchQuery}&Specialization=${value}`)
+            await customAxios.get(`/user/api/finddoctors?district=${searchQuery}&specialization=${value}`)
                 .then((response) => {
-                    console.log(response.data.data);
+                    console.log(response);
                     setfilter(response.data.data);
                 }).catch((error) => {
                     console.log(error);
@@ -91,10 +91,10 @@ function Viewdoctors() {
                                 </div>
                             </figure>
                             <div className="w-full md:w-2/3 p-4 md:pt-[50px]">
-                                <h2 className="text-2xl  text-blue-500">Dr.{item.Full_Name}</h2>
-                                <p className="text-md text-black">{item.Specialization}</p>
+                                <h2 className="text-2xl  text-blue-500">Dr.{item.full_Name}</h2>
+                                <p className="text-md text-black">{item.specialization}</p>
 
-                                <p className="text-md  text-black my-5">₹{item.Consultation_Fee} Consultation Fee</p>
+                                <p className="text-md  text-black my-5">₹{item.consultation_Fee} Consultation Fee</p>
                                 <div className="mt-4 flex justify-start">
                                     <button
                                         className="ml-[450px] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"

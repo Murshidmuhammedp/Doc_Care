@@ -81,12 +81,12 @@ function Registrationform() {
                     <form onSubmit={doctorregistration}>
                         <div className="md:flex md:flex-wrap -mx-3 mb-6">
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left" htmlFor="Doctor_ID">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left" htmlFor="doctor_ID">
                                     Doctor ID :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="Doctor_ID"
+                                    id="doctor_ID"
                                     type="text"
                                     placeholder="Enter doctor ID"
                                     required
@@ -95,12 +95,12 @@ function Registrationform() {
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left" htmlFor="Full_Name">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left" htmlFor="full_Name">
                                     Full Name :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="Full_Name"
+                                    id="full_Name"
                                     type="text"
                                     placeholder="Enter full name"
                                     required
@@ -109,12 +109,12 @@ function Registrationform() {
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Email">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="email">
                                     Email :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="Email"
+                                    id="email"
                                     type="email"
                                     placeholder="Enter email"
                                     required
@@ -123,12 +123,12 @@ function Registrationform() {
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Phone_Number">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="phone_Number">
                                     Phone Number :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="Phone_Number"
+                                    id="phone_Number"
                                     type="text"
                                     placeholder="Enter phone number"
                                     required
@@ -137,12 +137,12 @@ function Registrationform() {
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Gender">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="gender">
                                     Gender :
                                 </label>
                                 <select
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="Gender"
+                                    id="gender"
                                     required
                                     value={formData.gender}
                                     onChange={handleInputChange}
@@ -167,12 +167,12 @@ function Registrationform() {
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Specialization">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="specialization">
                                     Specialization :
                                 </label>
                                 <select
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="Specialization"
+                                    id="specialization"
                                     required
                                     value={formData.specialization}
                                     onChange={handleInputChange}
@@ -184,12 +184,12 @@ function Registrationform() {
                                 </select>
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Experience">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="experience">
                                     Experience :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="Experience"
+                                    id="experience"
                                     type="number"
                                     placeholder="Enter years of experience"
                                     required
@@ -198,12 +198,12 @@ function Registrationform() {
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Consultation_Fee">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="consultation_Fee">
                                     Consultation Fee :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="Consultation_Fee"
+                                    id="consultation_Fee"
                                     type="text"
                                     placeholder="Enter Fee"
                                     required
@@ -212,12 +212,12 @@ function Registrationform() {
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Consultation_Address">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="consultation_Address">
                                     Consultation Address :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="Consultation_Address"
+                                    id="consultation_Address"
                                     type="text"
                                     placeholder="Enter consultation Address"
                                     required
@@ -226,12 +226,12 @@ function Registrationform() {
                                 />
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="District">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="district">
                                     District :
                                 </label>
                                 <select
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="District"
+                                    id="district"
                                     required
                                     value={formData.district}
                                     onChange={handleInputChange}
@@ -243,12 +243,12 @@ function Registrationform() {
                                 </select>
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="State">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="state">
                                     State :
                                 </label>
                                 <select
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="State"
+                                    id="state"
                                     required
                                     value={formData.state}
                                     onChange={handleInputChange}
@@ -260,12 +260,12 @@ function Registrationform() {
                                 </select>
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Pincode">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="pincode">
                                     Pincode :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="Pincode"
+                                    id="pincode"
                                     type="tel"
                                     placeholder="Enter Pincode"
                                     required
@@ -319,12 +319,12 @@ function Registrationform() {
 
 
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
-                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Password">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="password">
                                     Password :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
-                                    id="Password"
+                                    id="password"
                                     type="password"
                                     placeholder="Enter password"
                                     required
