@@ -22,6 +22,8 @@ function Registrationform() {
         State: "",
         Pincode: "",
         image: "",
+        startTime: "",
+        endTime: "",
         Password: "",
     });
     const [confirmPassword, setconfirmPassword] = useState("");
@@ -51,15 +53,21 @@ function Registrationform() {
                 'Content-Type': 'multipart/form-data',
             }
         }
+        const startTime = new Date(`1970-01-01T${formData.startTime}:00`);
+        const endTime = new Date(`1970-01-01T${formData.endTime}:00`);
         if (formData.Password === confirmPassword) {
-            await customAxios.post('/user/api/doctor/register', formData, config)
-                .then((result) => {
-                    toast.success(result.data.message);
-                    navigate('/forbusiness')
-                }).catch((error) => {
-                    console.log(error);
-                    toast.error(error.response.data.message);
-                });
+            if (endTime >= startTime) {
+                await customAxios.post('/user/api/doctor/register', formData, config)
+                    .then((result) => {
+                        toast.success(result.data.message);
+                        navigate('/forbusiness')
+                    }).catch((error) => {
+                        console.log(error);
+                        toast.error(error.response.data.message);
+                    });
+            } else {
+                toast.error("End time must be after start time.")
+            }
         } else {
             toast.error("Password not match")
         }
@@ -191,7 +199,7 @@ function Registrationform() {
                             </div>
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
                                 <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Consultation_Fee">
-                                Consultation Fee :
+                                    Consultation Fee :
                                 </label>
                                 <input
                                     className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
@@ -278,6 +286,38 @@ function Registrationform() {
                                     onChange={handleImageChange}
                                 />
                             </div>
+
+                            <div className="md:w-1/2 px-3 mb-4 md:mb-0">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="startTime">
+                                    Start Time :
+                                </label>
+                                <input
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="startTime"
+                                    type="time"
+                                    placeholder="Enter Start Time"
+                                    required
+                                    value={formData.startTime}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+
+                            <div className="md:w-1/2 px-3 mb-4 md:mb-0">
+                                <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="endTime">
+                                    End Time :
+                                </label>
+                                <input
+                                    className="shadow appearance-none border rounded w-full py-2 px-3 text-gray-700 leading-tight focus:outline-none focus:shadow-outline"
+                                    id="endTime"
+                                    type="time"
+                                    placeholder="Enter End Time"
+                                    required
+                                    value={formData.endTime}
+                                    onChange={handleInputChange}
+                                />
+                            </div>
+
+
                             <div className="md:w-1/2 px-3 mb-4 md:mb-0">
                                 <label className="block text-gray-700 text-sm font-bold mb-2 text-left mt-1" htmlFor="Password">
                                     Password :
