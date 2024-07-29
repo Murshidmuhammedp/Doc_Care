@@ -1,15 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { districts } from './State_district';
 import { customAxios } from '../../confiq/axios';
 
 function Viewdoctors() {
+    const [selectedDoctor, setSelectedDoctor] = useState(null);
+    // const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const value = searchParams.get('value');
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredDistricts, setFilteredDistricts] = useState(districts["Kerala"]);
     const [filter, setfilter] = useState([])
+
+    const handleBookingClick = (doctor) => {
+        setSelectedDoctor(doctor);
+    };
+
+    const closeModal = () => {
+        setSelectedDoctor(null);
+    };
 
     const handleSearchChange = (event) => {
         const query = event.target.value;
@@ -81,34 +91,63 @@ function Viewdoctors() {
                 <h6 className="text-gray-500 ml-4 md:ml-[-910px] mt-2 md:mt-[10px]">Consult with top doctors across specialities</h6>
             </div>
             {/* Doctor's Cards */}
-            <div className=' bg-gray-100 pt-5'>
-                {filter && filter?.map(item => {
+            <div className='bg-gray-100 py-5'>
+                {filter && filter.map(item => {
                     return (
-                        <div key={item._id} className="bg-white shadow-xl flex flex-col md:flex-row mb-5 text-start md:h-[250px] w-full md:w-[1000px] mx-auto md:m-5">
-                            <figure className="w-full md:w-1/3">
-                                <div className="mt-7 ml-[50px] w-48 h-48 rounded-full overflow-hidden border-4 border-gray-50 shadow-lg mx-auto hover:shadow-md">
+                        <div key={item._id} className="bg-white shadow-xl flex flex-col md:flex-row mb-5 text-start md:h-auto w-full md:w-[1000px] mx-auto md:m-5 rounded-lg overflow-hidden">
+                            <figure className="w-full md:w-1/3 flex justify-center items-center p-5 md:p-0">
+                                <div className="w-48 h-48 rounded-full overflow-hidden border-4 border-gray-50 shadow-lg mx-auto hover:shadow-md">
                                     <img src={item.Image} alt="" className="w-full h-full object-cover cursor-pointer" />
                                 </div>
                             </figure>
-                            <div className="w-full md:w-2/3 p-4 md:pt-[50px]">
-                                <h2 className="text-2xl  text-blue-500">Dr.{item.full_Name}</h2>
-                                <p className="text-md text-black">{item.specialization}</p>
-
-                                <p className="text-md  text-black my-5">₹{item.consultation_Fee} Consultation Fee</p>
-                                <div className="mt-4 flex justify-start">
+                            <div className="w-full md:w-2/3 p-5 md:p-8 flex flex-col justify-center">
+                                <h2 className="text-2xl text-blue-500 mb-2">Dr. {item.full_Name}</h2>
+                                <p className="text-md text-black mb-1">{item.specialization}</p>
+                                <p className="text-md text-blue-800 mb-1">{item.experience} Years experience</p>
+                                <p className="text-md font-semibold text-black mb-1">{item.district}</p>
+                                <p className="text-md font-semibold text-black mb-1">{item.consultation_Address}</p>
+                                <p className="text-md text-black">₹{item.consultation_Fee} Consultation Fee</p>
+                                <div className="mt-[-50px] flex justify-end">
                                     <button
-                                        className="ml-[450px] bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
-                                    // onClick={() => booking(value.productId._id)}
+                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                        onClick={() => handleBookingClick(item)}
                                     >
-                                        Book Clinic Vist
+                                        Book Clinic Visit
                                     </button>
+                                </div>
+                                <p className="text-orange-600 flex justify-end text-xs mr-[25px]">No Booking Fees</p>
+                            </div>
+                        </div>
+                    );
+                })}
+
+                {selectedDoctor && (
+                    <>
+                        <div className="fixed inset-0 bg-black opacity-50 z-40"></div>
+                        <div className="fixed inset-0 flex justify-end z-50">
+                            <div className="bg-white shadow-xl h-full w-full md:w-1/3 p-5 overflow-auto">
+                                <div className="flex justify-between items-center mb-5">
+                                    <h2 className="text-2xl text-blue-500">Available Time Slots for Dr. {selectedDoctor.full_Name}</h2>
+                                    <button
+                                        className="text-red-500 hover:text-red-700 text-xl font-bold"
+                                        onClick={closeModal}
+                                    >
+                                        &times;
+                                    </button>
+                                </div>
+                                {/* Add your available time slot component here */}
+                                <div>
+                                    {/* Example content */}
+                                    <p>Time Slot 1</p>
+                                    <p>Time Slot 2</p>
+                                    <p>Time Slot 3</p>
+                                    {/* ... */}
                                 </div>
                             </div>
                         </div>
-                    )
-                })}
+                    </>
+                )}
             </div>
-
         </>
     )
 }
