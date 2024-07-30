@@ -1,17 +1,45 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
-import { useNavigate, useSearchParams } from 'react-router-dom'
+import { useSearchParams } from 'react-router-dom'
 import { districts } from './State_district';
 import { customAxios } from '../../confiq/axios';
+import { addDays, format, startOfToday } from 'date-fns'
+
+const generateTimeSlots = (start, end) => {
+    const startHour = parseInt(start.split(":")[0]);
+    const startMinute = parseInt(start.split(":")[1]);
+    const endHour = parseInt(end.split(":")[0]);
+    const endMinute = parseInt(end.split(":")[1]);
+
+    let slots = [];
+    let currentHour = startHour;
+    let currentMinute = startMinute;
+
+    while (currentHour < endHour || (currentHour === endHour && currentMinute < endMinute)) {
+        let hourString = currentHour.toString().padStart(2, '0');
+        let minuteString = currentMinute.toString().padStart(2, '0');
+        slots.push(`${hourString}:${minuteString}`);
+
+        currentMinute += 10;
+        if (currentMinute >= 60) {
+            currentMinute = 0;
+            currentHour += 1;
+        }
+    }
+
+    return slots;
+};
+const dates = Array.from({ length: 7 }, (_, i) => addDays(startOfToday(), i));
 
 function Viewdoctors() {
-    const [selectedDoctor, setSelectedDoctor] = useState(null);
-    // const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const value = searchParams.get('value');
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredDistricts, setFilteredDistricts] = useState(districts["Kerala"]);
     const [filter, setfilter] = useState([])
+    const [selectedDoctor, setSelectedDoctor] = useState(null);
+    const [timeSlots, setTimeSlots] = useState([]);
+    const [selectedDate, setSelectedDate] = useState(startOfToday());
 
     const handleBookingClick = (doctor) => {
         setSelectedDoctor(doctor);
@@ -52,6 +80,17 @@ function Viewdoctors() {
         }
         filterdata();
     }, [searchQuery, value]);
+
+    useEffect(() => {
+        if (selectedDoctor) {
+            const slots = generateTimeSlots(selectedDoctor.startTime, selectedDoctor.endTime);
+            setTimeSlots(slots);
+        }
+    }, [selectedDoctor]);
+
+    const handleDateChange = (date) => {
+        setSelectedDate(date);
+    };
 
     return (
         <>
@@ -126,22 +165,51 @@ function Viewdoctors() {
                         <div className="fixed inset-0 bg-black opacity-50 z-40"></div>
                         <div className="fixed inset-0 flex justify-end z-50">
                             <div className="bg-white shadow-xl h-full w-full md:w-1/3 p-5 overflow-auto">
-                                <div className="flex justify-between items-center mb-5">
-                                    <h2 className="text-2xl text-blue-500">Available Time Slots for Dr. {selectedDoctor.full_Name}</h2>
+                                <div style={{ borderBottom: "1px solid gray" }} className="relative flex items-center mb-5 h-[60px]">
+                                    <h2 className="text-xl font-bold text-black w-full text-center">Schedule Appointment</h2>
                                     <button
-                                        className="text-red-500 hover:text-red-700 text-xl font-bold"
+                                        className="absolute right-0 text-red-500 hover:text-red-700 text-xl font-bold"
                                         onClick={closeModal}
                                     >
                                         &times;
                                     </button>
                                 </div>
-                                {/* Add your available time slot component here */}
-                                <div>
-                                    {/* Example content */}
-                                    <p>Time Slot 1</p>
-                                    <p>Time Slot 2</p>
-                                    <p>Time Slot 3</p>
-                                    {/* ... */}
+
+                                <div className="flex justify-between mb-4">
+                                    {dates.map((date, index) => (
+                                        <button
+                                            key={index}
+                                            onClick={() => handleDateChange(date)}
+                                            className={`px-2 py-1 rounded-lg h-[70px] w-[50px] ${format(selectedDate, 'yyyy-MM-dd') === format(date, 'yyyy-MM-dd')
+                                                ? 'bg-blue-400 text-white'
+                                                : 'bg-gray-300 text-black'
+                                                }`}
+                                        >
+                                            {format(date, 'EEE dd')}
+                                        </button>
+                                    ))}
+                                </div>
+
+                                {/*Available time slot component*/}
+                                <h3 className='text-left mb-4 font-mono font-semibold text-green-600'>{timeSlots.length} Slots Available</h3>
+                                <div className='grid grid-cols-4 gap-2'>
+                                    {timeSlots && timeSlots.map((slot, index) => (
+                                        <h2 style={{ border: "1px solid gray" }} className='p-2 border rounded-md' key={index}>{slot}</h2>
+                                    ))}
+                                </div>
+                                <div className="flex justify-end mt-4">
+                                    <button
+                                        className="bg-red-500 hover:bg-red-700 text-white font-bold py-2 px-4 rounded mr-2"
+                                        onClick={closeModal}
+                                    >
+                                        cancel
+                                    </button>
+                                    <button
+                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
+                                    // onClick={() => handleBookingClick(item)}
+                                    >
+                                        Proceed
+                                    </button>
                                 </div>
                             </div>
                         </div>
