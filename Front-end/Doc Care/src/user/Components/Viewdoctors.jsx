@@ -101,6 +101,16 @@ function Viewdoctors() {
 
     const isProceedDisabled = !selectedDate || !selectedTimeSlot;
 
+    const handleProceed = () => {
+        navigate('/doctor/appointment', {
+            state: {
+                doctor: selectedDoctor,
+                date: selectedDate,
+                time: selectedTimeSlot,
+            },
+        });
+    };
+
     return (
         <>
             <Navbar />
@@ -223,7 +233,7 @@ function Viewdoctors() {
                                     <button
                                         className={`font-bold py-2 px-4 rounded ${isProceedDisabled ? 'bg-gray-300 text-gray-700' : 'bg-blue-500 hover:bg-blue-700 text-white'}`}
                                         disabled={isProceedDisabled}
-                                        onClick={() => navigate('/doctor/appointment')}
+                                        onClick={handleProceed}
                                     >
                                         Proceed
                                     </button>
