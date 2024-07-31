@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
-import { useSearchParams } from 'react-router-dom'
+import { useNavigate, useSearchParams } from 'react-router-dom'
 import { districts } from './State_district';
 import { customAxios } from '../../confiq/axios';
 import { addDays, format, startOfToday } from 'date-fns'
@@ -20,7 +20,7 @@ const generateTimeSlots = (start, end) => {
         let minuteString = currentMinute.toString().padStart(2, '0');
         slots.push(`${hourString}:${minuteString}`);
 
-        currentMinute += 10;
+        currentMinute += 15;
         if (currentMinute >= 60) {
             currentMinute = 0;
             currentHour += 1;
@@ -32,6 +32,7 @@ const generateTimeSlots = (start, end) => {
 const dates = Array.from({ length: 7 }, (_, i) => addDays(startOfToday(), i));
 
 function Viewdoctors() {
+    const navigate = useNavigate();
     const [searchParams] = useSearchParams();
     const value = searchParams.get('value');
     const [searchQuery, setSearchQuery] = useState('');
@@ -40,6 +41,8 @@ function Viewdoctors() {
     const [selectedDoctor, setSelectedDoctor] = useState(null);
     const [timeSlots, setTimeSlots] = useState([]);
     const [selectedDate, setSelectedDate] = useState(startOfToday());
+    const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
+
 
     const handleBookingClick = (doctor) => {
         setSelectedDoctor(doctor);
@@ -91,6 +94,12 @@ function Viewdoctors() {
     const handleDateChange = (date) => {
         setSelectedDate(date);
     };
+
+    const handleTimeSlotChange = (slot) => {
+        setSelectedTimeSlot(slot);
+    };
+
+    const isProceedDisabled = !selectedDate || !selectedTimeSlot;
 
     return (
         <>
@@ -194,7 +203,14 @@ function Viewdoctors() {
                                 <h3 className='text-left mb-4 font-mono font-semibold text-green-600'>{timeSlots.length} Slots Available</h3>
                                 <div className='grid grid-cols-4 gap-2'>
                                     {timeSlots && timeSlots.map((slot, index) => (
-                                        <h2 style={{ border: "1px solid gray" }} className='p-2 border rounded-md' key={index}>{slot}</h2>
+                                        <button
+                                            key={index}
+                                            onClick={() => handleTimeSlotChange(slot)}
+                                            className={`p-2 border rounded-md ${selectedTimeSlot === slot ? 'bg-blue-400 text-white' : 'bg-gray-300 text-black'}`}
+                                        >
+                                            {slot}
+                                        </button>
+                                        // <h2 style={{ border: "1px solid gray" }} className='p-2 border rounded-md' key={index}>{slot}</h2>
                                     ))}
                                 </div>
                                 <div className="flex justify-end mt-4">
@@ -205,8 +221,9 @@ function Viewdoctors() {
                                         cancel
                                     </button>
                                     <button
-                                        className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded"
-                                    // onClick={() => handleBookingClick(item)}
+                                        className={`font-bold py-2 px-4 rounded ${isProceedDisabled ? 'bg-gray-300 text-gray-700' : 'bg-blue-500 hover:bg-blue-700 text-white'}`}
+                                        disabled={isProceedDisabled}
+                                        onClick={() => navigate('/doctor/appointment')}
                                     >
                                         Proceed
                                     </button>
