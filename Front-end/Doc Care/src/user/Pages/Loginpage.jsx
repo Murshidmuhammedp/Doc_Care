@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
-import axios from 'axios';
 import toast from 'react-hot-toast';
 import { customAxios } from '../../confiq/axios';
 import Navbar2 from '../Components/Navbar2';
@@ -19,6 +18,8 @@ function Loginpage() {
         await customAxios.post('/user/api/login', { email, password })
             .then((result) => {
                 const token = result.data.token;
+                const userId = result.data.data._id
+                localStorage.setItem('userId', userId)
                 localStorage.setItem('userToken', token);
                 toast.success(result.data.message);
                 navigate('/');

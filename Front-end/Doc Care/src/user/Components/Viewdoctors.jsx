@@ -75,7 +75,6 @@ function Viewdoctors() {
         const filterdata = async () => {
             await customAxios.get(`/user/api/finddoctors?district=${searchQuery}&specialization=${value}`)
                 .then((response) => {
-                    console.log(response);
                     setfilter(response.data.data);
                 }).catch((error) => {
                     console.log(error);

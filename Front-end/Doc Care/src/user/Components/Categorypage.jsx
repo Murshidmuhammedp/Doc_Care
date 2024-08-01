@@ -6,8 +6,6 @@ import Cards from './Cards'
 
 function Categorypage() {
 
-
-
     return (
         <>
             <Navbar />

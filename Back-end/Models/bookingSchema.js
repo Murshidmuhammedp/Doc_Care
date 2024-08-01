@@ -15,13 +15,18 @@ const bookingSchema = new mongoose.Schema({
         type: String,
         required: true
     },
-    number: {
+    contact_number: {
         type: Number,
         required: true
     },
-    time: [{
-
-    }],
+    time: {
+        type: String,
+        required: true
+    },
+    date: {
+        type: String,
+        required: true
+    },
     bookingTime_Date: {
         type: Date,
         required: true,
