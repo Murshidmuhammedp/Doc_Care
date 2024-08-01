@@ -27,16 +27,16 @@ const Sidebardoc = ({ sidebarOpen, toggleSidebar }) => {
                         {sidebarOpen && <span className="w-full">Dashboard</span>}
                     </li>
                 </Link>
-                <Link to={'/admin/userlist'}>
+                {/* <Link to={'/admin/userlist'}>
                     <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
                         <FaUsers className="mr-4 text-gray-800" />
                         {sidebarOpen && <span className="w-full">User's List</span>}
                     </li>
-                </Link>
-                <Link to={'/admin/workerlist'}>
+                </Link> */}
+                <Link to={''}>
                     <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
                         <FaUserTie className="mr-4 text-gray-800" />
-                        {sidebarOpen && <span className="w-full">Workers List</span>}
+                        {sidebarOpen && <span className="w-full">Profile</span>}
                     </li>
                 </Link>
                 <Link to={'/admin/pendingrequest'}>
