@@ -1,5 +1,5 @@
 import React, { useRef } from 'react';
-import { useNavigate } from 'react-router-dom'; // Assuming you're using react-router for navigation
+import { useNavigate } from 'react-router-dom'; 
 
 const CardSlider = ({ department }) => {
     const sliderRef = useRef(null);

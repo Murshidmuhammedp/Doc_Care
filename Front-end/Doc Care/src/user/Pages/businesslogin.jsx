@@ -17,11 +17,15 @@ function businesslogin() {
         if (role == "doctor") {
             await customAxios.post("/user/api/doctor/login", { email, password })
                 .then((response) => {
-                    console.log(response);
+                    const token = response.data.token;
+                    const userId = response.data.data._id
+                    localStorage.setItem('docId', userId)
+                    localStorage.setItem('docToken', token);
                     toast.success(response.data.message)
                     navigate('/doctor/homepage')
                 }).catch((error) => {
                     console.log(error, "error");
+                    toast.error(error.response.data.message)
                 });
         } else if (role == 'hospital') {
             toast.error("Hospital not complited");

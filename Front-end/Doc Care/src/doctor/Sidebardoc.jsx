@@ -21,34 +21,22 @@ const Sidebardoc = ({ sidebarOpen, toggleSidebar }) => {
             )}
             {/* Sidebar Menu */}
             <ul className="list-none p-0 flex-1">
-                <Link to={'/admin/home/dashboard'}>
+                <Link to={'/doctor/homepage'}>
                     <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
                         <FaTachometerAlt className="mr-4 text-gray-800" />
                         {sidebarOpen && <span className="w-full">Dashboard</span>}
                     </li>
                 </Link>
-                {/* <Link to={'/admin/userlist'}>
-                    <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
-                        <FaUsers className="mr-4 text-gray-800" />
-                        {sidebarOpen && <span className="w-full">User's List</span>}
-                    </li>
-                </Link> */}
                 <Link to={''}>
                     <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
                         <FaUserTie className="mr-4 text-gray-800" />
                         {sidebarOpen && <span className="w-full">Profile</span>}
                     </li>
                 </Link>
-                <Link to={'/admin/pendingrequest'}>
+                <Link to={'/doctor/appointments'}>
                     <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
                         <FaUserTie className="mr-4 text-gray-800" />
-                        {sidebarOpen && <span className="w-full">Pending Request</span>}
-                    </li>
-                </Link>
-                <Link to={'/admin/blooddonors'}>
-                    <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
-                        <FaHandHoldingHeart className="mr-4 text-gray-800" />
-                        {sidebarOpen && <span className="w-full">Blood Donor's List</span>}
+                        {sidebarOpen && <span className="w-full">Appointments</span>}
                     </li>
                 </Link>
                 <Link to={'/admin/home/orderslist'}>
@@ -63,7 +51,7 @@ const Sidebardoc = ({ sidebarOpen, toggleSidebar }) => {
                         {sidebarOpen && <span className="w-full">Notification</span>}
                     </li>
                 </Link>
-                <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center" onClick={() => { navigate('/admin/login'); localStorage.clear(); }}>
+                <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center" onClick={() => { navigate('/forbusiness/doclogin'); localStorage.clear(); }}>
                     <FaSignOutAlt className="mr-4 text-gray-800" />
                     {sidebarOpen && <span className="w-full">Logout</span>}
                 </li>

@@ -416,25 +416,25 @@ const DoctorhomePage = () => {
                                     </thead>
                                     <tbody>
                                         <tr>
-                                            <td className="py-2 px-4 border-b">Ola Akintola</td>
+                                            <td className="py-2 px-4 border-b">Dr.Murshid Muhammed P</td>
                                             <td className="py-2 px-4 border-b">12-09-2023</td>
                                             <td className="py-2 px-4 border-b">UI/201</td>
                                             <td className="py-2 px-4 border-b">02656</td>
                                             <td className="py-2 px-4 border-b">Dr Alimi James</td>
                                         </tr>
                                         <tr>
-                                            <td className="py-2 px-4 border-b">Janet Paul</td>
+                                            <td className="py-2 px-4 border-b">suhaib</td>
                                             <td className="py-2 px-4 border-b">12-09-2023</td>
                                             <td className="py-2 px-4 border-b">AQ/32</td>
                                             <td className="py-2 px-4 border-b">07634</td>
-                                            <td className="py-2 px-4 border-b">Dr Rito Areogun</td>
+                                            <td className="py-2 px-4 border-b">Dr.Muhammed Suhail</td>
                                         </tr>
                                         <tr>
-                                            <td className="py-2 px-4 border-b">Areogun Joe</td>
+                                            <td className="py-2 px-4 border-b">Anas Malik</td>
                                             <td className="py-2 px-4 border-b">12-09-2023</td>
                                             <td className="py-2 px-4 border-b">AQ/45</td>
                                             <td className="py-2 px-4 border-b">02980</td>
-                                            <td className="py-2 px-4 border-b">Dr Aaron Lekon</td>
+                                            <td className="py-2 px-4 border-b">Dr.Nizamudheen </td>
                                         </tr>
                                     </tbody>
                                 </table>
