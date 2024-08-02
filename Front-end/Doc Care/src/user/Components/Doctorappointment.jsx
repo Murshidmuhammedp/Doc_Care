@@ -1,7 +1,7 @@
 import React, { useState } from 'react'
 import Navbar from './Navbar'
 import { FaClock, FaCalendarAlt } from 'react-icons/fa';
-import { useLocation } from 'react-router-dom'
+import { useLocation, useNavigate } from 'react-router-dom'
 import { format } from 'date-fns';
 import { customAxios } from '../../confiq/axios';
 import toast from 'react-hot-toast';
@@ -9,6 +9,7 @@ import toast from 'react-hot-toast';
 function Doctorappointment() {
 
     const location = useLocation();
+    const navigate = useNavigate();
     const { doctor, date, time } = location.state;
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
@@ -19,7 +20,7 @@ function Doctorappointment() {
         await customAxios.post(`/user/api/doctor/${doctorId}/appointment/booking/${userId}`, { name, phoneNumber, date, time })
             .then((response) => {
                 toast.success(response.data.message);
-                console.log(response);
+                navigate('/category')
             }).catch((error) => {
                 console.log(error);
             });

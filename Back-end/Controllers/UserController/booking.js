@@ -28,10 +28,10 @@ export const bookingAppointment = async (req, res, next) => {
             time,
             date: (new Date(date)),
         });
-        // user.booking.push(newBooking._id);
-        // await user.save();
-        // doctor.booking.push(newBooking._id);
-        // await doctor.save()
+        user.booking.push(newBooking._id);
+        await user.save();
+        doctor.booking.push(newBooking._id);
+        await doctor.save()
 
         const Userdata = {
             email: user.email,
