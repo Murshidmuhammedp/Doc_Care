@@ -26,6 +26,19 @@ function Appointments() {
         Appointment()
     }, [])
 
+    const [open, setOpen] = useState(false);
+    const [anchorEl, setAnchorEl] = useState(null);
+
+    const handlePopoverOpen = (event) => {
+        setAnchorEl(event.currentTarget);
+        setOpen(true);
+    };
+
+    const handlePopoverClose = () => {
+        setAnchorEl(null);
+        setOpen(false);
+    };
+
     console.log(datas, "vannkn");
     return (
         <>
@@ -53,15 +66,131 @@ function Appointments() {
                                             <td className="py-2 px-4 border-b">{data.contact_number}</td>
                                             <td className="py-2 px-4 border-b">{data.time}</td>
                                             <td className="py-2 px-4 border-b">{data.status}</td>
-                                            <td className="py-2 px-4 border-b">{ }</td>
                                             <td className="py-2 px-4 border-b">
-                                                <button
-                                                // onClick={() => toggleBlock()}
-                                                // className={`py-1 px-3 rounded ${user.isDeleted ? 'bg-red-500 hover:bg-red-700' : 'bg-green-500 hover:bg-green-700'
-                                                //     } text-white`}
+                                                {/* <button
+                                                onClick={() => toggleBlock()}
                                                 >
-                                                    {/* {user.isDeleted ? 'Unblock' : 'Block'} */}
-                                                </button>
+                                                </button> */}
+                                                <div className="relative ">
+                                                    {/* Tooltip with IconButton */}
+                                                    <button
+                                                        onClick={handlePopoverOpen}
+                                                        className="text-blue-500 transition-transform duration-200 hover:scale-110"
+                                                    >
+                                                        <svg
+                                                            xmlns="http://www.w3.org/2000/svg"
+                                                            className="h-6 w-6"
+                                                            fill="none"
+                                                            viewBox="0 0 24 24"
+                                                            stroke="currentColor"
+                                                        >
+                                                            <path
+                                                                strokeLinecap="round"
+                                                                strokeLinejoin="round"
+                                                                strokeWidth={2}
+                                                                d="M4 6h16M4 12h16m-7 6h7"
+                                                            />
+                                                        </svg>
+                                                    </button>
+
+                                                    {/* Popover */}
+                                                    {open && (
+                                                        <div
+                                                            className="absolute mt-2 bg-white border rounded shadow-lg w-52"
+                                                            style={{ top: '100%', left: 0 }}
+                                                            onMouseLeave={handlePopoverClose}
+                                                        >
+                                                            <div className="p-4">
+                                                                <h6 className="text-lg font-semibold mb-2">Actions</h6>
+                                                                <hr className="mb-2" />
+                                                                <ul>
+                                                                    <li
+                                                                        className="flex items-center cursor-pointer hover:bg-gray-100 p-2 rounded"
+                                                                        onClick={() => handleApprove(selectedUser._id)}
+                                                                    >
+                                                                        <svg
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            className="h-6 w-6 text-green-500 mr-2"
+                                                                            fill="none"
+                                                                            viewBox="0 0 24 24"
+                                                                            stroke="currentColor"
+                                                                        >
+                                                                            <path
+                                                                                strokeLinecap="round"
+                                                                                strokeLinejoin="round"
+                                                                                strokeWidth={2}
+                                                                                d="M9 12l2 2l4-4"
+                                                                            />
+                                                                        </svg>
+                                                                        <span>Approve</span>
+                                                                    </li>
+                                                                    <li
+                                                                        className="flex items-center cursor-pointer hover:bg-gray-100 p-2 rounded"
+                                                                        onClick={() => handleReject(selectedUser._id)}
+                                                                    >
+                                                                        <svg
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            className="h-6 w-6 text-red-500 mr-2"
+                                                                            fill="none"
+                                                                            viewBox="0 0 24 24"
+                                                                            stroke="currentColor"
+                                                                        >
+                                                                            <path
+                                                                                strokeLinecap="round"
+                                                                                strokeLinejoin="round"
+                                                                                strokeWidth={2}
+                                                                                d="M6 18L18 6M6 6l12 12"
+                                                                            />
+                                                                        </svg>
+                                                                        <span>Reject</span>
+                                                                    </li>
+                                                                    <hr className="my-2" />
+                                                                    <li
+                                                                        className="flex items-center cursor-pointer hover:bg-gray-100 p-2 rounded"
+                                                                        onClick={() => handleDetails(user._id)}
+                                                                    >
+                                                                        <svg
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            className="h-6 w-6 text-blue-500 mr-2"
+                                                                            fill="none"
+                                                                            viewBox="0 0 24 24"
+                                                                            stroke="currentColor"
+                                                                        >
+                                                                            <path
+                                                                                strokeLinecap="round"
+                                                                                strokeLinejoin="round"
+                                                                                strokeWidth={2}
+                                                                                d="M13 16h-1v-4h-1m1-4h.01"
+                                                                            />
+                                                                        </svg>
+                                                                        <span>Details</span>
+                                                                    </li>
+                                                                    <li
+                                                                        className="flex items-center cursor-pointer hover:bg-gray-100 p-2 rounded"
+                                                                        onClick={() => nav(`/admineditorowners/${user._id}`)}
+                                                                    >
+                                                                        <svg
+                                                                            xmlns="http://www.w3.org/2000/svg"
+                                                                            className="h-6 w-6 text-blue-500 mr-2"
+                                                                            fill="none"
+                                                                            viewBox="0 0 24 24"
+                                                                            stroke="currentColor"
+                                                                        >
+                                                                            <path
+                                                                                strokeLinecap="round"
+                                                                                strokeLinejoin="round"
+                                                                                strokeWidth={2}
+                                                                                d="M12 20h9M3 20h6M4 4h16v16H4V4z"
+                                                                            />
+                                                                        </svg>
+                                                                        <span>Edit</span>
+                                                                    </li>
+                                                                </ul>
+                                                            </div>
+                                                        </div>
+                                                    )}
+                                                </div>
+
                                             </td>
                                         </tr>
                                     ))}
