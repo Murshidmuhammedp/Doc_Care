@@ -1,7 +1,7 @@
 import Users from "../../Models/userSchema.js";
 import doctors from '../../Models/doctorSchema.js';
 import booking from "../../Models/bookingSchema.js";
-import sendMail from "../../Modules/nodeMailer.js";
+import sendmail from "../../Modules/nodeMailer.js";
 
 export const bookingAppointment = async (req, res, next) => {
     try {
@@ -28,10 +28,10 @@ export const bookingAppointment = async (req, res, next) => {
             time,
             date: (new Date(date)),
         });
-        user.booking.push(newBooking._id);
-        await user.save();
-        doctor.booking.push(newBooking._id);
-        await doctor.save()
+        // user.booking.push(newBooking._id);
+        // await user.save();
+        // doctor.booking.push(newBooking._id);
+        // await doctor.save()
 
         const Userdata = {
             email: user.email,
@@ -40,7 +40,7 @@ export const bookingAppointment = async (req, res, next) => {
             date: `${(new Date(date))}`,
             time: `${time}`
         };
-        await sendMail(data);
+        await sendmail(Userdata);
 
         const Doctordata = {
             email: doctor.email,
@@ -50,7 +50,7 @@ export const bookingAppointment = async (req, res, next) => {
             time: `${time}`
         };
 
-        await sendMail(data);
+        await sendmail(Doctordata);
 
         return res.status(200).json({ message: "Booking Successfully Completed" })
 
