@@ -2,11 +2,30 @@ import React, { useEffect, useState } from 'react'
 import Sidebardoc from './Sidebardoc';
 import Navbardoctor from './Navbardoctor';
 import { customAxios } from '../confiq/axios';
+import toast from 'react-hot-toast';
 
 function Appointments() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [datas, setDatas] = useState([]);
     const headline = ["Sl. No", "Patient Name", "Phone Number", "Time", "Status", "Action"]
+
+    const handleApprove = async (Id) => {
+        await customAxios.patch(`/user/api/doctor/appointment/approve/${Id}`)
+            .then((response) => {
+                toast.success(response.data.message)
+            }).catch((error) => {
+                console.log(error);
+            });
+    };
+
+    const handleReject = async (Id) => {
+        await customAxios.patch(`/user/api/doctor/appointment/reject/${Id}`)
+            .then((response) => {
+                toast.success(response.data.message)
+            }).catch((error) => {
+                console.log(error);
+            });
+    };
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
@@ -17,8 +36,7 @@ function Appointments() {
         const Appointment = async () => {
             await customAxios.get(`/user/api/doctor/appointments/${docId}`)
                 .then((result) => {
-                    setDatas(result.data.data.booking)
-                    console.log(result.data.data.booking);
+                    setDatas(result.data.data)
                 }).catch((error) => {
                     console.log(error);
                 });
@@ -27,19 +45,17 @@ function Appointments() {
     }, [])
 
     const [open, setOpen] = useState(false);
-    const [anchorEl, setAnchorEl] = useState(null);
+    // const [anchorEl, setAnchorEl] = useState(null);
 
     const handlePopoverOpen = (event) => {
-        setAnchorEl(event.currentTarget);
+        // setAnchorEl(event.currentTarget);
         setOpen(true);
     };
 
     const handlePopoverClose = () => {
-        setAnchorEl(null);
+        // setAnchorEl(null);
         setOpen(false);
     };
-
-    console.log(datas, "vannkn");
     return (
         <>
             <div className="flex">
@@ -106,7 +122,7 @@ function Appointments() {
                                                                 <ul>
                                                                     <li
                                                                         className="flex items-center cursor-pointer hover:bg-gray-100 p-2 rounded"
-                                                                        onClick={() => handleApprove(selectedUser._id)}
+                                                                        onClick={() => handleApprove(data._id)}
                                                                     >
                                                                         <svg
                                                                             xmlns="http://www.w3.org/2000/svg"
@@ -126,7 +142,7 @@ function Appointments() {
                                                                     </li>
                                                                     <li
                                                                         className="flex items-center cursor-pointer hover:bg-gray-100 p-2 rounded"
-                                                                        onClick={() => handleReject(selectedUser._id)}
+                                                                        onClick={() => handleReject(data._id)}
                                                                     >
                                                                         <svg
                                                                             xmlns="http://www.w3.org/2000/svg"
@@ -144,7 +160,7 @@ function Appointments() {
                                                                         </svg>
                                                                         <span>Reject</span>
                                                                     </li>
-                                                                    <hr className="my-2" />
+                                                                    {/* <hr className="my-2" />
                                                                     <li
                                                                         className="flex items-center cursor-pointer hover:bg-gray-100 p-2 rounded"
                                                                         onClick={() => handleDetails(user._id)}
@@ -164,8 +180,8 @@ function Appointments() {
                                                                             />
                                                                         </svg>
                                                                         <span>Details</span>
-                                                                    </li>
-                                                                    <li
+                                                                    </li> */}
+                                                                    {/* <li
                                                                         className="flex items-center cursor-pointer hover:bg-gray-100 p-2 rounded"
                                                                         onClick={() => nav(`/admineditorowners/${user._id}`)}
                                                                     >
@@ -184,7 +200,7 @@ function Appointments() {
                                                                             />
                                                                         </svg>
                                                                         <span>Edit</span>
-                                                                    </li>
+                                                                    </li> */}
                                                                 </ul>
                                                             </div>
                                                         </div>
