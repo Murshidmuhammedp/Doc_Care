@@ -12,7 +12,7 @@ import Doclogin from './user/Pages/businesslogin'
 import AdminLogin from './admin/Login'
 import AdminHomepage from './admin/Homepage'
 import Userlist from './admin/User\'slist'
-import Workerlist from './admin/Worker\'slist'
+import Doctorlist from './admin/Doctorlist'
 import Pendingrequest from './admin/Pendingrequest'
 import Blooddonor from './admin/Blooddonor\'s'
 import Viewdoctors from './user/Components/Viewdoctors'
@@ -37,7 +37,7 @@ function App() {
         <Route path='/admin/login' element={<AdminLogin />}></Route>
         <Route path='/admin/home/dashboard' element={<AdminHomepage />}></Route>
         <Route path='/admin/userlist' element={<Userlist />}></Route>
-        <Route path='/admin/workerlist' element={<Workerlist />}></Route>
+        <Route path='/admin/doctorlist' element={<Doctorlist />}></Route>
         <Route path='/admin/pendingrequest' element={<Pendingrequest />}></Route>
         <Route path='/admin/blooddonors' element={<Blooddonor />}></Route>
         <Route path='/user/viewdoctors' element={<Viewdoctors />}></Route>

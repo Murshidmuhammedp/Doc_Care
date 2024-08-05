@@ -33,10 +33,10 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
                         {sidebarOpen && <span className="w-full">User's List</span>}
                     </li>
                 </Link>
-                <Link to={'/admin/workerlist'}>
+                <Link to={'/admin/doctorlist'}>
                     <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
                         <FaUserTie className="mr-4 text-gray-800" />
-                        {sidebarOpen && <span className="w-full">Workers List</span>}
+                        {sidebarOpen && <span className="w-full">Doctor's List</span>}
                     </li>
                 </Link>
                 <Link to={'/admin/pendingrequest'}>
@@ -51,18 +51,18 @@ const Sidebar = ({ sidebarOpen, toggleSidebar }) => {
                         {sidebarOpen && <span className="w-full">Blood Donor's List</span>}
                     </li>
                 </Link>
-                <Link to={'/admin/home/orderslist'}>
+                <Link to={''}>
                     <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
                         <FaClipboardList className="mr-4 text-gray-800" />
-                        {sidebarOpen && <span className="w-full">Appointment List</span>}
+                        {sidebarOpen && <span className="w-full">Blood Request</span>}
                     </li>
                 </Link>
-                <Link to={'/admin/home/notification'}>
+                {/* <Link to={""}>
                     <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
                         <FaBell className="mr-4 text-gray-800" />
                         {sidebarOpen && <span className="w-full">Notification</span>}
                     </li>
-                </Link>
+                </Link> */}
                 <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center" onClick={() => { navigate('/admin/login'); localStorage.clear(); }}>
                     <FaSignOutAlt className="mr-4 text-gray-800" />
                     {sidebarOpen && <span className="w-full">Logout</span>}

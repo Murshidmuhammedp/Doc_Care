@@ -60,7 +60,7 @@ function Previoueappoint() {
                                                 <td className="py-2 px-4 border-b">{data.contact_number}</td>
                                                 <td className="py-2 px-4 border-b">{formattedDate}</td>
                                                 <td className="py-2 px-4 border-b">{data.time}</td>
-                                                <td className="py-2 px-4 border-b">{data.status}</td>
+                                                <td className={`py-2 px-4 border-b font-semibold ${data.status === "Rejected" ? "text-red-500" : data.status === "Checked" ? "text-blue-600" : ""}`}>{data.status}</td>
                                             </tr>
                                         );
                                     })}

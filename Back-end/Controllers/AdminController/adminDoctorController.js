@@ -51,3 +51,14 @@ export const approvedoctor = async (req, res, next) => {
     }
 }
 
+export const viewDoctors = async (req, res, next) => {
+    try {
+        const doctor = await doctors.find()
+        if (!doctor) {
+            return res.status(404).json({ message: "Doctors not Found" })
+        };
+        return res.status(200).json({ message: "Data fetched", data: doctor })
+    } catch (error) {
+        return next(error)
+    }
+}
