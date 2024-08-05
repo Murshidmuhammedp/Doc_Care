@@ -56,7 +56,8 @@ export const appointmentReject = async (req, res, next) => {
 
 export const previousAppointment = async (req, res, next) => {
     try {
-        const Id = req.params.doctorId;
+        const Id = req.params.Id;
+        
         const doctor = await doctors.findById(Id).populate({
             path: 'booking'
         });
@@ -68,6 +69,8 @@ export const previousAppointment = async (req, res, next) => {
         if (!filterData || filterData.length == 0) {
             return res.status({ message: "No booking Found" })
         };
+        console.log(filterData,"datas");
+        
         return res.status(200).json({ message: "Fetched Successfully", data: filterData });
     } catch (error) {
         return next(error)

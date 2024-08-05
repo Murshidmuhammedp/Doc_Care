@@ -19,6 +19,7 @@ import Viewdoctors from './user/Components/Viewdoctors'
 import DoctorhomePage from '../src/doctor/DoctorHomePage';
 import Doctorappointment from './user/Components/Doctorappointment'
 import Appointments from './doctor/Appointments'
+import Previoueappoint from './doctor/Previoueappoint'
 
 function App() {
   return (
@@ -43,6 +44,7 @@ function App() {
         <Route path='/doctor/homepage' element={<DoctorhomePage />}></Route>
         <Route path='/doctor/appointment' element={<Doctorappointment />}></Route>
         <Route path='/doctor/appointments' element={<Appointments />}></Route>
+        <Route path='/doctor/previousappointment' element={<Previoueappoint />}></Route>
       </Routes>
     </div>
   )

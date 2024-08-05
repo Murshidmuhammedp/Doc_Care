@@ -39,7 +39,7 @@ const Sidebardoc = ({ sidebarOpen, toggleSidebar }) => {
                         {sidebarOpen && <span className="w-full">Appointments</span>}
                     </li>
                 </Link>
-                <Link to={'/admin/home/orderslist'}>
+                <Link to={'/doctor/previousappointment'}>
                     <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
                         <FaClipboardList className="mr-4 text-gray-800" />
                         {sidebarOpen && <span className="w-full">Appointment List</span>}

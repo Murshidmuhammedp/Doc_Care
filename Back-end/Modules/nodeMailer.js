@@ -37,7 +37,7 @@ const sendmail = async (data) => {
 
     transporter.sendMail(mailOptions, function (error, info) {
         if (error) {
-            logger.error(error);
+            // logger.error(error);
         } else {
             logger.info('Email sent: ' + info.response);
         }

@@ -45,7 +45,7 @@ function Appointments() {
     }, [])
 
     const [open, setOpen] = useState(false);
-    // const [anchorEl, setAnchorEl] = useState(null);
+    const [anchorEl, setAnchorEl] = useState(null);
 
     const handlePopoverOpen = (event) => {
         // setAnchorEl(event.currentTarget);
