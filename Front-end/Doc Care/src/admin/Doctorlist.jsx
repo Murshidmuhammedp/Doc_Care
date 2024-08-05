@@ -5,9 +5,12 @@ import { customAxios } from '../confiq/axios';
 import { districts, specializations } from '../user/Components/State_district';
 
 function Doctorlist() {
-
+    const [gender, setGender] = useState("")
+    const [specialization, setSpecialization] = useState("")
+    const [district, setDistrict] = useState("")
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [doctorlist, setdoctorlist] = useState([])
+
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
     };
@@ -15,7 +18,7 @@ function Doctorlist() {
     useEffect(() => {
         const docotorList = async () => {
             try {
-                const result = await customAxios.get("");
+                const result = await customAxios.get(``);
                 setdoctorlist(result);
             } catch (error) {
                 console.log(error);
@@ -33,20 +36,20 @@ function Doctorlist() {
                     <div className="p-4">
 
                         <div className='mt-8 w-full h-[40px] bg-gray-400 gap-7 flex justify-items-center px-10'>
-                            <select className='h-full p-2 bg-gray-300 border-gray-300 rounded'>
+                            <select className='h-full p-2 bg-gray-300 border-gray-300 rounded' onChange={e => setGender(e.target.value)}>
                                 <option value="">Select Gender</option>
                                 <option value="male">Male</option>
                                 <option value="female">Female</option>
                             </select>
 
-                            <select className='h-full p-2 bg-gray-300 border-gray-300 rounded'>
+                            <select className='h-full p-2 bg-gray-300 border-gray-300 rounded' onChange={e => setSpecialization(e.target.value)}>
                                 <option value="">Select Specialization</option>
                                 {specializations.map((value, index) => (
                                     <option key={index} value={value}>{value}</option>
                                 ))}
                             </select>
 
-                            <select className='h-full p-2 bg-gray-300 border-gray-300 rounded'>
+                            <select className='h-full p-2 bg-gray-300 border-gray-300 rounded' onChange={e => setDistrict(e.target.value)}>
                                 <option value="">Select District</option>
                                 {districts["Kerala"].map((district, index) => (
                                     <option key={index} value={district}>{district}</option>
