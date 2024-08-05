@@ -6,28 +6,26 @@ import toast from 'react-hot-toast';
 
 function Previoueappoint() {
     const [sidebarOpen, setSidebarOpen] = useState(false);
-    const headline = ["Sl. No", "Patient Name", "Phone Number", "Time", "Status"]
+    const headline = ["Sl. No", "Patient Name", "Phone Number", "Date", "Time", "Status"]
     const docId = localStorage.getItem('docId')
     const [datas, setDatas] = useState([]);
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
     };
-   
+
     useEffect(() => {
         const previous = async () => {
-            await customAxios.get(`/user/api/doctor/previousappointment/${docId}`)
+            await customAxios.get(`/user/api/doctor/appointment/previous/${docId}`)
                 .then((result) => {
                     setDatas(result.data.data)
-                    toast.success(result.data.message)
-                    console.log(result);
                 }).catch((error) => {
                     toast.error(error.response.data.message)
                     console.log(error);
                 })
         }
         previous()
-    });
+    }, [docId]);
 
     return (
         <>
@@ -48,16 +46,24 @@ function Previoueappoint() {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {datas?.map((data, index) => (
-                                        <tr>
-                                            <td className="py-2 px-4 border-b">{1}</td>
-                                            <td className="py-2 px-4 border-b">{data.patient_name}</td>
-                                            <td className="py-2 px-4 border-b">{data.contact_number}</td>
-                                            <td className="py-2 px-4 border-b">{data.time}</td>
-                                            <td className="py-2 px-4 border-b">{data.status}</td>
-                                            <td className="py-2 px-4 border-b">{ }</td>
-                                        </tr>
-                                    ))}
+                                    {datas?.map((data, index) => {
+                                        const formattedDate = new Date(data.date).toLocaleDateString("en-US", {
+                                            weekday: 'short',
+                                            year: 'numeric',
+                                            month: 'short',
+                                            day: 'numeric'
+                                        });
+                                        return (
+                                            <tr key={index}>
+                                                <td className="py-2 px-4 border-b">{index + 1}</td>
+                                                <td className="py-2 px-4 border-b">{data.patient_name}</td>
+                                                <td className="py-2 px-4 border-b">{data.contact_number}</td>
+                                                <td className="py-2 px-4 border-b">{formattedDate}</td>
+                                                <td className="py-2 px-4 border-b">{data.time}</td>
+                                                <td className="py-2 px-4 border-b">{data.status}</td>
+                                            </tr>
+                                        );
+                                    })}
                                 </tbody>
                             </table>
                         </div>

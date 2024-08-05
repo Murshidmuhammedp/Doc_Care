@@ -17,6 +17,6 @@ router.post('/doctor/login', doctorlogin);
 router.get('/doctor/appointments/:doctorId', pendingAppointments);
 router.patch('/doctor/appointment/approve/:Id', appointmentApprove);
 router.patch('/doctor/appointment/reject/:Id', appointmentReject);
-router.get('/doctor/previousappointment/:Id', previousAppointment);
+router.get('/doctor/appointment/previous/:Id', previousAppointment);
 
 export default router;
