@@ -27,7 +27,7 @@ const Sidebardoc = ({ sidebarOpen, toggleSidebar }) => {
                         {sidebarOpen && <span className="w-full">Dashboard</span>}
                     </li>
                 </Link>
-                <Link to={''}>
+                <Link to={'/doctor/profile'}>
                     <li className="p-4 hover:bg-gray-200 cursor-pointer flex items-center">
                         <FaUserTie className="mr-4 text-gray-800" />
                         {sidebarOpen && <span className="w-full">Profile</span>}

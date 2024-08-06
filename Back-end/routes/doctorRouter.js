@@ -2,6 +2,7 @@ import express from 'express';
 import { doctorlogin, doctorRegistration } from '../Controllers/DoctorController/doctorController.js';
 import uploadImage from '../Middlewares/uploadImage.js';
 import { appointmentApprove, appointmentReject, pendingAppointments, previousAppointment } from '../Controllers/DoctorController/appointments.js';
+import { profile } from '../Controllers/DoctorController/profile.js';
 
 const router = express.Router();
 
@@ -18,5 +19,8 @@ router.get('/doctor/appointments/:doctorId', pendingAppointments);
 router.patch('/doctor/appointment/approve/:Id', appointmentApprove);
 router.patch('/doctor/appointment/reject/:Id', appointmentReject);
 router.get('/doctor/appointment/previous/:Id', previousAppointment);
+
+// Profile
+router.get('/doctor/profile/:Id', profile);
 
 export default router;
