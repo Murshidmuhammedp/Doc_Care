@@ -1,7 +1,7 @@
 import express from 'express';
 import { adminLogin } from '../Controllers/AdminController/adminController.js';
 import { BlockandUnblock, ViewallUser } from '../Controllers/AdminController/adminUserController.js';
-import { approvedoctor, pendingrequestdoctor, rejectDoctor } from '../Controllers/AdminController/adminDoctorController.js';
+import { approvedoctor, pendingrequestdoctor, rejectDoctor, viewDoctors } from '../Controllers/AdminController/adminDoctorController.js';
 import { approveHospital, pendingrequesthospital, rejectHospital } from '../Controllers/AdminController/adminHospitalController.js';
 const router = express.Router();
 
@@ -19,6 +19,7 @@ router.patch('/blockandunblock/:id', BlockandUnblock);
 router.get('/workers/doctor/pendingrequest', pendingrequestdoctor);
 router.delete('/workers/doctor/rejected/:id', rejectDoctor);
 router.patch('/workers/doctor/approved/:id', approvedoctor);
+router.get('/doctors/view/data',viewDoctors);
 
 // Hospital Controller
 
