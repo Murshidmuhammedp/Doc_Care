@@ -64,107 +64,109 @@ function Appointments() {
                     <Navbardoctor />
                     <div className="p-4">
 
-                        <div className="bg-white shadow-md rounded-lg p-6">
-                            <h3 className="text-xl font-bold mb-4">Appointments</h3>
-                            <table className="min-w-full bg-white border-collapse">
-                                <thead>
-                                    <tr>
-                                        {headline.map((title, index) => (
-                                            <th key={index} className="py-2 px-4 border-b">{title}</th>
-                                        ))}
-                                    </tr>
-                                </thead>
-                                <tbody>
-                                    {datas?.map((data, index) => {
-                                        const formattedDate = new Date(data.date).toLocaleDateString("en-US", {
-                                            weekday: 'short',
-                                            year: 'numeric',
-                                            month: 'short',
-                                            day: 'numeric'
-                                        });
-                                        return (
-                                            <tr key={index}>
-                                                <td className="py-2 px-4 border-b">{index + 1}</td>
-                                                <td className="py-2 px-4 border-b">{data.patient_name}</td>
-                                                <td className="py-2 px-4 border-b">{data.contact_number}</td>
-                                                <td className="py-2 px-4 border-b">{data.time}</td>
-                                                <td className="py-2 px-4 border-b">{formattedDate}</td>
-                                                <td className="py-2 px-4 border-b">{data.status}</td>
-                                                <td className="py-2 px-4 border-b">
-                                                    <div className="relative ">
-                                                        {/* Tooltip with IconButton */}
-                                                        <button
-                                                            onClick={handlePopoverOpen}
-                                                            className="text-blue-500 transition-transform duration-200 hover:scale-110"
-                                                        >
-                                                            <svg
-                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                className="h-6 w-6"
-                                                                fill="none"
-                                                                viewBox="0 0 24 24"
-                                                                stroke="currentColor"
-                                                            >
-                                                                <path
-                                                                    strokeLinecap="round"
-                                                                    strokeLinejoin="round"
-                                                                    strokeWidth={2}
-                                                                    d="M4 6h16M4 12h16m-7 6h7"
-                                                                />
-                                                            </svg>
-                                                        </button>
+                        {datas.length > 0 ? (
+                            <div className="bg-white shadow-md rounded-lg p-6">
+                                <h3 className="text-xl font-bold mb-4">Appointments</h3>
+                                <table className="min-w-full bg-white border-collapse">
+                                    <thead>
+                                        <tr>
+                                            {headline.map((title, index) => (
+                                                <th key={index} className="py-2 px-4 border-b">{title}</th>
+                                            ))}
+                                        </tr>
+                                    </thead>
 
-                                                        {/* Popover */}
-                                                        {open && (
-                                                            <div
-                                                                className="absolute mt-2 bg-white border rounded shadow-lg w-52"
-                                                                style={{ top: '100%', left: 0 }}
-                                                                onMouseLeave={handlePopoverClose}
+                                    <tbody>
+                                        {datas?.map((data, index) => {
+                                            const formattedDate = new Date(data.date).toLocaleDateString("en-US", {
+                                                weekday: 'short',
+                                                year: 'numeric',
+                                                month: 'short',
+                                                day: 'numeric'
+                                            });
+                                            return (
+                                                <tr key={index}>
+                                                    <td className="py-2 px-4 border-b">{index + 1}</td>
+                                                    <td className="py-2 px-4 border-b">{data.patient_name}</td>
+                                                    <td className="py-2 px-4 border-b">{data.contact_number}</td>
+                                                    <td className="py-2 px-4 border-b">{data.time}</td>
+                                                    <td className="py-2 px-4 border-b">{formattedDate}</td>
+                                                    <td className="py-2 px-4 border-b">{data.status}</td>
+                                                    <td className="py-2 px-4 border-b">
+                                                        <div className="relative ">
+                                                            {/* Tooltip with IconButton */}
+                                                            <button
+                                                                onClick={handlePopoverOpen}
+                                                                className="text-blue-500 transition-transform duration-200 hover:scale-110"
                                                             >
-                                                                <div className="p-4">
-                                                                    <h6 className="text-lg font-semibold mb-2">Actions</h6>
-                                                                    <hr className="mb-2" />
-                                                                    <ul>
-                                                                        <li
-                                                                            className="flex items-center cursor-pointer hover:bg-gray-100 p-2 rounded"
-                                                                            onClick={() => handleApprove(data._id)}
-                                                                        >
-                                                                            <svg
-                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                className="h-6 w-6 text-green-500 mr-2"
-                                                                                fill="none"
-                                                                                viewBox="0 0 24 24"
-                                                                                stroke="currentColor"
+                                                                <svg
+                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                    className="h-6 w-6"
+                                                                    fill="none"
+                                                                    viewBox="0 0 24 24"
+                                                                    stroke="currentColor"
+                                                                >
+                                                                    <path
+                                                                        strokeLinecap="round"
+                                                                        strokeLinejoin="round"
+                                                                        strokeWidth={2}
+                                                                        d="M4 6h16M4 12h16m-7 6h7"
+                                                                    />
+                                                                </svg>
+                                                            </button>
+
+                                                            {/* Popover */}
+                                                            {open && (
+                                                                <div
+                                                                    className="absolute mt-2 bg-white border rounded shadow-lg w-52"
+                                                                    style={{ top: '100%', left: 0 }}
+                                                                    onMouseLeave={handlePopoverClose}
+                                                                >
+                                                                    <div className="p-4">
+                                                                        <h6 className="text-lg font-semibold mb-2">Actions</h6>
+                                                                        <hr className="mb-2" />
+                                                                        <ul>
+                                                                            <li
+                                                                                className="flex items-center cursor-pointer hover:bg-gray-100 p-2 rounded"
+                                                                                onClick={() => handleApprove(data._id)}
                                                                             >
-                                                                                <path
-                                                                                    strokeLinecap="round"
-                                                                                    strokeLinejoin="round"
-                                                                                    strokeWidth={2}
-                                                                                    d="M9 12l2 2l4-4"
-                                                                                />
-                                                                            </svg>
-                                                                            <span>Approve</span>
-                                                                        </li>
-                                                                        <li
-                                                                            className="flex items-center cursor-pointer hover:bg-gray-100 p-2 rounded"
-                                                                            onClick={() => handleReject(data._id)}
-                                                                        >
-                                                                            <svg
-                                                                                xmlns="http://www.w3.org/2000/svg"
-                                                                                className="h-6 w-6 text-red-500 mr-2"
-                                                                                fill="none"
-                                                                                viewBox="0 0 24 24"
-                                                                                stroke="currentColor"
+                                                                                <svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    className="h-6 w-6 text-green-500 mr-2"
+                                                                                    fill="none"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    stroke="currentColor"
+                                                                                >
+                                                                                    <path
+                                                                                        strokeLinecap="round"
+                                                                                        strokeLinejoin="round"
+                                                                                        strokeWidth={2}
+                                                                                        d="M9 12l2 2l4-4"
+                                                                                    />
+                                                                                </svg>
+                                                                                <span>Approve</span>
+                                                                            </li>
+                                                                            <li
+                                                                                className="flex items-center cursor-pointer hover:bg-gray-100 p-2 rounded"
+                                                                                onClick={() => handleReject(data._id)}
                                                                             >
-                                                                                <path
-                                                                                    strokeLinecap="round"
-                                                                                    strokeLinejoin="round"
-                                                                                    strokeWidth={2}
-                                                                                    d="M6 18L18 6M6 6l12 12"
-                                                                                />
-                                                                            </svg>
-                                                                            <span>Reject</span>
-                                                                        </li>
-                                                                        {/* <hr className="my-2" />
+                                                                                <svg
+                                                                                    xmlns="http://www.w3.org/2000/svg"
+                                                                                    className="h-6 w-6 text-red-500 mr-2"
+                                                                                    fill="none"
+                                                                                    viewBox="0 0 24 24"
+                                                                                    stroke="currentColor"
+                                                                                >
+                                                                                    <path
+                                                                                        strokeLinecap="round"
+                                                                                        strokeLinejoin="round"
+                                                                                        strokeWidth={2}
+                                                                                        d="M6 18L18 6M6 6l12 12"
+                                                                                    />
+                                                                                </svg>
+                                                                                <span>Reject</span>
+                                                                            </li>
+                                                                            {/* <hr className="my-2" />
                                                                     <li
                                                                         className="flex items-center cursor-pointer hover:bg-gray-100 p-2 rounded"
                                                                         onClick={() => handleDetails(user._id)}
@@ -185,7 +187,7 @@ function Appointments() {
                                                                         </svg>
                                                                         <span>Details</span>
                                                                     </li> */}
-                                                                        {/* <li
+                                                                            {/* <li
                                                                         className="flex items-center cursor-pointer hover:bg-gray-100 p-2 rounded"
                                                                         onClick={() => nav(`/admineditorowners/${user._id}`)}
                                                                     >
@@ -205,20 +207,25 @@ function Appointments() {
                                                                         </svg>
                                                                         <span>Edit</span>
                                                                     </li> */}
-                                                                    </ul>
+                                                                        </ul>
+                                                                    </div>
                                                                 </div>
-                                                            </div>
-                                                        )}
-                                                    </div>
+                                                            )}
+                                                        </div>
 
-                                                </td>
-                                            </tr>
-                                        )
-                                    })}
-                                </tbody>
-                            </table>
-                        </div>
-
+                                                    </td>
+                                                </tr>
+                                            )
+                                        })}
+                                    </tbody>
+                                </table>
+                            </div>
+                        ) : (<div className="flex justify-center items-center h-full">
+                            <div className="text-center p-10 bg-gray-100 shadow-lg rounded-lg">
+                                <h1 className="text-4xl font-semibold text-gray-800 mb-4">No New Appointments</h1>
+                                <p className="text-gray-600 text-lg">You currently have no new appointments. Please check back later.</p>
+                            </div>
+                        </div>)}
                     </div>
                 </div>
             </div>

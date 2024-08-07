@@ -21,6 +21,7 @@ import Doctorappointment from './user/Components/Doctorappointment'
 import Appointments from './doctor/Appointments'
 import Previoueappoint from './doctor/Previoueappoint'
 import Profile from './doctor/Profile'
+import Userprofile from './user/Components/Userprofile'
 
 function App() {
   return (
@@ -47,6 +48,7 @@ function App() {
         <Route path='/doctor/appointments' element={<Appointments />}></Route>
         <Route path='/doctor/previousappointment' element={<Previoueappoint />}></Route>
         <Route path='/doctor/profile' element={<Profile />}></Route>
+        <Route path='user/profile' element={<Userprofile />}></Route>
       </Routes>
     </div>
   )

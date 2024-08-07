@@ -3,6 +3,7 @@ import { signin, signup } from '../Controllers/UserController/userController.js'
 import { bloodRegister } from '../Controllers/UserController/bloodRegisterController.js'
 import { filterData } from '../Controllers/UserController/filterData.js';
 import { bookingAppointment } from '../Controllers/UserController/booking.js';
+import { userProfile } from '../Controllers/UserController/userProfile.js';
 
 const router = express.Router();
 
@@ -20,5 +21,8 @@ router.get('/finddoctors', filterData);
 // Booking Doctor
 
 router.post('/doctor/:doctorId/appointment/booking/:userId', bookingAppointment);
+
+// Profile
+router.get('/user/profile/:Id', userProfile);
 
 export default router;
