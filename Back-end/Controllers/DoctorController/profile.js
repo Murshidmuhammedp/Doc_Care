@@ -12,3 +12,11 @@ export const profile = async (req, res, next) => {
         return next(error)
     }
 }
+
+export const editProfile = async (req, res, next) => {
+    try {
+            
+    } catch (error) {
+        return next(error);
+    }
+}
