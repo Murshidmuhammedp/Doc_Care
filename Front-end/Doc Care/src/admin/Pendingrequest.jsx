@@ -59,61 +59,67 @@ function Pendingrequest() {
                     <Nav />
                     <div className="p-4">
 
-                        <div className="min-h-screen bg-gray-100 py-8 px-4">
-                            <h1 className="text-3xl font-bold text-center mb-6">Category Page</h1>
-                            <div className="flex justify-center mb-6 space-x-4">
-                                {categories.map((category) => (
-                                    <button
-                                        key={category}
-                                        onClick={() => handleCategoryChange(category)}
-                                        className={`py - 2 px - 4 rounded - lg font - semibold transition - colors duration - 300 ${selectedCategory === category
-                                            ? 'bg-blue-500 text-white'
-                                            : 'bg-white text-blue-500 border border-blue-500'
-                                            } hover: bg-blue - 600 hover: text - white`}
-                                    >
-                                        {category}
-                                    </button>
-                                ))}
-                            </div>
+                        {data.length > 0 ? (
+                            <div className="min-h-screen bg-gray-100 py-8 px-4">
+                                <h1 className="text-3xl font-bold text-center mb-6">Category Page</h1>
+                                <div className="flex justify-center mb-6 space-x-4">
+                                    {categories.map((category) => (
+                                        <button
+                                            key={category}
+                                            onClick={() => handleCategoryChange(category)}
+                                            className={`py - 2 px - 4 rounded - lg font - semibold transition - colors duration - 300 ${selectedCategory === category
+                                                ? 'bg-blue-500 text-white'
+                                                : 'bg-white text-blue-500 border border-blue-500'
+                                                } hover: bg-blue - 600 hover: text - white`}
+                                        >
+                                            {category}
+                                        </button>
+                                    ))}
+                                </div>
 
-                            <div className="overflow-x-auto">
-                                <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
-                                    <thead className="bg-blue-500 text-white">
-                                        <tr>
-                                            <th className="py-3 px-4 text-center">Sl. No</th>
-                                            <th className="py-3 px-4 text-center">Name</th>
-                                            <th className="py-3 px-4 text-center">Doctor Id</th>
-                                            <th className="py-3 px-4 text-center">Specialization</th>
-                                            <th className="py-3 px-4 text-center">Phone Number</th>
-                                            <th className="py-3 px-4 text-left">Actions</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        {data && data.map((item, index) => (
-                                            <tr key={item._id} className="border-b hover:bg-gray-100">
-                                                <td className="py-3 px-4">{index + 1}</td>
-                                                <td className="py-3 px-4">{item.full_Name}{item.Hospital_name}</td>
-                                                <td className="py-3 px-4">{item.doctor_ID}</td>
-                                                <td className="py-3 px-4">{item.specialization}</td>
-                                                <td className="py-3 px-4">{item.phone_Number}</td>
-                                                <td className="py-3 px-4 flex space-x-2">
-                                                    <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600" onClick={() => rejectDoctor(item._id)}>
-                                                        Reject
-                                                    </button>
-                                                    <button className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600" onClick={() => approvelDoctor(item._id)}>
-                                                        Approve
-                                                    </button>
-                                                    <button className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600" onClick={() => detailspage(item._id)}>
-                                                        Details
-                                                    </button>
-                                                </td>
+                                <div className="overflow-x-auto">
+                                    <table className="min-w-full bg-white border border-gray-200 rounded-lg shadow-md">
+                                        <thead className="bg-blue-500 text-white">
+                                            <tr>
+                                                <th className="py-3 px-4 text-center">Sl. No</th>
+                                                <th className="py-3 px-4 text-center">Name</th>
+                                                <th className="py-3 px-4 text-center">Doctor Id</th>
+                                                <th className="py-3 px-4 text-center">Specialization</th>
+                                                <th className="py-3 px-4 text-center">Phone Number</th>
+                                                <th className="py-3 px-4 text-left">Actions</th>
                                             </tr>
-                                        ))}
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            {data && data.map((item, index) => (
+                                                <tr key={item._id} className="border-b hover:bg-gray-100">
+                                                    <td className="py-3 px-4">{index + 1}</td>
+                                                    <td className="py-3 px-4">{item.full_Name}{item.Hospital_name}</td>
+                                                    <td className="py-3 px-4">{item.doctor_ID}</td>
+                                                    <td className="py-3 px-4">{item.specialization}</td>
+                                                    <td className="py-3 px-4">{item.phone_Number}</td>
+                                                    <td className="py-3 px-4 flex space-x-2">
+                                                        <button className="bg-red-500 text-white px-3 py-1 rounded hover:bg-red-600" onClick={() => rejectDoctor(item._id)}>
+                                                            Reject
+                                                        </button>
+                                                        <button className="bg-green-500 text-white px-3 py-1 rounded hover:bg-green-600" onClick={() => approvelDoctor(item._id)}>
+                                                            Approve
+                                                        </button>
+                                                        <button className="bg-blue-500 text-white px-3 py-1 rounded hover:bg-blue-600" onClick={() => detailspage(item._id)}>
+                                                            Details
+                                                        </button>
+                                                    </td>
+                                                </tr>
+                                            ))}
+                                        </tbody>
+                                    </table>
+                                </div>
                             </div>
-                        </div>
-
+                        ) : (<div className="flex justify-center items-center h-full">
+                            <div className="text-center p-10 bg-gray-100 shadow-lg rounded-lg">
+                                <h1 className="text-4xl font-semibold text-gray-800 mb-4">No New Pending Request</h1>
+                                <p className="text-gray-600 text-lg">You currently have no new Pending Request. Please check back later.</p>
+                            </div>
+                        </div>)}
                     </div>
                 </div>
             </div>

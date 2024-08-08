@@ -212,7 +212,6 @@ function Appointments() {
                                                                 </div>
                                                             )}
                                                         </div>
-
                                                     </td>
                                                 </tr>
                                             )

@@ -5,7 +5,7 @@ const Nav = () => {
         <div className="ml-auto mb-6 lg:w-[100%] xl:w-[100%] 2xl:w-[100%]">
             <div className="sticky z-10 top-0 h-16 border-b bg-white lg:py-2.5">
                 <div className="px-6 flex items-center justify-between space-x-4 2xl:container">
-                    <h5 hidden className="text-2xl text-gray-600 font-medium lg:block">Dashboard</h5>
+                    <h5 hidden className="text-2xl text-gray-600 font-medium lg:block">Admin</h5>
                     <button className="w-12 h-16 -mr-2 border-r lg:hidden">
                         <svg xmlns="http://www.w3.org/2000/svg" className="h-6 w-6 my-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16" />

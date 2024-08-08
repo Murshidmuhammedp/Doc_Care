@@ -219,7 +219,6 @@ function Viewdoctors() {
                                         >
                                             {slot}
                                         </button>
-                                        // <h2 style={{ border: "1px solid gray" }} className='p-2 border rounded-md' key={index}>{slot}</h2>
                                     ))}
                                 </div>
                                 <div className="flex justify-end mt-4">

@@ -26,6 +26,10 @@ function Userlist() {
         fetchUsers();
     });
 
+    const formatDate = (timestamp) => {
+        const date = new Date(timestamp);
+        return date.toISOString().split('T')[0];
+    };
 
     const toggleBlock = async (id) => {
         await customAxios.patch(`/admin/api/blockandunblock/${id}`)
@@ -61,7 +65,7 @@ function Userlist() {
                                             <td className="py-2 px-4 border-b">{user.username}</td>
                                             <td className="py-2 px-4 border-b">{user.email}</td>
                                             <td className="py-2 px-4 border-b">{user.phone_number}</td>
-                                            <td className="py-2 px-4 border-b">{user.accountCreatedDate}</td>
+                                            <td className="py-2 px-4 border-b">{formatDate(user.accountCreatedDate)}</td>
                                             <td className="py-2 px-4 border-b">
                                                 <button
                                                     onClick={() => toggleBlock(user._id)}
