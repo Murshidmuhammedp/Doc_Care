@@ -15,6 +15,7 @@ function Doctorappointment() {
     const [phoneNumber, setPhoneNumber] = useState('');
     const doctorId = doctor._id;
     let userId = localStorage.getItem("userId")
+
     const handleSubmit = async (e) => {
         e.preventDefault();
         await customAxios.post(`/user/api/doctor/${doctorId}/appointment/booking/${userId}`, { name, phoneNumber, date, time })
@@ -22,7 +23,8 @@ function Doctorappointment() {
                 toast.success(response.data.message);
                 navigate('/category')
             }).catch((error) => {
-                console.log(error);
+                console.error("Booking failed:",error);
+                toast.error("Failed to book the appointment. Please try again.");
             });
     };
 

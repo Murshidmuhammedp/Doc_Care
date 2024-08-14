@@ -84,6 +84,24 @@ function Viewdoctors() {
     }, [searchQuery, value]);
 
     useEffect(() => {
+        const fetchBookings = async () => {
+            try {
+                // const formattedDate = format(selectedDate, 'yyyy-MM-dd');
+                const response = await customAxios.get(`/user/api/doctor/${selectedDoctor._id}/bookings?date=${selectedDate}`);
+                console.log(response, "previousbooking");
+                const bookedSlots = response.data.data.map(booking => booking.timeSlot);
+                const availableSlots = generateTimeSlots(selectedDoctor.startTime, selectedDoctor.endTime).filter(slot => !bookedSlots.includes(slot));
+                setTimeSlots(availableSlots);
+            } catch (error) {
+                console.log(error);
+            }
+        };
+        if (selectedDoctor) {
+            fetchBookings();
+        }
+    }, [selectedDoctor, selectedDate]);
+
+    useEffect(() => {
         if (selectedDoctor) {
             const slots = generateTimeSlots(selectedDoctor.startTime, selectedDoctor.endTime);
             setTimeSlots(slots);

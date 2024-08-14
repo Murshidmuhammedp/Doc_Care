@@ -2,7 +2,7 @@ import express from 'express';
 import { signin, signup } from '../Controllers/UserController/userController.js'
 import { bloodRegister } from '../Controllers/UserController/bloodRegisterController.js'
 import { filterData } from '../Controllers/UserController/filterData.js';
-import { bookingAppointment } from '../Controllers/UserController/booking.js';
+import { bookedTimeSlot, bookingAppointment } from '../Controllers/UserController/booking.js';
 import { userProfile } from '../Controllers/UserController/userProfile.js';
 
 const router = express.Router();
@@ -24,5 +24,8 @@ router.post('/doctor/:doctorId/appointment/booking/:userId', bookingAppointment)
 
 // Profile
 router.get('/user/profile/:Id', userProfile);
+
+// Booked TimeSlot
+router.get('/doctor/:Id/bookings', bookedTimeSlot);
 
 export default router;
