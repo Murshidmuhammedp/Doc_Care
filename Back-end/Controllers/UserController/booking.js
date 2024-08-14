@@ -74,6 +74,6 @@ export const bookedTimeSlot = async (req, res) => {
 
         return res.status(200).json({ data: bookings });
     } catch (error) {
-        return res.status(500).send({ error: "rror fetching bookings" });
+        return res.status(500).send({ error: "error fetching bookings" });
     }
 }
