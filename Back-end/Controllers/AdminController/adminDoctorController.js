@@ -76,3 +76,18 @@ export const viewDoctors = async (req, res, next) => {
         return next(error)
     }
 }
+
+export const dashboardDoctors = async (req, res, next) => {
+    try {
+
+        const doctorsList = await doctors.find();
+        const filterDoctor = doctorsList.filter((data) => data.approve == true);
+        if (!filterDoctor) {
+            return res.status(202).json({ message: "No data found" });
+        }
+
+        return res.status(200).json({ message: "Data fetch successfully", data: filterDoctor })
+    } catch (error) {
+        return next(error)
+    }
+}

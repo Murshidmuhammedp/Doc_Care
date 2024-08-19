@@ -57,3 +57,18 @@ export const approveHospital = async (req, res, next) => {
         return next(error)
     }
 }
+
+export const dashboardHospital = async (req, res, next) => {
+    try {
+
+        const hospitalList = await hospitals.find();
+        const filterDoctor = hospitalList.filter((data) => data.approve == true);
+        if (!filterDoctor) {
+            return res.status(202).json({ message: "No data found" });
+        }
+
+        return res.status(200).json({ message: "Data fetch successfully", data: filterDoctor })
+    } catch (error) {
+        return next(error)
+    }
+}

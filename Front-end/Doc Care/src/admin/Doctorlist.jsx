@@ -20,7 +20,6 @@ function Doctorlist() {
             try {
                 const result = await customAxios.get(`/admin/api/doctors/view/data?gender=${gender}&specialization=${specialization}&district=${district}`);
                 setdoctorlist(result.data.data);
-                console.log(result.data.data);
             } catch (error) {
                 console.log(error);
             }

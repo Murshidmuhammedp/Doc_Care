@@ -5,18 +5,46 @@ import { useParams } from 'react-router-dom';
 import { Line, Pie } from 'react-chartjs-2';
 import 'chart.js/auto';
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
+import { customAxios } from '../confiq/axios';
 
 
 Chart.register(ArcElement, Tooltip, Legend);
 
 const Adminhome = () => {
 
+    const [dashboardlist, setdocdashboard] = useState([]);
+    const [userdashboard, setuserdashboard] = useState([]);
+    const [hospitaldashboard, sethospitaldashboard] = useState([]);
+    const [donordashboard, setdonordashboard] = useState([]);
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [filter, setFilter] = useState('Monthly');
-
+    const tableheading = ["Sl.No", "Name", "Doctor Id", "Specialization", "Phone Number", "District"];
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
     };
+
+    useEffect(() => {
+        const doctordashboard = async () => {
+            const result = await customAxios.get('/admin/api/doctors/data/dashboard')
+            setdocdashboard(result.data.data);
+        }
+        doctordashboard();
+        const userdashboard = async () => {
+            const result = await customAxios.get('/admin/api/userdata')
+            setuserdashboard(result.data.data);
+        }
+        userdashboard();
+        const hospitaldashboard = async () => {
+            const result = await customAxios.get('/admin/api/hospital/data/dashboard')
+            sethospitaldashboard(result.data.data);
+        }
+        hospitaldashboard();
+        const donordashboard = async () => {
+            const result = await customAxios.get('/admin/api/blood/donors')
+            setdonordashboard(result.data.data);
+        }
+        donordashboard();
+    }, []);
 
     const getFilteredData = () => {
         switch (filter) {
@@ -303,14 +331,14 @@ const Adminhome = () => {
                                             </svg>
                                         </div>
                                         <div className="p-4 text-right">
-                                            <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Doctor's</p>
-                                            <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">58 nos</h4>
+                                            <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Users</p>
+                                            <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{userdashboard.length} nos</h4>
                                         </div>
-                                        <div className="border-t border-blue-gray-50 p-4">
+                                        {/* <div className="border-t border-blue-gray-50 p-4">
                                             <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
                                                 <strong className="text-green-500">+55%</strong>&nbsp;than last week
                                             </p>
-                                        </div>
+                                        </div> */}
                                     </div>
 
                                     <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
@@ -321,13 +349,13 @@ const Adminhome = () => {
                                         </div>
                                         <div className="p-4 text-right">
                                             <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Hospital's</p>
-                                            <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">48 nos</h4>
+                                            <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{hospitaldashboard.length} nos</h4>
                                         </div>
-                                        <div className="border-t border-blue-gray-50 p-4">
+                                        {/* <div className="border-t border-blue-gray-50 p-4">
                                             <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
                                                 <strong className="text-green-500">+3%</strong>&nbsp;than last month
                                             </p>
-                                        </div>
+                                        </div> */}
                                     </div>
 
                                     <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
@@ -337,14 +365,14 @@ const Adminhome = () => {
                                             </svg>
                                         </div>
                                         <div className="p-4 text-right">
-                                            <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Users</p>
-                                            <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">758 nos</h4>
+                                            <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Doctor's</p>
+                                            <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{dashboardlist.length} nos</h4>
                                         </div>
-                                        <div className="border-t border-blue-gray-50 p-4">
+                                        {/* <div className="border-t border-blue-gray-50 p-4">
                                             <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
                                                 <strong className="text-red-500">-2%</strong>&nbsp;than yesterday
                                             </p>
-                                        </div>
+                                        </div> */}
                                     </div>
 
                                     <div className="relative flex flex-col bg-clip-border rounded-xl bg-white text-gray-700 shadow-md">
@@ -355,13 +383,13 @@ const Adminhome = () => {
                                         </div>
                                         <div className="p-4 text-right">
                                             <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Blood donor's</p>
-                                            <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">85 nos</h4>
+                                            <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{donordashboard.length} nos</h4>
                                         </div>
-                                        <div className="border-t border-blue-gray-50 p-4">
+                                        {/* <div className="border-t border-blue-gray-50 p-4">
                                             <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
                                                 <strong className="text-green-500">+5%</strong>&nbsp;than yesterday
                                             </p>
-                                        </div>
+                                        </div> */}
                                     </div>
                                 </div>
                             </div>
@@ -403,45 +431,33 @@ const Adminhome = () => {
 
                             {/* Table Section */}
                             <div className="bg-white shadow-md rounded-lg p-6">
-                                <h3 className="text-xl font-bold mb-4">Working List</h3>
+                                <h3 className="text-xl font-bold mb-4">Doctor's List</h3>
                                 <table className="min-w-full bg-white border-collapse">
                                     <thead>
                                         <tr>
-                                            <th className="py-2 px-4 border-b">Name</th>
-                                            <th className="py-2 px-4 border-b">Admission Date</th>
-                                            <th className="py-2 px-4 border-b">Number</th>
-                                            <th className="py-2 px-4 border-b">Work ID</th>
-                                            <th className="py-2 px-4 border-b">Workers</th>
+                                            {tableheading && tableheading.map((data, index) => (
+                                                <th key={index} className="py-2 px-4 border-b">{data}</th>
+                                            ))}
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td className="py-2 px-4 border-b">Ola Akintola</td>
-                                            <td className="py-2 px-4 border-b">12-09-2023</td>
-                                            <td className="py-2 px-4 border-b">UI/201</td>
-                                            <td className="py-2 px-4 border-b">02656</td>
-                                            <td className="py-2 px-4 border-b">Dr Alimi James</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="py-2 px-4 border-b">Janet Paul</td>
-                                            <td className="py-2 px-4 border-b">12-09-2023</td>
-                                            <td className="py-2 px-4 border-b">AQ/32</td>
-                                            <td className="py-2 px-4 border-b">07634</td>
-                                            <td className="py-2 px-4 border-b">Dr Rito Areogun</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="py-2 px-4 border-b">Areogun Joe</td>
-                                            <td className="py-2 px-4 border-b">12-09-2023</td>
-                                            <td className="py-2 px-4 border-b">AQ/45</td>
-                                            <td className="py-2 px-4 border-b">02980</td>
-                                            <td className="py-2 px-4 border-b">Dr Aaron Lekon</td>
-                                        </tr>
+                                        {dashboardlist && dashboardlist.map((data, index) => {
+                                            return (
+                                                <tr key={index}>
+                                                    <td className="py-2 px-4 border-b">{index + 1}</td>
+                                                    <td className="py-2 px-4 border-b">{data.full_Name}</td>
+                                                    <td className="py-2 px-4 border-b">{data.doctor_ID}</td>
+                                                    <td className="py-2 px-4 border-b">{data.specialization}</td>
+                                                    <td className="py-2 px-4 border-b">{data.phone_Number}</td>
+                                                    <td className="py-2 px-4 border-b">{data.district}</td>
+                                                </tr>
+                                            )
+                                        })}
                                     </tbody>
                                 </table>
                             </div>
                         </div>
                         ) : route === "notification" ? (<ListingAndApprovingUsers />) : route === 'userlists' ? (<AdminUsers />) : route === 'workerslist' ? <AdminWorkers /> : route === 'orderslist' ? (<Card />) : null}
-
                     </div>
                 </div>
             </div>
