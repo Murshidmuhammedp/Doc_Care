@@ -25,7 +25,7 @@ function Doctorappointment() {
         await customAxios.post(`/user/api/doctor/${doctorId}/appointment/booking/${userId}`, { name, phoneNumber, date: formatDate, time })
             .then((response) => {
                 toast.success(response.data.message);
-                // navigate('/category')
+                navigate('/category')
             }).catch((error) => {
                 console.error("Booking failed:", error);
                 toast.error("Failed to book the appointment. Please try again.");
