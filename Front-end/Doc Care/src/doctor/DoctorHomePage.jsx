@@ -5,6 +5,7 @@ import 'chart.js/auto';
 import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
 import Sidebardoc from './Sidebardoc';
 import Navbardoctor from './Navbardoctor';
+import { customAxios } from '../confiq/axios';
 
 
 Chart.register(ArcElement, Tooltip, Legend);
@@ -13,6 +14,11 @@ const DoctorhomePage = () => {
 
     const [sidebarOpen, setSidebarOpen] = useState(false);
     const [filter, setFilter] = useState('Monthly');
+    const [booking, setbooking] = useState([])
+    const [pending, setpending] = useState([])
+    const [Status, setStatus] = useState([])
+
+    const docId = localStorage.getItem('docId')
 
     const toggleSidebar = () => {
         setSidebarOpen(!sidebarOpen);
@@ -277,6 +283,26 @@ const DoctorhomePage = () => {
         }
     }, []);
 
+    useEffect(() => {
+        const bookingdashboard = async () => {
+            const result = await customAxios.get(`/user/api/doctor/total/appointments/${docId}`)
+            setbooking(result.data.data.booking);
+        }
+        bookingdashboard();
+        const pendingdashboard = async () => {
+            const result = await customAxios.get(`/user/api/doctor/appointments/${docId}`)
+            setpending(result.data.data);
+        }
+        pendingdashboard();
+        const statusdashboard = async () => {
+            const result = await customAxios.get(`/user/api/doctor/appointment/previous/${docId}`)
+            setStatus(result.data.data);
+        }
+        statusdashboard();
+    }, []);
+
+    const checked = Status.filter((data) => data.status == "Checked");
+    const rejected = Status.filter((data) => data.status == "Rejected");
 
     const { route } = useParams()
 
@@ -303,13 +329,8 @@ const DoctorhomePage = () => {
                                             </svg>
                                         </div>
                                         <div className="p-4 text-right">
-                                            <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Doctor's</p>
-                                            <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">58 nos</h4>
-                                        </div>
-                                        <div className="border-t border-blue-gray-50 p-4">
-                                            <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                                                <strong className="text-green-500">+55%</strong>&nbsp;than last week
-                                            </p>
+                                            <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Booking</p>
+                                            <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{booking.length} nos</h4>
                                         </div>
                                     </div>
 
@@ -320,13 +341,8 @@ const DoctorhomePage = () => {
                                             </svg>
                                         </div>
                                         <div className="p-4 text-right">
-                                            <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Hospital's</p>
-                                            <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">48 nos</h4>
-                                        </div>
-                                        <div className="border-t border-blue-gray-50 p-4">
-                                            <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                                                <strong className="text-green-500">+3%</strong>&nbsp;than last month
-                                            </p>
+                                            <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Pending</p>
+                                            <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{pending.length} nos</h4>
                                         </div>
                                     </div>
 
@@ -337,13 +353,8 @@ const DoctorhomePage = () => {
                                             </svg>
                                         </div>
                                         <div className="p-4 text-right">
-                                            <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Users</p>
-                                            <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">758 nos</h4>
-                                        </div>
-                                        <div className="border-t border-blue-gray-50 p-4">
-                                            <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                                                <strong className="text-red-500">-2%</strong>&nbsp;than yesterday
-                                            </p>
+                                            <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Approvel</p>
+                                            <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{checked.length} nos</h4>
                                         </div>
                                     </div>
 
@@ -354,13 +365,8 @@ const DoctorhomePage = () => {
                                             </svg>
                                         </div>
                                         <div className="p-4 text-right">
-                                            <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Blood donor's</p>
-                                            <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">85 nos</h4>
-                                        </div>
-                                        <div className="border-t border-blue-gray-50 p-4">
-                                            <p className="block antialiased font-sans text-base leading-relaxed font-normal text-blue-gray-600">
-                                                <strong className="text-green-500">+5%</strong>&nbsp;than yesterday
-                                            </p>
+                                            <p className="block antialiased font-sans text-sm leading-normal font-normal text-blue-gray-600">Total Reject</p>
+                                            <h4 className="block antialiased tracking-normal font-sans text-2xl font-semibold leading-snug text-blue-gray-900">{rejected.length} nos</h4>
                                         </div>
                                     </div>
                                 </div>

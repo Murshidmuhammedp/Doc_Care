@@ -74,3 +74,17 @@ export const previousAppointment = async (req, res, next) => {
         return next(error)
     }
 }
+
+export const totalbooking = async (req, res, next) => {
+    try {
+        const Id = req.params.doctorId;
+        const totalBookings = await doctors.findById(Id).populate({
+            path: 'booking',
+        })
+
+        return res.status(200).json({ message: "Fetched Successfully", data: totalBookings });
+
+    } catch (error) {
+        return next(error)
+    }
+}

@@ -102,7 +102,7 @@ function Viewdoctors() {
             try {
                 // const formattedDate = format(selectedDate, 'yyyy-MM-dd');
                 const response = await customAxios.get(`/user/api/doctor/${selectedDoctor._id}/bookings?date=${selectedDate}`);
-                console.log(response, "previousbooking");
+                // console.log(response, "previousbooking");
                 const bookedSlots = response.data.data.map(booking => booking.timeSlot);
                 const availableSlots = generateTimeSlots(selectedDoctor.startTime, selectedDoctor.endTime).filter(slot => !bookedSlots.includes(slot));
                 setTimeSlots(availableSlots);

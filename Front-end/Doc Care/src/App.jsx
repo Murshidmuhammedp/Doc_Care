@@ -42,7 +42,7 @@ function App() {
         <Route path='/admin/doctorlist' element={<Doctorlist />}></Route>
         <Route path='/admin/pendingrequest' element={<Pendingrequest />}></Route>
         <Route path='/admin/blooddonors' element={<Blooddonor />}></Route>
-        <Route path='/user/viewdoctors' element={<Viewdoctors />}></Route>
+        <Route path='/viewdoctors' element={<Viewdoctors />}></Route>
         <Route path='/doctor/homepage' element={<DoctorhomePage />}></Route>
         <Route path='/doctor/appointment' element={<Doctorappointment />}></Route>
         <Route path='/doctor/appointments' element={<Appointments />}></Route>

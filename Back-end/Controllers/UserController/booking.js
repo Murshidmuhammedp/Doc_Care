@@ -19,6 +19,7 @@ export const bookingAppointment = async (req, res, next) => {
         };
 
         const { name, phoneNumber, date, time } = req.body;
+        console.log(date,"ithaan date");
 
         const newBooking = await booking.create({
             userId: user._id,
@@ -28,10 +29,10 @@ export const bookingAppointment = async (req, res, next) => {
             time,
             date: new Date(date),
         });
-        // user.booking.push(newBooking._id);
-        // await user.save();
-        // doctor.booking.push(newBooking._id);
-        // await doctor.save()
+        user.booking.push(newBooking._id);
+        await user.save();
+        doctor.booking.push(newBooking._id);
+        await doctor.save()
 
         // const Userdata = {
         //     email: user.email,
@@ -63,13 +64,13 @@ export const bookedTimeSlot = async (req, res) => {
     try {
         const Id = req.params.Id;
         const { date } = req.query;
-        console.log(Id);
+        // console.log(Id);
 
 
-        console.log(date);
+        // console.log(date);
 
 
-        const bookings = await booking.find({ doctorId: Id, date:date });
+        const bookings = await booking.find({ doctorId: Id, date: date });
         console.log(bookings, "slots");
 
         return res.status(200).json({ data: bookings });

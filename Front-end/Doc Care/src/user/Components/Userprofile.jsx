@@ -13,7 +13,6 @@ function Userprofile() {
       try {
         const response = await customAxios.get(`/user/api/user/profile/${userId}`);
         setProfile(response.data.data);
-        console.log(response.data.data);
       } catch (error) {
         console.log(error);
       }

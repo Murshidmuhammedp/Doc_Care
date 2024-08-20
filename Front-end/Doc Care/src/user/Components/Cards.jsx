@@ -34,7 +34,7 @@ function Cards() {
                                 <img src={value.imageUrl} alt={value.title} className="w-full h-full object-cover cursor-pointer" />
                             </div>
                             <p className="mt-4 text-md font-semibold text-gray-800 text-center">{value.title}</p>
-                            <p className="mt-2 text-md font-semibold text-blue-400 text-center hover:cursor-pointer" onClick={() => navigate(`/user/viewdoctors?value=${value.title}`)}>Book now</p>
+                            <p className="mt-2 text-md font-semibold text-blue-400 text-center hover:cursor-pointer" onClick={() => navigate(`/viewdoctors?value=${value.title}`)}>Book now</p>
                         </div>
                     </div>
                 ))}
