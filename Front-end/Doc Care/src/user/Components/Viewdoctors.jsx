@@ -4,6 +4,7 @@ import { useNavigate, useSearchParams } from 'react-router-dom'
 import { districts } from './State_district';
 import { customAxios } from '../../confiq/axios';
 import { addDays, format, startOfToday } from 'date-fns'
+import toast from 'react-hot-toast'
 
 const generateTimeSlots = (start, end) => {
     const startHour = parseInt(start.split(":")[0]);
@@ -50,6 +51,19 @@ function Viewdoctors() {
 
     const closeModal = () => {
         setSelectedDoctor(null);
+    };
+
+    const handleLogin = () => {
+        navigate('/login');
+        toast.error("Please sign in to continue.", {
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "colored",
+        });
     };
 
     const handleSearchChange = (event) => {
@@ -183,12 +197,18 @@ function Viewdoctors() {
                                 <p className="text-md font-semibold text-black mb-1">{item.consultation_Address}</p>
                                 <p className="text-md text-black">₹{item.consultation_Fee} Consultation Fee</p>
                                 <div className="mt-[-50px] flex justify-end">
-                                    <button
+                                    {localStorage.getItem("userToken") ? (<button
                                         className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
                                         onClick={() => handleBookingClick(item)}
                                     >
                                         Book Clinic Visit
-                                    </button>
+                                    </button>) : (
+                                        <button
+                                            className="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded focus:outline-none focus:shadow-outline"
+                                            onClick={() => handleLogin()}
+                                        >
+                                            Book Clinic Visit
+                                        </button>)}
                                 </div>
                                 <p className="text-orange-600 flex justify-end text-xs mr-[25px]">No Booking Fees</p>
                             </div>
