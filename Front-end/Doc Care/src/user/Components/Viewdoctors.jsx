@@ -100,10 +100,9 @@ function Viewdoctors() {
     useEffect(() => {
         const fetchBookings = async () => {
             try {
-                // const formattedDate = format(selectedDate, 'yyyy-MM-dd');
-                const response = await customAxios.get(`/user/api/doctor/${selectedDoctor._id}/bookings?date=${selectedDate}`);
-                // console.log(response, "previousbooking");
-                const bookedSlots = response.data.data.map(booking => booking.timeSlot);
+                const formatDate = format(new Date(selectedDate), 'PP')
+                const response = await customAxios.get(`/user/api/doctor/${selectedDoctor._id}/bookings?date=${formatDate}`);
+                const bookedSlots = response.data.data.map(booking => booking.time);
                 const availableSlots = generateTimeSlots(selectedDoctor.startTime, selectedDoctor.endTime).filter(slot => !bookedSlots.includes(slot));
                 setTimeSlots(availableSlots);
             } catch (error) {

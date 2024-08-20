@@ -11,6 +11,10 @@ function Doctorappointment() {
     const location = useLocation();
     const navigate = useNavigate();
     const { doctor, date, time } = location.state;
+
+    const formatDate = format(new Date(date), 'PP')
+
+
     const [name, setName] = useState('');
     const [phoneNumber, setPhoneNumber] = useState('');
     const doctorId = doctor._id;
@@ -18,11 +22,10 @@ function Doctorappointment() {
 
     const handleSubmit = async (e) => {
         e.preventDefault();
-        await customAxios.post(`/user/api/doctor/${doctorId}/appointment/booking/${userId}`, { name, phoneNumber, date, time })
+        await customAxios.post(`/user/api/doctor/${doctorId}/appointment/booking/${userId}`, { name, phoneNumber, date: formatDate, time })
             .then((response) => {
                 toast.success(response.data.message);
                 // navigate('/category')
-                console.log(date, "front date")
             }).catch((error) => {
                 console.error("Booking failed:", error);
                 toast.error("Failed to book the appointment. Please try again.");
@@ -43,7 +46,7 @@ function Doctorappointment() {
                             </div>
                             <div className="flex items-center">
                                 <FaCalendarAlt className="mr-2 text-gray-500" />
-                                <span className="text-lg">{format(new Date(date), 'PPP')}</span>
+                                <span className="text-lg">{formatDate}</span>
                             </div>
                         </div>
                         <div className="flex items-center">
