@@ -6,7 +6,7 @@ import { Chart, ArcElement, Tooltip, Legend } from 'chart.js';
 import Sidebardoc from './Sidebardoc';
 import Navbardoctor from './Navbardoctor';
 import { customAxios } from '../confiq/axios';
-
+import moment from 'moment';
 
 Chart.register(ArcElement, Tooltip, Legend);
 
@@ -399,8 +399,8 @@ const DoctorhomePage = () => {
 
                                 {/* Pie Chart */}
                                 <div className="shadow-md p-6 rounded-lg w-full bg-white">
-                                    <h3 className="text-xl font-bold text-center">Yearly Updates</h3>
-                                    <p className="text-2xl text-center mb-4">$500,458</p>
+                                    <h3 className="text-xl font-bold text-center">Monthly Bookings</h3>
+                                    <p className="text-lg text-center mb-4">Total booking : {booking.length}</p>
                                     <div style={{ height: '300px' }}>
                                         <Pie data={pieData} options={pieOptions} ref={chartRef} />
                                     </div>
@@ -409,39 +409,31 @@ const DoctorhomePage = () => {
 
                             {/* Table Section */}
                             <div className="bg-white shadow-md rounded-lg p-6">
-                                <h3 className="text-xl font-bold mb-4">Working List</h3>
+                                <h3 className="text-xl font-bold mb-4">Pending Request</h3>
                                 <table className="min-w-full bg-white border-collapse">
                                     <thead>
                                         <tr>
-                                            <th className="py-2 px-4 border-b">Name</th>
-                                            <th className="py-2 px-4 border-b">Admission Date</th>
-                                            <th className="py-2 px-4 border-b">Number</th>
-                                            <th className="py-2 px-4 border-b">Work ID</th>
-                                            <th className="py-2 px-4 border-b">Workers</th>
+                                            <th className="py-2 px-4 border-b">Sl.No</th>
+                                            <th className="py-2 px-4 border-b">Patient Name</th>
+                                            <th className="py-2 px-4 border-b">Time</th>
+                                            <th className="py-2 px-4 border-b">Date</th>
+                                            <th className="py-2 px-4 border-b">Phone Number</th>
+                                            <th className="py-2 px-4 border-b">Booking Time</th>
                                         </tr>
                                     </thead>
                                     <tbody>
-                                        <tr>
-                                            <td className="py-2 px-4 border-b">Dr.Murshid Muhammed P</td>
-                                            <td className="py-2 px-4 border-b">12-09-2023</td>
-                                            <td className="py-2 px-4 border-b">UI/201</td>
-                                            <td className="py-2 px-4 border-b">02656</td>
-                                            <td className="py-2 px-4 border-b">Dr Alimi James</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="py-2 px-4 border-b">suhaib</td>
-                                            <td className="py-2 px-4 border-b">12-09-2023</td>
-                                            <td className="py-2 px-4 border-b">AQ/32</td>
-                                            <td className="py-2 px-4 border-b">07634</td>
-                                            <td className="py-2 px-4 border-b">Dr.Muhammed Suhail</td>
-                                        </tr>
-                                        <tr>
-                                            <td className="py-2 px-4 border-b">Anas Malik</td>
-                                            <td className="py-2 px-4 border-b">12-09-2023</td>
-                                            <td className="py-2 px-4 border-b">AQ/45</td>
-                                            <td className="py-2 px-4 border-b">02980</td>
-                                            <td className="py-2 px-4 border-b">Dr.Nizamudheen </td>
-                                        </tr>
+                                        {pending?.map((data, index) => {
+                                            return (
+                                                <tr key={index}>
+                                                    <td className="py-2 px-4 border-b">{index + 1}</td>
+                                                    <td className="py-2 px-4 border-b">{data.patient_name}</td>
+                                                    <td className="py-2 px-4 border-b">{data.time}</td>
+                                                    <td className="py-2 px-4 border-b">{data.date}</td>
+                                                    <td className="py-2 px-4 border-b">{data.contact_number}</td>
+                                                    <td className="py-2 px-4 border-b">{moment(data.bookingTime_Date).format('YYYY-MM-DD  h:mm A')}</td>
+                                                </tr>
+                                            )
+                                        })}
                                     </tbody>
                                 </table>
                             </div>

@@ -2,6 +2,7 @@ import Users from "../../Models/userSchema.js";
 import doctors from '../../Models/doctorSchema.js';
 import booking from "../../Models/bookingSchema.js";
 import sendmail from "../../Modules/nodeMailer.js";
+import moment from 'moment';
 
 export const bookingAppointment = async (req, res, next) => {
     try {
@@ -28,6 +29,8 @@ export const bookingAppointment = async (req, res, next) => {
             time,
             date: date,
         });
+        
+        const formattedDate = moment(date).format('ddd, MMM D, YYYY');
 
         user.booking.push(newBooking._id);
         await user.save();
@@ -35,19 +38,21 @@ export const bookingAppointment = async (req, res, next) => {
         await doctor.save()
 
         const Userdata = {
+            from: user.username,
             email: user.email,
             subject: "Your booking status",
             text: `We are pleased to confirm your appointment with Dr.${doctor.full_Name}.`,
-            date: `${(new Date(date))}`,
+            date: `${formattedDate}`,
             time: `${time}`
         };
         await sendmail(Userdata);
 
         const Doctordata = {
+            from: `Dr.${doctor.full_Name}`,
             email: doctor.email,
             subject: 'New Appointment Booked',
             text: ` A new appointment has been booked by ${name}`,
-            date: `${(new Date(date))}`,
+            date: `${formattedDate}`,
             time: `${time}`
         };
 
