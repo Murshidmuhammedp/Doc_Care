@@ -86,24 +86,34 @@ function Navbar() {
                                         <MenuItem>
                                             {({ focus }) => (
                                                 <a
-                                                    href="user/profile"
+                                                    href="/user/profile"
                                                     className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
                                                 >
                                                     profile
                                                 </a>
                                             )}
                                         </MenuItem>
-                                        <MenuItem>
-                                            {({ focus }) => (
-                                                <a
-                                                    href="user/bookings"
-                                                    className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
-                                                >
-                                                    Bookings
-                                                </a>
-                                            )}
-                                        </MenuItem>
-                                        <MenuItem>
+                                        {localStorage.getItem("userToken") ? (
+                                            <MenuItem>
+                                                {({ focus }) => (
+                                                    <a
+                                                        href="/user/bookings"
+                                                        className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                    >
+                                                        Bookings
+                                                    </a>
+                                                )}
+                                            </MenuItem>) : (<MenuItem>
+                                                {({ focus }) => (
+                                                    <a
+                                                        href='/login'
+                                                        className={classNames(focus ? 'bg-gray-100' : '', 'block px-4 py-2 text-sm text-gray-700')}
+                                                    >
+                                                        Bookings
+                                                    </a>
+                                                )}
+                                            </MenuItem>)}
+                                        < MenuItem >
                                             {({ focus }) => (
                                                 <a
                                                     href="#"
@@ -140,8 +150,9 @@ function Navbar() {
                         </div>
                     </DisclosurePanel>
                 </>
-            )}
-        </Disclosure>
+            )
+            }
+        </Disclosure >
     )
 }
 

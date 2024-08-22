@@ -49,8 +49,8 @@ function App() {
         <Route path='/doctor/appointments' element={<Appointments />}></Route>
         <Route path='/doctor/previousappointment' element={<Previoueappoint />}></Route>
         <Route path='/doctor/profile' element={<Profile />}></Route>
-        <Route path='user/profile' element={<Userprofile />}></Route>
-        <Route path='user/bookings' element={<Previousbooking />}></Route>
+        <Route path='/user/profile' element={<Userprofile />}></Route>
+        <Route path='/user/bookings' element={<Previousbooking />}></Route>
       </Routes>
     </div>
   )
