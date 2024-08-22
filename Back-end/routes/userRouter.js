@@ -2,7 +2,7 @@ import express from 'express';
 import { signin, signup } from '../Controllers/UserController/userController.js'
 import { bloodRegister } from '../Controllers/UserController/bloodRegisterController.js'
 import { filterData } from '../Controllers/UserController/filterData.js';
-import { bookedTimeSlot, bookingAppointment } from '../Controllers/UserController/booking.js';
+import { bookedTimeSlot, bookingAppointment, previousBooking } from '../Controllers/UserController/booking.js';
 import { userProfile } from '../Controllers/UserController/userProfile.js';
 
 const router = express.Router();
@@ -27,5 +27,8 @@ router.get('/user/profile/:Id', userProfile);
 
 // Booked TimeSlot
 router.get('/doctor/:Id/bookings', bookedTimeSlot);
+
+// Previous Booking
+router.get('/previous/booking/:Id', previousBooking)
 
 export default router;

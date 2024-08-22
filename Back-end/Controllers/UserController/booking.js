@@ -29,7 +29,7 @@ export const bookingAppointment = async (req, res, next) => {
             time,
             date: date,
         });
-        
+
         const formattedDate = moment(date).format('ddd, MMM D, YYYY');
 
         user.booking.push(newBooking._id);
@@ -73,5 +73,21 @@ export const bookedTimeSlot = async (req, res) => {
         return res.status(200).json({ data: bookings });
     } catch (error) {
         return res.status(500).send({ error: "error fetching bookings" });
+    }
+}
+
+export const previousBooking = async (req, res, next) => {
+    try {
+        const Id = req.params.Id;
+
+        const bookings = await booking.find({ userId: Id }).populate('doctorId')
+
+        if (!bookings) {
+            return res.status(202).json({ message: "No Previous Booking" });
+        }
+
+        return res.status(200).json({ message: "Fetch data successfully", data: bookings })
+    } catch (error) {
+        return next(error)
     }
 }
