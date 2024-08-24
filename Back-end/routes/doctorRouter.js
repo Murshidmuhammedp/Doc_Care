@@ -3,6 +3,7 @@ import { doctorlogin, doctorRegistration } from '../Controllers/DoctorController
 import uploadImage from '../Middlewares/uploadImage.js';
 import { appointmentApprove, appointmentReject, pendingAppointments, previousAppointment, totalbooking } from '../Controllers/DoctorController/appointments.js';
 import { profile } from '../Controllers/DoctorController/profile.js';
+import { doctorToken } from '../Middlewares/doctorJwtToken.js';
 
 const router = express.Router();
 
@@ -23,5 +24,10 @@ router.get('/doctor/total/appointments/:doctorId', totalbooking);
 
 // Profile
 router.get('/doctor/profile/:Id', profile);
+
+
+router.get('/protected', doctorToken, (req, res) => {
+    res.json({ message: 'This is a Protected Route', user: req.user });
+});
 
 export default router;
