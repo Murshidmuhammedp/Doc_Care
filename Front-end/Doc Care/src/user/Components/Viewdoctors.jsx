@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import Navbar from './Navbar'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { districts } from './State_district';
@@ -38,12 +38,14 @@ function Viewdoctors() {
     const value = searchParams.get('value');
     const [searchQuery, setSearchQuery] = useState('');
     const [filteredDistricts, setFilteredDistricts] = useState(districts["Kerala"]);
+    const [allDoctors, setAllDoctors] = useState([]);
     const [filter, setfilter] = useState([])
     const [selectedDoctor, setSelectedDoctor] = useState(null);
     const [timeSlots, setTimeSlots] = useState([]);
     const [selectedDate, setSelectedDate] = useState(startOfToday());
     const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
 
+    const cache = useRef(new Map());
 
     const handleBookingClick = (doctor) => {
         setSelectedDoctor(doctor);
@@ -87,15 +89,25 @@ function Viewdoctors() {
 
     useEffect(() => {
         const filterdata = async () => {
-            await customAxios.get(`/user/api/finddoctors?district=${searchQuery}&specialization=${value}`)
+            await customAxios.get(`/user/api/finddoctors?specialization=${value}`)
                 .then((response) => {
+                    setAllDoctors(response.data.data);
                     setfilter(response.data.data);
+                    console.log(response.data.data)
                 }).catch((error) => {
                     console.log(error);
                 })
         }
         filterdata();
-    }, [searchQuery, value]);
+    }, [value]);
+
+    useEffect(() => {
+        if (searchQuery) {
+            setfilter(allDoctors.filter(doc => doc.district.toLowerCase().includes(searchQuery.toLowerCase())));
+        } else {
+            setfilter(allDoctors);
+        }
+    }, [searchQuery, allDoctors])
 
     useEffect(() => {
         const fetchBookings = async () => {
@@ -214,6 +226,8 @@ function Viewdoctors() {
                         </div>
                     );
                 })}
+
+
 
                 {selectedDoctor && (
                     <>
