@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Navbar from './Navbar'
 import { useNavigate, useSearchParams } from 'react-router-dom'
 import { districts } from './State_district';
@@ -45,7 +45,6 @@ function Viewdoctors() {
     const [selectedDate, setSelectedDate] = useState(startOfToday());
     const [selectedTimeSlot, setSelectedTimeSlot] = useState(null);
 
-    const cache = useRef(new Map());
 
     const handleBookingClick = (doctor) => {
         setSelectedDoctor(doctor);
@@ -88,26 +87,34 @@ function Viewdoctors() {
     };
 
     useEffect(() => {
-        const filterdata = async () => {
-            await customAxios.get(`/user/api/finddoctors?specialization=${value}`)
+        const fetchDoctors = async () => {
+            await customAxios.get('/user/api/finddoctors')
                 .then((response) => {
                     setAllDoctors(response.data.data);
                     setfilter(response.data.data);
-                    console.log(response.data.data)
                 }).catch((error) => {
                     console.log(error);
                 })
         }
-        filterdata();
-    }, [value]);
+            fetchDoctors();
+    }, []);
 
     useEffect(() => {
-        if (searchQuery) {
-            setfilter(allDoctors.filter(doc => doc.district.toLowerCase().includes(searchQuery.toLowerCase())));
-        } else {
-            setfilter(allDoctors);
+        const filterData = () => {
+            let filtered = allDoctors;
+
+            if (searchQuery) {
+                filtered = filtered.filter((doctor) => doctor.district.toLowerCase().includes(searchQuery.toLowerCase()));
+            }
+            
+            if (value) {
+                filtered = filtered.filter((doctor) => doctor.specialization.includes(value));
+            }
+            setfilter(filtered)
         }
-    }, [searchQuery, allDoctors])
+
+        filterData();
+    }, [searchQuery, allDoctors, value])
 
     useEffect(() => {
         const fetchBookings = async () => {
@@ -183,8 +190,7 @@ function Viewdoctors() {
             </div>
 
 
-            <div className='mt-8 w-full h-[40px] bg-gray-400'>
-            </div>
+            <div className='mt-8 w-full h-[40px] bg-gray-400'></div>
 
             <div>
                 <h1 className="text-2xl md:text-1xl font-bold ml-4 md:ml-[-970px] mt-4 md:mt-[30px]">25+ doctors available</h1>
@@ -192,7 +198,7 @@ function Viewdoctors() {
             </div>
             {/* Doctor's Cards */}
             <div className='bg-gray-100 py-5'>
-                {filter && filter.map(item => {
+                {filter && filter.map((item) => {
                     return (
                         <div key={item._id} className="bg-white shadow-xl flex flex-col md:flex-row mb-5 text-start md:h-auto w-full md:w-[1000px] mx-auto md:m-5 rounded-lg overflow-hidden">
                             <figure className="w-full md:w-1/3 flex justify-center items-center p-5 md:p-0">
